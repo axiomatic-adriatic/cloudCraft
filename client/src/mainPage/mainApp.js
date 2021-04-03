@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './mainApp.css';
 import TaskListModule from './taskList/index.js';
 import Message from './message/index.js';
+import UserList from './userList/index.js';
 
 class MainApp extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class MainApp extends React.Component {
             <h1>Search Bar</h1>
         </div>
         <div className={styles.div1}>
-        <h1>Search Bar</h1>
+          <UserList />
         </div>
         <div className={styles.div2}>
           <Message />
