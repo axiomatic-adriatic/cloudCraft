@@ -22,5 +22,7 @@ export const Container = styled.div `
 `;
 
 export const TextArea = styled.textarea`
-  background-color: black;
+  // background-color: black;
+  resize: none;
+  width: 100%;
 `;
