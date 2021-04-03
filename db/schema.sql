@@ -45,8 +45,6 @@ CREATE TABLE `messages` (
 );
 
 
-
-
 CREATE TABLE `tasks` (
 	`task_id` INT NOT NULL AUTO_INCREMENT,
 	`message_id` INT NOT NULL DEFAULT '0',
