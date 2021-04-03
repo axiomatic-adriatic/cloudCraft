@@ -7,7 +7,7 @@ class Groups extends React.Component {
   render() {
     return (
       <div>
-        <h1>Groups List</h1>
+        <h3>Groups List</h3>
       </div>
     )
   }

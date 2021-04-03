@@ -7,7 +7,7 @@ class Users extends React.Component {
   render() {
     return (
       <div>
-        <h1>Users</h1>
+        <h3>Users</h3>
       </div>
     )
   }
