@@ -3,7 +3,7 @@ var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'me',
   password : 'secret',
-  database : 'cloudCraft'
+  database : 'cloud_craft'
 });
 
 connection.connect();
