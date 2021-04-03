@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from './components/header/header.jsx';
-import AllCategoryList from './components/allCategoryList/allCategoryList.jsx';
 import axios from 'axios';
+import Header from './components/header/header';
+import AllCategoryList from './components/allCategoryList/allCategoryList';
 
 class TaskListModule extends React.Component {
   constructor(props) {
@@ -17,12 +17,12 @@ class TaskListModule extends React.Component {
       .then((resp) => {
         console.log(resp.data);
         this.setState({
-          tasks: [...resp.data]
-        })
+          tasks: [...resp.data],
+        });
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
   }
 
   render() {

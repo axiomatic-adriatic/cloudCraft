@@ -1,5 +1,5 @@
 import React from 'react';
-import CompleteTask from '../completeTask/completeTask.jsx';
+import CompleteTask from '../completeTask/completeTask';
 
 class Task extends React.Component {
   constructor(props) {
