@@ -6,9 +6,15 @@ class Task extends React.Component {
   }
   render() {
     return (
-      <form>
-
-      </form>
+      <div>
+        <p>Username</p>
+        <p>task text</p>
+        <form>
+           <input type="checkbox" id="vehicle1" name="vehicle1" value="Completed" />
+        </form>
+      </div>
     )
   }
 }
+
+export default Task;
