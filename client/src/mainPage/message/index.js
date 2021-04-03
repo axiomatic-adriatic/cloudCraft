@@ -19,9 +19,9 @@ const Message = ({ groupdId }) => {
       .catch((err) => { throw err; });
   };
 
-  useEffect(() => {
-    getChatHistory(groupdId);
-  });
+  // useEffect(() => {
+  //   getChatHistory(groupdId);
+  // });
 
   return (
     <Container>

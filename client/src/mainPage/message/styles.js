@@ -20,3 +20,7 @@ export const Container = styled.div `
     grid-row: 3 / 4;
   }
 `;
+
+export const TextArea = styled.textarea`
+  background-color: black;
+`;

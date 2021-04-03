@@ -2,7 +2,7 @@ import React from 'react';
 
 const ChatBox = () => {
   return (
-    <div className='chatbox'>
+    <div className="chatbox">
       <h1>I am chatbox</h1>
     </div>
   )
