@@ -1,0 +1,83 @@
+#loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* #loginBox {
+  display: flex;
+  justify-content: center;
+  align-self: auto;
+  flex-wrap: wrap;
+  height: 400px;
+  width: 300px;
+  border: solid 1px grey;
+} */
+
+#loginBox {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: .5fr repeat(2, 1fr) .5fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  height: 400px;
+  width: 300px;
+  border: solid 1px grey;
+}
+
+.parent {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: .5fr repeat(2, 1fr) .5fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  }
+
+  /* .div1 { grid-area: 1 / 1 / 2 / 2; }
+  .div2 { grid-area: 2 / 1 / 3 / 2; }
+  .div3 { grid-area: 3 / 1 / 4 / 2; }
+  .div4 { grid-area: 4 / 1 / 5 / 2; } */
+
+#cloudCraft {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+#loginButtonDiv {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+#emailInputDiv,
+#passwordInputDiv,
+#emailInput {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+#signIn {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  font-size: 40px;
+}
+
+#emailLabel,
+#passwordLabel {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
