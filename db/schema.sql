@@ -34,7 +34,8 @@ CREATE TABLE `messages` (
 	`datetime` DATETIME NOT NULL,
 	`message_text` TEXT NOT NULL,
 	`disabled` BOOLEAN NOT NULL DEFAULT false,
-	`completed` BOOLEAN NOT NULL,
+	`completed` BOOLEAN NOT NULL DEFAULT false,
+	`is_delete` BOOLEAN NOT NULL DEFAULT false,
 	PRIMARY KEY (`message_id`),
 	FOREIGN KEY (`user_id`) 
 	  REFERENCES `users`(`user_id`)
@@ -51,7 +52,8 @@ CREATE TABLE `tasks` (
 	`user_id` INT NOT NULL,
 	`task_text` TEXT NOT NULL,
 	`datetime` DATETIME NOT NULL,
-	`completed` BOOLEAN NOT NULL,
+	`completed` BOOLEAN NOT NULL DEFAULT false,
+	`is_delete` BOOLEAN NOT NULL DEFAULT false,
 	PRIMARY KEY (`task_id`),
 	FOREIGN KEY (`message_id`)
 	  REFERENCES `messages`(`message_id`)
@@ -117,45 +119,45 @@ INSERT INTO `users_groups` (`user_group_id`, `user_id`, `group_id`) VALUES (15, 
 -- messages
 
 
-INSERT INTO `messages` (`message_id`,`user_id`,`group_id`,`read`,`datetime`,`message_text`,`disabled`,`completed`) VALUES (1,7,1,1,"2020-05-08 20:05:40","nec urna suscipit nonummy. Fusce fermentum fermentum arcu. Vestibulum ante",1,0);
-INSERT INTO `messages` (`message_id`,`user_id`,`group_id`,`read`,`datetime`,`message_text`,`disabled`,`completed`) VALUES (2,2,1,0,"2021-01-15 22:44:03","Nullam vitae diam. Proin dolor. Nulla semper tellus id nunc",0,1);
+INSERT INTO `messages` (`message_id`,`user_id`,`group_id`,`read`,`datetime`,`message_text`,`disabled`,`completed`,`is_delete`) VALUES (1,7,1,1,"2020-05-08 20:05:40","nec urna suscipit nonummy. Fusce fermentum fermentum arcu. Vestibulum ante",1,0,0);
+INSERT INTO `messages` (`message_id`,`user_id`,`group_id`,`read`,`datetime`,`message_text`,`disabled`,`completed`,`is_delete`) VALUES (2,2,1,0,"2021-01-15 22:44:03","Nullam vitae diam. Proin dolor. Nulla semper tellus id nunc",0,1,0);
 
-INSERT INTO `messages` (`message_id`,`user_id`,`group_id`,`read`,`datetime`,`message_text`,`disabled`,`completed`) VALUES(3,7,1,1,"2021-10-16 15:14:41","semper. Nam tempor diam dictum sapien. Aenean massa. Integer vitae",0,1);
-INSERT INTO `messages` (`message_id`,`user_id`,`group_id`,`read`,`datetime`,`message_text`,`disabled`,`completed`) VALUES(4,2,1,0,"2020-05-14 23:35:43","elementum sem, vitae aliquam eros turpis non enim. Mauris quis",1,0);
-INSERT INTO `messages` (`message_id`,`user_id`,`group_id`,`read`,`datetime`,`message_text`,`disabled`,`completed`)VALUES(5,1,4,1,"2020-04-19 14:48:10","sit amet, consectetuer adipiscing elit. Etiam laoreet, libero et tristique",1,1);
-INSERT INTO `messages` (`message_id`,`user_id`,`group_id`,`read`,`datetime`,`message_text`,`disabled`,`completed`)VALUES(6,2,5,0,"2020-11-04 09:24:51","Suspendisse commodo tincidunt nibh. Phasellus nulla. Integer vulputate, risus a",0,0);
-INSERT INTO `messages` (`message_id`,`user_id`,`group_id`,`read`,`datetime`,`message_text`,`disabled`,`completed`)VALUES(7,4,5,1,"2021-05-30 13:19:23","mi. Duis risus odio, auctor vitae, aliquet nec, imperdiet nec,",1,0);
-INSERT INTO `messages` (`message_id`,`user_id`,`group_id`,`read`,`datetime`,`message_text`,`disabled`,`completed`)VALUES(8,8,5,0,"2021-09-18 19:55:25","Aliquam auctor, velit eget laoreet posuere, enim nisl elementum purus,",0,1);
-INSERT INTO `messages` (`message_id`,`user_id`,`group_id`,`read`,`datetime`,`message_text`,`disabled`,`completed`)VALUES(9,5,3,0,"2020-06-16 21:47:40","Suspendisse eleifend. Cras sed leo. Cras vehicula aliquet libero. Integer",0,1);
-INSERT INTO `messages` (`message_id`,`user_id`,`group_id`,`read`,`datetime`,`message_text`,`disabled`,`completed`)VALUES(10,7,3,0,"2020-11-18 05:15:04","eu nibh vulputate mauris sagittis placerat. Cras dictum ultricies ligula.",1,0);
+INSERT INTO `messages` (`message_id`,`user_id`,`group_id`,`read`,`datetime`,`message_text`,`disabled`,`completed`,`is_delete`) VALUES(3,7,1,1,"2021-10-16 15:14:41","semper. Nam tempor diam dictum sapien. Aenean massa. Integer vitae",0,1,0);
+INSERT INTO `messages` (`message_id`,`user_id`,`group_id`,`read`,`datetime`,`message_text`,`disabled`,`completed`,`is_delete`) VALUES(4,2,1,0,"2020-05-14 23:35:43","elementum sem, vitae aliquam eros turpis non enim. Mauris quis",1,0,0);
+INSERT INTO `messages` (`message_id`,`user_id`,`group_id`,`read`,`datetime`,`message_text`,`disabled`,`completed`,`is_delete`)VALUES(5,1,4,1,"2020-04-19 14:48:10","sit amet, consectetuer adipiscing elit. Etiam laoreet, libero et tristique",1,1,0);
+INSERT INTO `messages` (`message_id`,`user_id`,`group_id`,`read`,`datetime`,`message_text`,`disabled`,`completed`,`is_delete`)VALUES(6,2,5,0,"2020-11-04 09:24:51","Suspendisse commodo tincidunt nibh. Phasellus nulla. Integer vulputate, risus a",0,0,0);
+INSERT INTO `messages` (`message_id`,`user_id`,`group_id`,`read`,`datetime`,`message_text`,`disabled`,`completed`,`is_delete`)VALUES(7,4,5,1,"2021-05-30 13:19:23","mi. Duis risus odio, auctor vitae, aliquet nec, imperdiet nec,",1,0,0);
+INSERT INTO `messages` (`message_id`,`user_id`,`group_id`,`read`,`datetime`,`message_text`,`disabled`,`completed`,`is_delete`)VALUES(8,8,5,0,"2021-09-18 19:55:25","Aliquam auctor, velit eget laoreet posuere, enim nisl elementum purus,",0,1,0);
+INSERT INTO `messages` (`message_id`,`user_id`,`group_id`,`read`,`datetime`,`message_text`,`disabled`,`completed`,`is_delete`)VALUES(9,5,3,0,"2020-06-16 21:47:40","Suspendisse eleifend. Cras sed leo. Cras vehicula aliquet libero. Integer",0,1,0);
+INSERT INTO `messages` (`message_id`,`user_id`,`group_id`,`read`,`datetime`,`message_text`,`disabled`,`completed`,`is_delete`)VALUES(10,7,3,0,"2020-11-18 05:15:04","eu nibh vulputate mauris sagittis placerat. Cras dictum ultricies ligula.",1,0,0);
 
 
 -- tasks
 
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES (1,7,7,"2022-01-05 18:40:10","nascetur ridiculus mus. Donec dignissim magna a tortor. Nunc commodo",0);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES(2,2,1,"2022-02-12 13:38:41","arcu et pede. Nunc sed orci lobortis augue scelerisque mollis.",0);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES(3,7,4,"2020-12-21 07:15:58","egestas hendrerit neque. In ornare sagittis felis. Donec tempor, est",1);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES(4,2,7,"2021-12-24 15:06:17","Cras vulputate velit eu sem. Pellentesque ut ipsum ac mi",0);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES(5,1,7,"2020-10-02 15:49:02","pede. Cum sociis natoque penatibus et magnis dis parturient montes,",1);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES(6,2,5,"2021-05-08 18:22:13","ipsum primis in faucibus orci luctus et ultrices posuere cubilia",1);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES(7,4,7,"2021-08-27 23:37:23","Donec tempor, est ac mattis semper, dui lectus rutrum urna,",0);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES(8,7,1,"2020-08-26 14:37:47","torquent per conubia nostra, per inceptos hymenaeos. Mauris ut quam",1);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES(9,8,3,"2022-03-06 05:59:25","convallis dolor. Quisque tincidunt pede ac urna. Ut tincidunt vehicula",0);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES(10,5,1,"2021-09-15 17:03:12","nisi nibh lacinia orci, consectetuer euismod est arcu ac orci.",0);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES (11,1,9,"2021-08-29 07:43:34","mollis dui, in sodales elit erat vitae risus. Duis a",0);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES(12,2,1,"2022-02-14 02:33:20","ac urna. Ut tincidunt vehicula risus. Nulla eget metus eu",1);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES(13,3,4,"2021-12-02 04:18:38","nisi sem semper erat, in consectetuer ipsum nunc id enim.",0);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES(14,6,2,"2020-12-06 14:06:17","dui, in sodales elit erat vitae risus. Duis a mi",1);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES(15,8,9,"2022-03-13 19:27:39","a ultricies adipiscing, enim mi tempor lorem, eget mollis lectus",1);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES(16,4,6,"2021-05-10 11:04:58","porttitor scelerisque neque. Nullam nisl. Maecenas malesuada fringilla est. Mauris",0);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES(17,3,5,"2020-12-26 07:48:02","Phasellus libero mauris, aliquam eu, accumsan sed, facilisis vitae, orci.",1);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES(18,7,8,"2021-10-28 14:56:00","eu enim. Etiam imperdiet dictum magna. Ut tincidunt orci quis",1);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES(19,2,5,"2020-04-13 15:30:20","enim mi tempor lorem, eget mollis lectus pede et risus.",0);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES(20,2,1,"2021-01-22 16:39:51","sem. Nulla interdum. Curabitur dictum. Phasellus in felis. Nulla tempor",0);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES (21,1,1,"2022-04-01 22:27:03","leo elementum sem, vitae aliquam eros turpis non enim. Mauris",0);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES(22,2,5,"2021-02-26 19:46:53","odio a purus. Duis elementum, dui quis accumsan convallis, ante",0);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES(23,5,4,"2020-08-16 10:57:16","Aenean eget magna. Suspendisse tristique neque venenatis lacus. Etiam bibendum",0);
-INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`) VALUES(24,7,7,"2020-07-31 17:38:46","ligula. Aliquam erat volutpat. Nulla dignissim. Maecenas ornare egestas ligula.",0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES (1,7,7,"2022-01-05 18:40:10","nascetur ridiculus mus. Donec dignissim magna a tortor. Nunc commodo",0,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES(2,2,1,"2022-02-12 13:38:41","arcu et pede. Nunc sed orci lobortis augue scelerisque mollis.",0,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES(3,7,4,"2020-12-21 07:15:58","egestas hendrerit neque. In ornare sagittis felis. Donec tempor, est",1,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES(4,2,7,"2021-12-24 15:06:17","Cras vulputate velit eu sem. Pellentesque ut ipsum ac mi",0,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES(5,1,7,"2020-10-02 15:49:02","pede. Cum sociis natoque penatibus et magnis dis parturient montes,",1,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES(6,2,5,"2021-05-08 18:22:13","ipsum primis in faucibus orci luctus et ultrices posuere cubilia",1,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES(7,4,7,"2021-08-27 23:37:23","Donec tempor, est ac mattis semper, dui lectus rutrum urna,",0,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES(8,7,1,"2020-08-26 14:37:47","torquent per conubia nostra, per inceptos hymenaeos. Mauris ut quam",1,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES(9,8,3,"2022-03-06 05:59:25","convallis dolor. Quisque tincidunt pede ac urna. Ut tincidunt vehicula",0,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES(10,5,1,"2021-09-15 17:03:12","nisi nibh lacinia orci, consectetuer euismod est arcu ac orci.",0,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES (11,1,9,"2021-08-29 07:43:34","mollis dui, in sodales elit erat vitae risus. Duis a",0,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES(12,2,1,"2022-02-14 02:33:20","ac urna. Ut tincidunt vehicula risus. Nulla eget metus eu",1,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES(13,3,4,"2021-12-02 04:18:38","nisi sem semper erat, in consectetuer ipsum nunc id enim.",0,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES(14,6,2,"2020-12-06 14:06:17","dui, in sodales elit erat vitae risus. Duis a mi",1,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES(15,8,9,"2022-03-13 19:27:39","a ultricies adipiscing, enim mi tempor lorem, eget mollis lectus",1,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES(16,4,6,"2021-05-10 11:04:58","porttitor scelerisque neque. Nullam nisl. Maecenas malesuada fringilla est. Mauris",0,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES(17,3,5,"2020-12-26 07:48:02","Phasellus libero mauris, aliquam eu, accumsan sed, facilisis vitae, orci.",1,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES(18,7,8,"2021-10-28 14:56:00","eu enim. Etiam imperdiet dictum magna. Ut tincidunt orci quis",1,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES(19,2,5,"2020-04-13 15:30:20","enim mi tempor lorem, eget mollis lectus pede et risus.",0,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES(20,2,1,"2021-01-22 16:39:51","sem. Nulla interdum. Curabitur dictum. Phasellus in felis. Nulla tempor",0,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES (21,1,1,"2022-04-01 22:27:03","leo elementum sem, vitae aliquam eros turpis non enim. Mauris",0,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES(22,2,5,"2021-02-26 19:46:53","odio a purus. Duis elementum, dui quis accumsan convallis, ante",0,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES(23,5,4,"2020-08-16 10:57:16","Aenean eget magna. Suspendisse tristique neque venenatis lacus. Etiam bibendum",0,0);
+INSERT INTO `tasks` (`task_id`,`user_id`,`message_id`,`datetime`,`task_text`,`completed`,`is_delete`) VALUES(24,7,7,"2020-07-31 17:38:46","ligula. Aliquam erat volutpat. Nulla dignissim. Maecenas ornare egestas ligula.",0,0);
 
 
 
