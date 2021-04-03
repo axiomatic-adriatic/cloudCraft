@@ -4,6 +4,7 @@ import { TextArea } from '../styles';
 const axios = require('axios');
 
 const TextBox = () => {
+  const groupName = 'group one'
   const postMessage = (id) => {
     axios({
       method: 'post',
@@ -18,7 +19,10 @@ const TextBox = () => {
 
   return (
     <div className="textbox">
-      <TextArea onSubmit={postMessage} />
+      <TextArea
+        onSubmit={postMessage}
+        placeholder={`Send a message to ${groupName}`}
+      />
     </div>
   );
 };
