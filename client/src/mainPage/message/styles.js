@@ -20,4 +20,3 @@ export const Container = styled.div `
     grid-row: 3 / 4;
   }
 `;
-
