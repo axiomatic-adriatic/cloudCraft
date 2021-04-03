@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from './components/header/header';
 
 class TaskListModule extends React.Component {
   constructor(props) {
@@ -7,7 +8,7 @@ class TaskListModule extends React.Component {
   render() {
     return (
       <div>
-        <h1>Task List Module</h1>
+        <Header />
       </div>
     )
   }
