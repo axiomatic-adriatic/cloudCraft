@@ -6,6 +6,7 @@ module.exports = {
     path: path.resolve(__dirname, './client/dist'),
     filename: 'bundle.js',
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -15,8 +16,8 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react']
-          }
-        }
+          },
+        },
       },
       {
         test: /\.((c|sa|sc)ss)$/i,
@@ -31,12 +32,12 @@ module.exports = {
             },
           },
         ],
-      }
+      },
       // {
       //   test: /\.css$/,
       //   loader: 'style-loader!css-loader?modules',
       // }
-    ]
+    ],
   },
-  mode: 'development'
+  mode: 'development',
 };
