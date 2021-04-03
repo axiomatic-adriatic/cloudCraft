@@ -1,15 +1,24 @@
 import React from 'react';
-import Banner from './components/Banner.js';
-import TextBox from './components/TextBox.js';
+import { io } from 'socket.io-client';
+import Banner from './components/Banner';
+import TextBox from './components/TextBox';
 
-const Message = () => {
-  return (
-    <div>
-      <h1>I am message</h1>
-      <Banner />
-      <TextBox />
-    </div>
-  )
-}
+const socket = io({
+  extraHeaders: {
+    'my-custom-header': '1234',
+  },
+});
+
+socket.on('date', (data) => {
+  console.log(data.date);
+});
+
+const Message = () => (
+  <div>
+    <h1>I am message</h1>
+    <Banner />
+    <TextBox />
+  </div>
+);
 
 export default Message;
