@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './components/header/header.jsx';
 import AllCategoryList from './components/allCategoryList/allCategoryList.jsx';
+import axios from 'axios';
 
 class TaskListModule extends React.Component {
   constructor(props) {
@@ -10,8 +11,18 @@ class TaskListModule extends React.Component {
     };
   }
 
-  componenDidMount() {
+  componentDidMount() {
     // get all tasks by user_id
+    axios.get('/tasks')
+      .then((resp) => {
+        console.log(resp.data);
+        this.setState({
+          tasks: [...resp.data]
+        })
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   render() {
