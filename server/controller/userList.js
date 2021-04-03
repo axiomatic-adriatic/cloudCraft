@@ -1,5 +1,4 @@
-
-const db = require('../../db/config.js')
+const db = require('../../db/db.js')
 
 exports.getUsers = (req, res) => {
   db.query('select user_id, name from users;', ((err, result) => {
