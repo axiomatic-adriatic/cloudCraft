@@ -8,7 +8,15 @@ class UserList extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div
+      className="userList-container"
+      style={{
+        backgroundColor: '#6096BA',
+        color: '#E7ECEF',
+        textAlign: 'center',
+       }
+      }
+      >
         <h1>User List</h1>
         <Groups />
         <Users />
