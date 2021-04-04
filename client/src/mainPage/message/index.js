@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react';
+import axios from 'axios';
 import { Container } from './styles';
 import Banner from './components/Banner';
 import ChatBox from './components/ChatBox';
 import TextBox from './components/TextBox';
 
-const axios = require('axios');
-
 const Message = ({ groupdId }) => {
   const getChatHistory = (id) => {
     axios({
       method: 'get',
-      url: '/chatHistory',
+      url: '/chat',
       params: { groupId: id },
     })
       .then((result) => {
