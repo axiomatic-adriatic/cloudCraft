@@ -34,7 +34,7 @@ const getTasks = (user_id, callback) => {
   });
 };
 
-const updateTask = (taskId, callback) => {
+const deleteTask = (taskId, callback) => {
   db.query('UPDATE tasks SET is_delete =? WHERE task_id = ?', [true, taskId], (err, results) => {
     if (err) {
       callback(err, null);
@@ -46,13 +46,13 @@ const updateTask = (taskId, callback) => {
   });
 };
 
-getTasks(2, (err, result) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log(result);
-  }
-});
+// getTasks(2, (err, result) => {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log(result);
+//   }
+// });
 
 // deleteTask(1, (err, result) => {
 //     if (err) {
@@ -64,5 +64,5 @@ getTasks(2, (err, result) => {
 
 module.exports = {
   getTasks,
-  updateTask,
+  deleteTask,
 };

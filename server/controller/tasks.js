@@ -11,7 +11,7 @@ const getTasks = (req, res) => {
   });
 };
 
-const updateTask = (req, res) => {
+const deleteTask = (req, res) => {
   const { task_id } = req.query;
   model.updateTask(task_id, (err, results) => {
     if (err) {
@@ -24,5 +24,5 @@ const updateTask = (req, res) => {
 
 module.exports = {
   getTasks,
-  updateTask,
+  deleteTask,
 };
