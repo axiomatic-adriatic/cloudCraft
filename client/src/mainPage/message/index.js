@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Container } from './styles';
 import Banner from './components/Banner';
@@ -6,6 +6,11 @@ import ChatBox from './components/ChatBox';
 import TextBox from './components/TextBox';
 
 const Message = ({ groupdId }) => {
+  // need messages, timestamp and username
+  // message with be store as object
+  // {username: name, message: 'some message', dateTime: date, messageId: id}
+  const [messages, setMessages] = useState([]);
+  const [groupName, setGroupName] = useState('');
   const getChatHistory = (id) => {
     axios({
       method: 'get',
@@ -13,6 +18,7 @@ const Message = ({ groupdId }) => {
       params: { groupId: id },
     })
       .then((result) => {
+        setMessages(result);
         console.log(result);
       })
       .catch((err) => { throw err; });
@@ -24,8 +30,8 @@ const Message = ({ groupdId }) => {
 
   return (
     <Container>
-      <Banner />
-      <ChatBox />
+      <Banner groupName={groupName} />
+      <ChatBox chatHistry={messages} />
       <TextBox />
     </Container>
   );
