@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-export const Container = styled.div `
+export const Container = styled.div`
   display: grid;
-  grid-template-columns: 0.5fr 4fr 0.5fr;
-  grid-template-rows: 0.5fr 7fr 1.5fr;
+  grid-template-columns: 1rem auto 1rem;
+  grid-template-rows: 4rem 8fr 1.5fr;
 
   .banner {
     grid-column: 2 / 3;
@@ -22,5 +22,9 @@ export const Container = styled.div `
 `;
 
 export const TextArea = styled.textarea`
-  background-color: black;
+  resize: none;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  width: 100%;
+  height: 5rem;
 `;

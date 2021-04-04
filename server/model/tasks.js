@@ -1,4 +1,4 @@
-const db = require('../../db/db');
+const db = require('../../db/db.js');
 
 const getTasks = (callback) => {
   db.query('SELECT * FROM tasks;', (err, results) => {
