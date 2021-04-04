@@ -1,14 +1,13 @@
 import React from 'react';
+import axios from 'axios';
 import { TextArea } from '../styles';
 
-const axios = require('axios');
-
 const TextBox = () => {
-  const groupName = 'group one'
+  const groupName = 'group one';
   const postMessage = (id) => {
     axios({
       method: 'post',
-      url: '/chatHistory',
+      url: '/chat',
       params: { groupId: id },
     })
       .then((result) => {
