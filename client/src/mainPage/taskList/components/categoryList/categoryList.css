@@ -1,0 +1,33 @@
+.categoryList {
+  margin-top: 20px;
+    background-color: #E7ECEF;
+}
+
+.scrollList {
+  min-height: 200px;
+
+
+  overflow-y: scroll;
+
+  max-height: 350px;
+}
+/* width */
+.scrollList::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.scrollList::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.scrollList::-webkit-scrollbar-thumb {
+  background: #888;
+
+}
+
+/* Handle on hover */
+.scrollList::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

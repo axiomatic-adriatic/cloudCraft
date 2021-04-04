@@ -1,5 +1,7 @@
 import React from 'react';
 import CompleteTask from '../completeTask/completeTask';
+import createDateTime from './task.util';
+import styles from './task.css';
 
 class Task extends React.Component {
   constructor(props) {
@@ -8,10 +10,14 @@ class Task extends React.Component {
   }
 
   render() {
+    const { task } = this.props;
     return (
-      <div>
-        <p>Username</p>
-        <p>task text</p>
+      <div className={styles.task}>
+        <div className={styles.header}>
+          <span>&#10006;</span>
+        </div>
+        <div>{createDateTime(task.datetime)}</div>
+        <p>{task.task_text}</p>
         <CompleteTask />
       </div>
     )
