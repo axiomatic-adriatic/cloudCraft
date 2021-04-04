@@ -34,8 +34,8 @@ const getTasks = (user_id, callback) => {
   });
 };
 
-const deleteTask = (taskId, callback) => {
-  db.query('UPDATE tasks SET is_delete =? WHERE task_id = ?', [true, taskId], (err, results) => {
+const deleteTask = (task_id, callback) => {
+  db.query('UPDATE tasks SET is_delete =? WHERE task_id = ?', [true, task_id], (err, results) => {
     if (err) {
       callback(err, null);
       // console.log(err)
