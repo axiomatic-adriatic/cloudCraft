@@ -18,8 +18,8 @@ const AllCateogryList = ({tasks, currentUserId}) => {
   }
   return (
     <div className={styles.allCategoryList}>
-      <CategoryList categoryName="My Tasks" tasks={currentUserTasks} bgColor="#6096BA" textColor="white" />
-      <CategoryList categoryName="Other User Tasks" tasks={otherUserTasks} bgColor="#A3CEF1" textColor="#274C77" />
+      <CategoryList categoryName="My Tasks" tasks={currentUserTasks} bgColor="#A3CEF1" textColor="#274C77" add={true} />
+      <CategoryList categoryName="Other User Tasks" tasks={otherUserTasks} bgColor="#6096BA" textColor="white" add={false} />
     </div>
   );
 };

@@ -1,14 +1,25 @@
+.addTask {
+  /* float:right; */
+  position: absolute;
+  top: 7px;
+  right: 12px;
+  cursor: pointer;
+}
 .categoryList {
   margin-top: 20px;
-    background-color: #E7ECEF;
+  background-color: #E7ECEF;
+}
+
+.categoryList h3 {
+  position: relative;
+  padding: 10px;
+  margin: 0px;
+  text-align: center;
 }
 
 .scrollList {
   min-height: 200px;
-
-
   overflow-y: scroll;
-
   max-height: 350px;
 }
 /* width */
