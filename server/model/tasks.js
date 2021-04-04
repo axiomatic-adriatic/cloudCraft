@@ -1,4 +1,4 @@
-const db = require('../../db/db');
+const db = require('../../db/db.js');
 
 const getTasks = (user_id, callback) => {
   const query = 'SELECT task_id,tasks.user_id,tasks.message_id,tasks.datetime,task_text,'

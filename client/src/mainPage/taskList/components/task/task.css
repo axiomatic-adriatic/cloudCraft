@@ -1,0 +1,13 @@
+.task {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.delete {
+  cursor: pointer;
+}

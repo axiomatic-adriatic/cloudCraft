@@ -1,0 +1,12 @@
+.completeSection input {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.regularComplete {
+  color: black;
+}
+
+.greenComplete {
+  color: #6096BA;
+}
