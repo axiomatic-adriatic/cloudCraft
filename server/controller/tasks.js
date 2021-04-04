@@ -1,7 +1,8 @@
 const model = require('../model/tasks');
 
 const getTasks = (req, res) => {
-  model.getTasks((err, result) => {
+  const { user_id } = req.query;
+  model.getTasks(user_id, (err, result) => {
     if (err) {
       res.send(err);
     } else {
