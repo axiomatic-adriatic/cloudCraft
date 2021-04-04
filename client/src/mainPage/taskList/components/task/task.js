@@ -14,7 +14,7 @@ class Task extends React.Component {
     return (
       <div className={styles.task}>
         <div className={styles.header}>
-          <span>&#10006;</span>
+          <span className={styles.delete}>&#10006;</span>
         </div>
         <div>{createDateTime(task.datetime)}</div>
         <p>{task.task_text}</p>
