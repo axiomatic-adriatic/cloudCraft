@@ -3,7 +3,7 @@ import { Header } from '../styles';
 
 const Banner = ({ groupName }) => (
   <div className="banner">
-    <Header size={2}>{groupName || 'GroupOne'}</Header>
+    <Header size={1.5} color="black">{groupName || 'GroupOne'}</Header>
   </div>
 );
 

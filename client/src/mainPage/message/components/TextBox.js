@@ -5,16 +5,21 @@ import { TextArea } from '../styles';
 const TextBox = () => {
   const [input, setInput] = useState('');
   const groupName = 'group one'; // sample
-  const postMessage = (id) => {
-    axios({
-      method: 'post',
-      url: '/chat',
-      params: { groupId: id },
-    })
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => { throw err; });
+  // const postMessage = (id) => {
+  //   axios({
+  //     method: 'post',
+  //     url: '/chat',
+  //     params: { groupId: id },
+  //   })
+  //     .then((result) => {
+  //       console.log(result);
+  //     })
+  //     .catch((err) => { throw err; });
+  // };
+
+  const getInput = (e) => {
+    e.preventDefault();
+    setInput(e.target.value);
   };
 
   return (
@@ -23,6 +28,7 @@ const TextBox = () => {
         onSubmit={postMessage}
         placeholder={`Send a message to ${groupName}`}
         value={input}
+        onChange={getInput}
       />
     </div>
   );
