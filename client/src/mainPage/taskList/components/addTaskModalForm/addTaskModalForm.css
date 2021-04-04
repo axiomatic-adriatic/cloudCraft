@@ -1,0 +1,13 @@
+.addTaskForm {
+  display: flex;
+  flex-direction: column;
+}
+.addTaskForm textarea {
+  width: 95%;
+  margin: 10px 10px 10px 0;
+  height: 60px;
+}
+.button {
+  width: 100px;
+  height: 30px;
+}

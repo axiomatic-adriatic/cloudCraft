@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { TextArea } from '../styles';
 
 const TextBox = () => {
-  const groupName = 'group one';
+  const [input, setInput] = useState('');
+  const groupName = 'group one'; // sample
   const postMessage = (id) => {
     axios({
       method: 'post',
@@ -21,6 +22,7 @@ const TextBox = () => {
       <TextArea
         onSubmit={postMessage}
         placeholder={`Send a message to ${groupName}`}
+        value={input}
       />
     </div>
   );
