@@ -55,7 +55,11 @@ class Users extends React.Component {
         <img src={imageSrc} style={avatarStyle} />
         <p
           onClick={() => handleUserClick(user.user_id)}
-          style={{ fontSize: '14px', marginLeft: '25px'}}
+          style={{
+            fontSize: '14px',
+            marginLeft: '25px',
+            cursor: 'pointer',
+          }}
         >
           {user.name}
         </p>
