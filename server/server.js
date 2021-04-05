@@ -22,9 +22,9 @@ io.on('connection', client => {
   client.on('message', data => {
     console.log(data);
    });
-  setInterval(function() {
-    io.emit('date', {'date': new Date()});
-  }, 3000);
+  // setInterval(function() {
+  //   io.emit('date', {'date': new Date()});
+  // }, 3000);
  });
 
 
