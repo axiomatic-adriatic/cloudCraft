@@ -53,7 +53,7 @@ const deleteTask = (task_id, callback) => {
       callback(err, null);
       // console.log(err)
     } else {
-      callback(results.protocol41, null);
+      callback(null, results.protocol41);
       // console.log(results.protocol41);
     }
   });
@@ -81,7 +81,7 @@ const completeTask = (task_id, callback) => {
       callback(err, null);
       // console.log(err)
     } else {
-      callback(results.protocol41, null);
+      callback(null, results.protocol41);
       // console.log(results.protocol41);
     }
   });
