@@ -23,8 +23,16 @@ class Task extends React.Component {
       })
   }
 
-  handleCompleteTask(e) {
-    console.log('handle complete task');
+  handleCompleteTask(task_id) {
+
+    console.log(task_id)
+    axios.put(`/task/complete?task_id=${task_id}`)
+      .then((resp) => {
+        console.log(resp.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   render() {

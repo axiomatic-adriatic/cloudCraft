@@ -19,16 +19,19 @@ class CompleteTask extends React.Component {
     });
   }
 
-  removeTaskInSpecifiedTime(seconds) {
-
-  }
-
   render() {
     const { disabled } = this.state;
+    const { task } = this.props;
+    let checkedObj = {}
+    if (task.completed === 1) {
+      checkedObj.checked = 'checked';
+    }
     return (
       <form className={styles.completeSection}>
         <label
-          className={disabled ? styles.greenComplete : styles.regularComplete}
+          className={
+            disabled || task.completed === 1 ? styles.greenComplete : styles.regularComplete
+          }
           htmlFor="completed"
         >
           <input
@@ -36,9 +39,10 @@ class CompleteTask extends React.Component {
             type="checkbox"
             name="completed"
             onChange={this.handleOnChange}
-            disabled={disabled}
+            disabled={task.completed === 1 ? true : disabled}
+            {...checkedObj}
           />
-          Completed
+          <strong>Completed</strong>
         </label>
       </form>
     );
