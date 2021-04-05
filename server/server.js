@@ -23,7 +23,7 @@ io.on('connection', (client) => {
   messagesController.getMessages(1/* will be replaced with channel id from client */)
     .then((history) => {
       // send back message history of specific channel when first connect
-      io.emit('message', { message: history });
+      client.emit('message', { message: history });
     });
   console.log(client.handshake.headers['my-custom-header']);
   client.on('message', (data) => {
