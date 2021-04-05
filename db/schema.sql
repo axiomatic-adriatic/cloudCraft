@@ -53,7 +53,7 @@ CREATE TABLE `tasks` (
 	`message_id` INT NOT NULL DEFAULT '0',
 	`user_id` INT NOT NULL,
 	`task_text` TEXT NOT NULL,
-	`datetime` DATETIME NOT NULL,
+	`datetime` DATETIME NOT NULL DEFAULT NOW(),
 	`completed` BOOLEAN NOT NULL DEFAULT false,
 	`is_delete` BOOLEAN NOT NULL DEFAULT false,
 	PRIMARY KEY (`task_id`),
