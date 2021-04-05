@@ -40,7 +40,11 @@ const Message = ({ groupdId }) => {
     console.log(data.message);
   });
 
-  // message = {message: messageBody, userId: userId}
+  // message = {
+  //   user_id: userID,
+  //   channel_id: channelID,
+  //   message_text: message,
+  // }
   const submit = (message) => {
     console.log(message);
     socket.emit('message', {message});
