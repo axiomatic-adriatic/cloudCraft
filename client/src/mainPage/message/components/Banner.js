@@ -1,11 +1,15 @@
 import React from 'react';
+import { Header } from '../styles';
 
-const Banner = () => {
-  return (
-    <div className="banner">
-      <h1>I am banner</h1>
-    </div>
-  )
-};
+const Banner = ({ groupName }) => (
+  <div className="banner">
+    <Header
+      size={1.5}
+      color="#202020"
+    >
+      {groupName || 'GroupOne'}
+    </Header>
+  </div>
+);
 
 export default Banner;
