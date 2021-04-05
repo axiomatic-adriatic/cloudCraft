@@ -8,12 +8,6 @@ class Groups extends React.Component {
       channels: [],
     }
     this.getChannels = this.getChannels.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(channelID) {
-    console.log('channel clicked', { channelID });
-    //
   }
 
   getChannels() {
@@ -35,6 +29,7 @@ class Groups extends React.Component {
 
   render() {
     const { channels } = this.state;
+    const { handleChannelClick } = this.props;
     const channelList = channels.map((channel) => {
       return (
       <p
@@ -43,14 +38,13 @@ class Groups extends React.Component {
       style={{
         marginLeft: '15px',
       }}
-      onClick={() => this.handleClick(channel.channel_id)}>#{channel.channel_name}</p>
+      onClick={() => handleChannelClick(channel.channel_id)}>#{channel.channel_name}</p>
       )
     })
     return (
       <div
       className="channels-container"
       style={{
-        // display: 'flex',
         marginLeft: '15px'
       }}>
         <h3>Channels</h3>
