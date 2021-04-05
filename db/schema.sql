@@ -14,11 +14,6 @@ CREATE TABLE `group` (
 	`group_name` varchar(255) NOT NULL,
 	 PRIMARY KEY (`group_id`)
 );
--- CREATE TABLE `group` (
--- 	`group_id` INT NOT NULL AUTO_INCREMENT,
--- 	`group_name` varchar(255) NOT NULL,
--- 	 PRIMARY KEY (`group_id`)
--- );
 
 CREATE TABLE `users_groups` (
 	`user_group_id` INT NOT NULL AUTO_INCREMENT,
@@ -83,14 +78,14 @@ CREATE TABLE `tasks` (
 
 -- users data
 
-INSERT INTO `users` (`user_id`, `name`, `password`, `email`) VALUES (1, 'Christiana', '578ce738ee12ac7e6f1f99a20d10e9577ee9b0af', 'christiana.zieme@example.org');
-INSERT INTO `users` (`user_id`, `name`, `password`, `email`) VALUES (2, 'Trevor', 'b8c8dcff0641f80b10c178dc6af00df6edf69534', 'weissnat.trevion@example.com');
-INSERT INTO `users` (`user_id`, `name`, `password`, `email`) VALUES (3, 'Vesta', '247f06f61d440af697f4dd63af4b4929d4c9f236', 'vesta.johnston@example.org');
-INSERT INTO `users` (`user_id`, `name`, `password`, `email`) VALUES (4, 'Rohan', 'b35de95107a415a1917a44b8e8483ac08fa0e024', 'rohan.maryam@example.com');
-INSERT INTO `users` (`user_id`, `name`, `password`, `email`) VALUES (5, 'Paul', '0e2869ce9b3bf82debc8a7156217bbea4a34c5f2', 'paul79@example.com');
-INSERT INTO `users` (`user_id`, `name`, `password`, `email`) VALUES (6, 'Kathryn', '93d98807b5670837018c2e5d6ddc4c15c1b97ab0', 'kathryn.eichmann@example.org');
-INSERT INTO `users` (`user_id`, `name`, `password`, `email`) VALUES (7, 'Marta', 'ac9f570f2e9e6a28981d866f720a6a6dd09c269b', 'marta66@example.org');
-INSERT INTO `users` (`user_id`, `name`, `password`, `email`) VALUES (8, 'Jane', '7f3c83ffbd3da732bfc5b31e73419889ddb516b4', 'oaltenwerth@example.org');
+INSERT INTO `users` (`user_id`, `name`, `password`, `email`) VALUES (1, 'Robin', '578ce738ee12ac7e6f1f99a20d10e9577ee9b0af', 'christiana.zieme@example.org');
+INSERT INTO `users` (`user_id`, `name`, `password`, `email`) VALUES (2, 'Avery', 'b8c8dcff0641f80b10c178dc6af00df6edf69534', 'weissnat.trevion@example.com');
+INSERT INTO `users` (`user_id`, `name`, `password`, `email`) VALUES (3, 'Riley', '247f06f61d440af697f4dd63af4b4929d4c9f236', 'vesta.johnston@example.org');
+INSERT INTO `users` (`user_id`, `name`, `password`, `email`) VALUES (4, 'Frankie', 'b35de95107a415a1917a44b8e8483ac08fa0e024', 'rohan.maryam@example.com');
+INSERT INTO `users` (`user_id`, `name`, `password`, `email`) VALUES (5, 'Alex', '0e2869ce9b3bf82debc8a7156217bbea4a34c5f2', 'paul79@example.com');
+INSERT INTO `users` (`user_id`, `name`, `password`, `email`) VALUES (6, 'River', '93d98807b5670837018c2e5d6ddc4c15c1b97ab0', 'kathryn.eichmann@example.org');
+INSERT INTO `users` (`user_id`, `name`, `password`, `email`) VALUES (7, 'Aiden', 'ac9f570f2e9e6a28981d866f720a6a6dd09c269b', 'marta66@example.org');
+INSERT INTO `users` (`user_id`, `name`, `password`, `email`) VALUES (8, 'Ocean', '7f3c83ffbd3da732bfc5b31e73419889ddb516b4', 'oaltenwerth@example.org');
 
 
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import { YaleBlue, AliceBlue } from '../../../styles/colors';
+import { YaleBlue, AliceBlue } from '../styles/colors';
+import faker from 'faker';
 
 class Users extends React.Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class Users extends React.Component {
       verticalAlign: 'middle',
       width: '35px',
       height: '35px',
-      borderRadius: '50%',
+      borderRadius: '15%',
       marginLeft: '15px',
     };
 
@@ -48,7 +49,8 @@ class Users extends React.Component {
       // if (user.user_id === login.user_id) {
       //   return '';
       // }
-      const imageSrc= 'https://www.w3schools.com/howto/img_avatar.png';
+      const imageSrc= faker.image.avatar();
+
       return (
       <div
           className="user-container"
