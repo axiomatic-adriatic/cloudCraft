@@ -26,7 +26,8 @@ class TaskListModule extends React.Component {
   }
 
   render() {
-    const { tasks, user_id } = this.state;
+    const { tasks } = this.state;
+    const { user_id } = this.props;
     return (
       <div>
         {/* <Header /> */}
