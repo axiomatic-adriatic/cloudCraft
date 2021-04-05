@@ -41,7 +41,7 @@ const addTask = (user_id, task_text, callback) => {
     if (err) {
       callback(err, null);
     } else {
-      callback(results, null);
+      callback(null, results);
     }
   });
 };
