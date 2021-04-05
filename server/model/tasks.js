@@ -62,7 +62,30 @@ const deleteTask = (task_id, callback) => {
 //     }
 // })
 
+const completeTask = (task_id, callback) => {
+  db.query('UPDATE tasks SET completed =? WHERE task_id = ?', [true, task_id], (err, results) => {
+    if (err) {
+      callback(err, null);
+      // console.log(err)
+    } else {
+      callback(results.protocol41, null);
+      // console.log(results.protocol41);
+    }
+  });
+};
+
+
+
+// completeTask(2, (err, result) => {
+//     if (err) {
+//         console.log(err);
+//     } else {
+//         console.log(result);
+//     }
+// })
+
 module.exports = {
   getTasks,
   deleteTask,
+  completeTask
 };
