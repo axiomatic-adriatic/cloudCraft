@@ -56,7 +56,7 @@ class Users extends React.Component {
           className="user-container"
           style={{
             display: 'flex',
-            padding: '5px',
+            padding: '3px'
           }}
           key={user.user_id}
         >
@@ -71,7 +71,12 @@ class Users extends React.Component {
       );
     })
     return (
-      <div>
+      <div
+        className="userList"
+        style={{
+          marginLeft: '15px'
+        }}
+      >
         <h3>Direct Messages</h3>
         {userList}
       </div>
