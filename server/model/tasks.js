@@ -34,6 +34,19 @@ const getTasks = (user_id, callback) => {
   });
 };
 
+
+const addTask = (user_id, task_text, callback) => {
+  const post = { user_id, task_text };
+  db.query('INSERT INTO tasks SET ?', [post], (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(results, null);
+    }
+  });
+};
+
+
 const deleteTask = (task_id, callback) => {
   db.query('UPDATE tasks SET is_delete =? WHERE task_id = ?', [true, task_id], (err, results) => {
     if (err) {
@@ -87,5 +100,6 @@ const completeTask = (task_id, callback) => {
 module.exports = {
   getTasks,
   deleteTask,
-  completeTask
+  completeTask,
+  addTask,
 };
