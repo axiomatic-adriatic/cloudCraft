@@ -10,7 +10,6 @@ class Users extends React.Component {
       users: [],
     }
     this.getUsers = this.getUsers.bind(this);
-    this.handleClick = this.handleClick.bind(this);
   }
 
   getUsers() {
@@ -26,17 +25,14 @@ class Users extends React.Component {
     })
   }
 
-  handleClick(userId) {
-    console.log('user clicked', { userId });
-    //
-  }
-
   componentDidMount() {
     this.getUsers();
   }
 
   render() {
     const { users } = this.state;
+    const { handleUserClick } = this.props;
+
     const avatarStyle = {
       verticalAlign: 'middle',
       width: '35px',
@@ -46,11 +42,7 @@ class Users extends React.Component {
     };
 
     const userList = users.map((user) => {
-      // if (user.user_id === login.user_id) {
-      //   return '';
-      // }
       const imageSrc= faker.image.avatar();
-
       return (
       <div
           className="user-container"
@@ -62,7 +54,7 @@ class Users extends React.Component {
         >
         <img src={imageSrc} style={avatarStyle} />
         <p
-          onClick={() => this.handleClick(user.user_id)}
+          onClick={() => handleUserClick(user.user_id)}
           style={{ fontSize: '14px', marginLeft: '25px'}}
         >
           {user.name}
