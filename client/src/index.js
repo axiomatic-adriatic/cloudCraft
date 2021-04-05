@@ -1,6 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LoginApp from './login/loginApp';
+import { Auth0Provider } from '@auth0/auth0-react';
+import LoginApp from './login/loginApp.jsx';
 import MainApp from './mainPage/mainApp';
+import LogoutButton from './login/logoutButton.jsx';
 
-ReactDOM.render(window.location.pathname === '/home/' ? <MainApp /> : <LoginApp />, document.getElementById('app'));
+ReactDOM.render(
+  window.location.pathname === '/home/' ? <MainApp />
+    : (
+      <Auth0Provider
+        domain="dev-u3lai6d6.us.auth0.com"
+        clientId="EK0st6RmeWmL7pbxBjH8nIg9GhtV97AQ"
+        redirectUri={window.location.origin}
+      >
+        <LoginApp />
+        <LogoutButton />
+      </Auth0Provider>
+    ),
+  document.getElementById('app'),
+);
