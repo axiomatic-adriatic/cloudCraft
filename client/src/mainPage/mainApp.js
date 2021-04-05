@@ -6,31 +6,32 @@ import UserList from './userList/index.js';
 
 class MainApp extends React.Component {
   constructor(props) {
-    super(props)
-
+    super(props);
+    this.state = {
+      user_id: 2,
+      channel_id: 1,
+    };
   }
 
-  render(){
-    return(
+  render() {
+    const { user_id, channel_id } = this.state;
+    return (
       <div className={styles.parent}>
         <div className={styles.div4}>
-            <h1>Search Bar</h1>
+          <h1>Search Bar</h1>
         </div>
         <div className={styles.div1}>
-          <UserList />
+          <UserList user_id={user_id} channel_id={channel_id} />
         </div>
         <div className={styles.div2}>
-          <Message />
+          <Message channel_id={channel_id} user_id={user_id} />
         </div>
         <div className={styles.div3}>
-            <TaskListModule />
+          <TaskListModule user_id={user_id} />
         </div>
-        {/* <Userlist className={styles.div1} />
-        <Message  className={styles.div2}/>
-        <TaskList className={styles.div3}/> */}
       </div>
-    )
+    );
   }
 }
 
-export default MainApp
+export default MainApp;
