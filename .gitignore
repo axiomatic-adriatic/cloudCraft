@@ -4,3 +4,4 @@ bundle.js
 DS_store
 .eslintrc.js
 bundle.js.map
+package-lock.json
