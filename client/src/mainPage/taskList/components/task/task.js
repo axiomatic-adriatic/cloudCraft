@@ -8,6 +8,7 @@ class Task extends React.Component {
   constructor(props) {
     super(props);
     this.handleDeleteTask = this.handleDeleteTask.bind(this);
+    this.handleCompleteTask = this.handleCompleteTask.bind(this);
   }
 
   handleDeleteTask(e) {
@@ -22,18 +23,22 @@ class Task extends React.Component {
       })
   }
 
+  handleCompleteTask(e) {
+    console.log('handle complete task');
+  }
+
   render() {
     const { task } = this.props;
     return (
       <div className={styles.task}>
         <div className={styles.header}>
-          <span className={styles.delete} onClick={this.handleDeleteTask}>&#10006;</span>
+          <span className={styles.delete} onClick={this.handleDeleteTask} role="button" tabIndex="0" >&#10006;</span>
         </div>
         <div>{createDateTime(task.datetime)}</div>
         <p>{task.task_text}</p>
-        <CompleteTask />
+        <CompleteTask task={task} handleCompleteTask={this.handleCompleteTask} />
       </div>
-    )
+    );
   }
 }
 
