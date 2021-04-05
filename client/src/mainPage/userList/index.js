@@ -13,11 +13,11 @@ class UserList extends React.Component {
       style={{
         backgroundColor: '#6096BA',
         color: '#E7ECEF',
-        textAlign: 'center',
+        // textAlign: 'left',
+        // marginRight: '10px'
        }
       }
       >
-        <h1>User List</h1>
         <Groups />
         <Users />
       </div>
