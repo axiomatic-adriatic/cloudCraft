@@ -22,7 +22,19 @@ const deleteTask = (req, res) => {
     });
 };
 
+const completeTask = (req, res) => {
+    const { task_id } = req.query;
+    model.completeTask(task_id, (err, results) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(results);
+        }
+    })
+}
+
 module.exports = {
     getTasks,
     deleteTask,
+    completeTask
 };
