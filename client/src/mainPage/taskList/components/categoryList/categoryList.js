@@ -26,9 +26,11 @@ class CategoryList extends React.Component {
   }
 
   render() {
-    const { categoryName, tasks, bgColor, textColor, add } = this.props;
+    const { categoryName, tasks, bgColor, textColor, add, getAllTasks } = this.props;
     const { displayModal } = this.state;
-    const list = tasks.map((task) => <Task task={task} key={task.task_id} />);
+    const list = tasks.map((task) => (
+      <Task task={task} key={task.task_id} getAllTasks={getAllTasks} />
+    ));
     return (
       <div className={styles.categoryList}>
         <h3 style={{ backgroundColor: bgColor, color: textColor }}>

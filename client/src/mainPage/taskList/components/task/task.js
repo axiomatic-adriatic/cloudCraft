@@ -12,10 +12,11 @@ class Task extends React.Component {
   }
 
   handleDeleteTask(e) {
-    const { task : { task_id } } = this.props;
+    const { task : { task_id }, getAllTasks } = this.props;
     console.log(task_id)
     axios.put(`/task/delete?task_id=${task_id}`)
       .then((resp) => {
+        getAllTasks();
         console.log(resp.data);
       })
       .catch((err) => {
@@ -24,8 +25,6 @@ class Task extends React.Component {
   }
 
   handleCompleteTask(task_id) {
-
-    console.log(task_id)
     axios.put(`/task/complete?task_id=${task_id}`)
       .then((resp) => {
         console.log(resp.data);
