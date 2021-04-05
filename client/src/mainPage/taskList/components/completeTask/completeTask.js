@@ -11,8 +11,11 @@ class CompleteTask extends React.Component {
   }
 
   handleOnChange(e) {
+    const { handleCompleteTask, task : {task_id} } = this.props;
     this.setState({
       disabled: true,
+    }, () => {
+      handleCompleteTask(task_id);
     });
   }
 
@@ -24,8 +27,12 @@ class CompleteTask extends React.Component {
     const { disabled } = this.state;
     return (
       <form className={styles.completeSection}>
-        <label className={disabled ? styles.greenComplete : styles.regularComplete}>
+        <label
+          className={disabled ? styles.greenComplete : styles.regularComplete}
+          htmlFor="completed"
+        >
           <input
+            id="completed"
             type="checkbox"
             name="completed"
             onChange={this.handleOnChange}
@@ -34,7 +41,7 @@ class CompleteTask extends React.Component {
           Completed
         </label>
       </form>
-    )
+    );
   }
 }
 

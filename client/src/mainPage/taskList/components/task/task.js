@@ -32,7 +32,15 @@ class Task extends React.Component {
     return (
       <div className={styles.task}>
         <div className={styles.header}>
-          <span className={styles.delete} onClick={this.handleDeleteTask} role="button" tabIndex="0" >&#10006;</span>
+          <span
+            className={styles.delete}
+            onClick={this.handleDeleteTask}
+            role="button"
+            tabIndex="0"
+            onKeyPress={this.handleDeleteTask}
+          >
+            &#10006;
+          </span>
         </div>
         <div>{createDateTime(task.datetime)}</div>
         <p>{task.task_text}</p>
