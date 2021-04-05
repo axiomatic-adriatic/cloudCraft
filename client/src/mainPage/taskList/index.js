@@ -8,13 +8,14 @@ class TaskListModule extends React.Component {
     super(props);
     this.state = {
       tasks: [],
-      currentUserId: 2,
     };
   }
 
   componentDidMount() {
-    axios.get('/tasks')
+    const { user_id } = this.props;
+    axios.get(`/tasks?user_id=${user_id}`)
       .then((resp) => {
+        console.log(resp.data);
         this.setState({
           tasks: [...resp.data],
         });
@@ -25,11 +26,11 @@ class TaskListModule extends React.Component {
   }
 
   render() {
-    const { tasks, currentUserId } = this.state;
+    const { tasks, user_id } = this.state;
     return (
       <div>
-        <Header />
-        <AllCategoryList tasks={tasks} currentUserId={currentUserId} />
+        {/* <Header /> */}
+        <AllCategoryList tasks={tasks} currentUserId={user_id} />
       </div>
     );
   }
