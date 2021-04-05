@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@auth0/auth0-react": "^1.4.0",
     "axios": "^0.21.1",
     "css-loader": "^5.2.0",
     "express": "^4.17.1",
