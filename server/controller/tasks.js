@@ -22,7 +22,19 @@ const addTask = (req, res) => {
     }
   });
 };
+const addTask = (req, res) => {
+    const { user_id, task_text } = req.body;
+    // console.log(req.body)
+    model.addTask(user_id, task_text, (err, results) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(results);
+      }
+    });
+  };
 
+  
 const deleteTask = (req, res) => {
   const { task_id } = req.query;
   model.deleteTask(task_id, (err, results) => {
@@ -46,8 +58,8 @@ const completeTask = (req, res) => {
 };
 
 module.exports = {
-  getTasks,
-  addTask,
-  deleteTask,
-  completeTask,
+    getTasks,
+    addTask,
+    deleteTask,
+    completeTask
 };
