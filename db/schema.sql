@@ -33,7 +33,7 @@ CREATE TABLE `messages` (
 	`user_id` INT NOT NULL,
 	`channel_id` INT NOT NULL,
 	`read` BOOLEAN NOT NULL DEFAULT false,
-	`datetime` DATETIME NOT NULL,
+	`datetime` DATETIME NOT NULL DEFAULT NOW(),
 	`message_text` TEXT NOT NULL,
 	`disabled` BOOLEAN NOT NULL DEFAULT false,
 	`completed` BOOLEAN NOT NULL DEFAULT false,
@@ -50,7 +50,7 @@ CREATE TABLE `messages` (
 
 CREATE TABLE `tasks` (
 	`task_id` INT NOT NULL AUTO_INCREMENT,
-	`message_id` INT NOT NULL DEFAULT '0',
+	`message_id` INT DEFAULT NULL,
 	`user_id` INT NOT NULL,
 	`task_text` TEXT NOT NULL,
 	`datetime` DATETIME NOT NULL DEFAULT NOW(),

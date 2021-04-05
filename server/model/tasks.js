@@ -28,8 +28,19 @@ const getTasks = (user_id, callback) => {
         };
         taskArray.push(result);
       }
-      //console.log(taskArray);
+      // console.log(taskArray);
       callback(taskArray, null);
+    }
+  });
+};
+
+const addTask = (user_id, task_text, callback) => {
+  const post = { user_id, task_text };
+  db.query('INSERT INTO tasks SET ?', [post], (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(results, null);
     }
   });
 };
@@ -45,6 +56,19 @@ const deleteTask = (task_id, callback) => {
     }
   });
 };
+
+const completeTask = (task_id, callback) => {
+  db.query('UPDATE tasks SET completed =? WHERE task_id = ?', [true, task_id], (err, results) => {
+    if (err) {
+      callback(err, null);
+      // console.log(err)
+    } else {
+      callback(results.protocol41, null);
+      // console.log(results.protocol41);
+    }
+  });
+};
+
 
 // getTasks(2, (err, result) => {
 //   if (err) {
@@ -62,20 +86,6 @@ const deleteTask = (task_id, callback) => {
 //     }
 // })
 
-const completeTask = (task_id, callback) => {
-  db.query('UPDATE tasks SET completed =? WHERE task_id = ?', [true, task_id], (err, results) => {
-    if (err) {
-      callback(err, null);
-      // console.log(err)
-    } else {
-      callback(results.protocol41, null);
-      // console.log(results.protocol41);
-    }
-  });
-};
-
-
-
 // completeTask(2, (err, result) => {
 //     if (err) {
 //         console.log(err);
@@ -84,8 +94,17 @@ const completeTask = (task_id, callback) => {
 //     }
 // })
 
+// addTask(2, "set up endpoint for getTask router", (err, result) => {
+//   if (err) {
+//     console.log(err)
+//   } else {
+//     console.log(result);
+//   }
+// })
+
 module.exports = {
   getTasks,
   deleteTask,
-  completeTask
+  completeTask,
+  addTask,
 };
