@@ -24,6 +24,24 @@ const Message = ({ groupdId }) => {
       .catch((err) => { throw err; });
   };
 
+  const submit = (e, message) => {
+    e.preventDefault();
+    console.log(message);
+    // axios({
+    //   method: 'post',
+    //   url: '/chat',
+    //   body: {
+    //     groupId: message.groupId,
+    //     message: message.message,
+    //     userId: message.userId,
+    //   },
+    // })
+    //   .then((result) => {
+    //     console.log(result);
+    //   })
+    //   .catch((err) => { throw err; });
+  };
+
   // useEffect(() => {
   //   getChatHistory(groupdId);
   // });
@@ -32,7 +50,7 @@ const Message = ({ groupdId }) => {
     <Container>
       <Banner groupName={groupName} />
       <ChatBox chatHistry={messages} />
-      <TextBox />
+      <TextBox submit={submit} />
     </Container>
   );
 };
