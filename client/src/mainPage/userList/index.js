@@ -7,19 +7,18 @@ class UserList extends React.Component {
     super(props)
   }
   render() {
+    const { handleUserClick, handleChannelClick } = this.props;
     return (
       <div
       className="userList-container"
       style={{
         backgroundColor: '#6096BA',
         color: '#E7ECEF',
-        // textAlign: 'left',
-        // marginRight: '10px'
        }
       }
       >
-        <Groups />
-        <Users />
+        <Groups handleChannelClick={handleChannelClick}/>
+        <Users handleUserClick={handleUserClick}/>
       </div>
     )
   }
