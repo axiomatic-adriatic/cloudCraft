@@ -13,7 +13,6 @@ class Task extends React.Component {
 
   handleDeleteTask(e) {
     const { task : { task_id }, getAllTasks } = this.props;
-    console.log(task_id)
     axios.put(`/task/delete?task_id=${task_id}`)
       .then((resp) => {
         getAllTasks();
@@ -49,8 +48,14 @@ class Task extends React.Component {
             &#10006;
           </span>
         </div>
-        <div>{createDateTime(task.datetime)}</div>
+        <div className={styles.date}>
+          <div><em>{createDateTime(task.datetime)}</em></div>
+        </div>
+
         <p>{task.task_text}</p>
+        <div className={styles.name}>
+          <div>-{task.sender.sender_name}</div>
+        </div>
         <CompleteTask task={task} handleCompleteTask={this.handleCompleteTask} />
       </div>
     );

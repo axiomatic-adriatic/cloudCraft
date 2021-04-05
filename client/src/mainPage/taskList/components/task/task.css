@@ -11,3 +11,17 @@
 .delete {
   cursor: pointer;
 }
+
+.date {
+  /* display: flex;
+  justify-content: flex-end; */
+  margin-top: 10px;
+}
+
+
+.name {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
