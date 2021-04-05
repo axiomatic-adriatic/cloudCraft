@@ -99,7 +99,7 @@ const completeTask = (task_id, callback) => {
 
 module.exports = {
   getTasks,
+  addTask,
   deleteTask,
   completeTask,
-  addTask,
 };
