@@ -8,10 +8,6 @@ export const Container = styled.div`
   grid-gap: 0.5rem;
   // background-color: ${CeruleanFrost};
 
-  .camera {
-    // font-size: 5rem;
-    width:  5rem;
-  }
 
   .banner {
     grid-column: 2 / 3;
@@ -81,10 +77,6 @@ export const Container = styled.div`
       background-color: transparent;
       border: none;
       cursor: pointer;
-
-      :hover {
-        color: green;
-      }
 
       :active {
 
