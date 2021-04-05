@@ -24,8 +24,7 @@ const Message = ({ groupdId }) => {
       .catch((err) => { throw err; });
   };
 
-  const submit = (e, message) => {
-    e.preventDefault();
+  const submit = (message) => {
     console.log(message);
     // axios({
     //   method: 'post',
