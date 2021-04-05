@@ -1,7 +1,8 @@
 const model = require('../model/tasks');
 
 const getTasks = (req, res) => {
-    model.getTasks((err, result) => {
+    const { user_id } = req.query;
+    model.getTasks(user_id, (err, result) => {
         if (err) {
             res.send(err);
         } else {
@@ -10,9 +11,9 @@ const getTasks = (req, res) => {
     });
 };
 
-const updateTask = (req, res) => {
+const deleteTask = (req, res) => {
     const { task_id } = req.query;
-    model.updateTask(task_id, (err, results) => {
+    model.deleteTask(task_id, (err, results) => {
         if (err) {
             res.send(err);
         } else {
@@ -34,6 +35,6 @@ const completeTask = (req, res) => {
 
 module.exports = {
     getTasks,
-    updateTask,
+    deleteTask,
     completeTask
 };

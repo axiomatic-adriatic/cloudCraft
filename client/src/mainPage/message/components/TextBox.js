@@ -1,20 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import { TextArea } from '../styles';
 
-const axios = require('axios');
-
 const TextBox = () => {
-  const groupName = 'group one'
-  const postMessage = (id) => {
-    axios({
-      method: 'post',
-      url: '/chatHistory',
-      params: { groupId: id },
-    })
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => { throw err; });
+  const [input, setInput] = useState('');
+  const groupName = 'group one'; // sample
+  // const postMessage = (id) => {
+  //   axios({
+  //     method: 'post',
+  //     url: '/chat',
+  //     params: { groupId: id },
+  //   })
+  //     .then((result) => {
+  //       console.log(result);
+  //     })
+  //     .catch((err) => { throw err; });
+  // };
+
+  const getInput = (e) => {
+    e.preventDefault();
+    setInput(e.target.value);
   };
 
   return (
@@ -22,6 +27,8 @@ const TextBox = () => {
       <TextArea
         onSubmit={postMessage}
         placeholder={`Send a message to ${groupName}`}
+        value={input}
+        onChange={getInput}
       />
     </div>
   );
