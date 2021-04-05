@@ -1,6 +1,17 @@
 import React from 'react';
 import styles from './login.css';
+import { useAuth0 } from "@auth0/auth0-react";
 
+const LoginApp = () => {
+  const { loginWithRedirect } = useAuth0();
+
+  return <button onClick={() => loginWithRedirect()}>Log In</button>;
+};
+
+export default LoginApp;
+
+
+/*
 class LoginApp extends React.Component {
   constructor(props) {
     super(props);
@@ -41,5 +52,4 @@ class LoginApp extends React.Component {
     );
   }
 }
-
-export default LoginApp;
+*/
