@@ -28,7 +28,7 @@ const getTasks = (user_id, callback) => {
         };
         taskArray.push(result);
       }
-      callback(null, taskArray);
+      callback(null,taskArray);
     }
   });
 };
