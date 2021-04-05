@@ -11,6 +11,20 @@ class MainApp extends React.Component {
       user_id: 2,
       channel_id: 1,
     };
+    this.handleUserClick = this.handleUserClick.bind(this);
+    this.handleChannelClick = this.handleChannelClick.bind(this);
+  }
+
+  handleUserClick(userID) {
+    this.setState({
+      user_id: userID
+    })
+  }
+
+  handleChannelClick(channelID) {
+    this.setState({
+      channel_id: channelID
+    })
   }
 
   render() {
@@ -21,7 +35,7 @@ class MainApp extends React.Component {
           <h1>Search Bar</h1>
         </div>
         <div className={styles.div1}>
-          <UserList user_id={user_id} channel_id={channel_id} />
+          <UserList handleUserClick={this.handleUserClick} handleChannelClick={this.handleChannelClick}user_id={user_id} channel_id={channel_id} />
         </div>
         <div className={styles.div2}>
           <Message channel_id={channel_id} user_id={user_id} />
