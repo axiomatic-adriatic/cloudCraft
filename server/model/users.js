@@ -9,3 +9,13 @@ exports.getUsers = (callback) => {
     }
   })
 };
+
+exports.getChannels = (callback) => {
+  db.query('select channel_id, channel_name from channels;', (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(results, null);
+    }
+  })
+};

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { io } from 'socket.io-client';
 import axios from 'axios';
 import { Container } from './styles';
 import Banner from './components/Banner';
@@ -24,21 +25,29 @@ const Message = ({ groupdId }) => {
       .catch((err) => { throw err; });
   };
 
+  const randomNumber = Math.floor(Math.random() * 100000 + 1);
+  const socket = io({
+    extraHeaders: {
+      'my-custom-header': randomNumber,
+    },
+  });
+
+  // socket.on('date', (data) => {
+  //   console.log(data.date);
+  // });
+
+  socket.on('message', (data) => {
+    console.log(data.message);
+  });
+
+  // message = {
+  //   user_id: userID,
+  //   channel_id: channelID,
+  //   message_text: message,
+  // }
   const submit = (message) => {
     console.log(message);
-    // axios({
-    //   method: 'post',
-    //   url: '/chat',
-    //   body: {
-    //     groupId: message.groupId,
-    //     message: message.message,
-    //     userId: message.userId,
-    //   },
-    // })
-    //   .then((result) => {
-    //     console.log(result);
-    //   })
-    //   .catch((err) => { throw err; });
+    socket.emit('message', {message});
   };
 
   // useEffect(() => {
@@ -55,3 +64,17 @@ const Message = ({ groupdId }) => {
 };
 
 export default Message;
+
+// axios({
+//   method: 'post',
+//   url: '/chat',
+//   body: {
+//     groupId: message.groupId,
+//     message: message.message,
+//     userId: message.userId,
+//   },
+// })
+//   .then((result) => {
+//     console.log(result);
+//   })
+//   .catch((err) => { throw err; });
