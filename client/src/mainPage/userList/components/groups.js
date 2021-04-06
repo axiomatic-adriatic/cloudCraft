@@ -37,6 +37,7 @@ class Groups extends React.Component {
       }
       style={{
         marginLeft: '15px',
+        cursor: 'pointer',
       }}
       onClick={() => handleChannelClick(channel.channel_id)}>#{channel.channel_name}</p>
       )
