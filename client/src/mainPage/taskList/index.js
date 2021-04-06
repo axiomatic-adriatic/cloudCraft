@@ -32,7 +32,20 @@ class TaskListModule extends React.Component {
   }
 
   addTask(textBody) {
-
+    const { user_id } = this.props;
+    console.log(textBody)
+    console.log(user_id)
+    const data = {
+      user_id,
+      task_text: textBody,
+    };
+    axios.post('/task', data)
+      .then((resp) => {
+        console.log(resp.data);
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   render() {

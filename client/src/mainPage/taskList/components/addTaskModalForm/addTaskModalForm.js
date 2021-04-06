@@ -20,7 +20,9 @@ class AddTaskModalForm extends React.Component {
 
   handleOnSubmit(e) {
     e.preventDefault();
-    console.log(this.state.task)
+    const { task } = this.state;
+    const { addTask } = this.props;
+    addTask(task);
   }
 
   render() {
