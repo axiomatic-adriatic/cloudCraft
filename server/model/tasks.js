@@ -68,17 +68,6 @@ const completeTask = (task_id, callback) => {
   });
 };
 
-const completeTask = (task_id, callback) => {
-  db.query('UPDATE tasks SET completed =? WHERE task_id = ?', [true, task_id], (err, results) => {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, results.protocol41);
-    }
-  });
-};
-
-
 // getTasks(2, (err, result) => {
 //   if (err) {
 //     console.log(err);
