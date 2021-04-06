@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+// import props from 'prop-types';
 import styles from './mainApp.css';
 import TaskListModule from './taskList/index.js';
 import Message from './message/index.js';
@@ -15,16 +17,33 @@ class MainApp extends React.Component {
     this.handleChannelClick = this.handleChannelClick.bind(this);
   }
 
+  componentDidMount() {
+    // this.setState({
+    //   user_id: 2,
+    //   channel_id: 1,
+    // });
+    axios.get(`/userInfo?email=${this.props.email}`)
+      .then((results) => {
+        console.log(results.data.user_id)
+        this.setState({
+          user_id: results.data.user_id || 2,
+        });
+      })
+      .catch((err) => {
+        console.log('user get request err', err);
+      });
+  }
+
   handleUserClick(userID) {
     this.setState({
-      user_id: userID
-    })
+      user_id: userID,
+    });
   }
 
   handleChannelClick(channelID) {
     this.setState({
-      channel_id: channelID
-    })
+      channel_id: channelID,
+    });
   }
 
   render() {
@@ -37,20 +56,23 @@ class MainApp extends React.Component {
           </div>
           <div className={styles.div1}>
             <UserList
-            handleUserClick={this.handleUserClick}
-            handleChannelClick={this.handleChannelClick}
-            user_id={user_id}
-            channel_id={channel_id} />
+              handleUserClick={this.handleUserClick}
+              handleChannelClick={this.handleChannelClick}
+              user_id={user_id}
+              channel_id={channel_id}
+            />
           </div>
           <div className={styles.div2}>
             <Message
-            channel_id={channel_id} user_id={user_id} />
+              channel_id={channel_id}
+              user_id={user_id}
+            />
           </div>
           <div className={styles.div3}>
             <TaskListModule user_id={user_id} />
           </div>
+        </div>
       </div>
-    </div>
     );
   }
 }

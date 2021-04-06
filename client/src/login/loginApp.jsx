@@ -30,7 +30,7 @@ const LoginApp = () => {
             <img src={user.picture} alt={user.name} />
             <h2>{user.name}</h2>
             <p>{user.email}</p>
-            <MainApp email={user.email}/>
+            <MainApp email={user.email} />
           </div>
         )
       }

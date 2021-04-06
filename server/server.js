@@ -15,10 +15,6 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.use('/home/', express.static(path.join(__dirname, '../client/dist')));
 
-// app.get('/', (req, res) => {
-//   res.render('index');
-// })
-
 io.on('connection', (client) => {
   messagesController.getMessages(1/* will be replaced with channel id from client */)
     .then((history) => {
