@@ -8,7 +8,7 @@ class CategoryList extends React.Component {
     super(props);
     this.state = {
       displayModal: 'none',
-    }
+    };
     this.handlOpenModal = this.handlOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
   }
@@ -16,19 +16,21 @@ class CategoryList extends React.Component {
   handleCloseModal(e) {
     this.setState({
       displayModal: 'none',
-    })
+    });
   }
 
   handlOpenModal(e) {
     this.setState({
       displayModal: 'block',
-    })
+    });
   }
 
   render() {
-    const { categoryName, tasks, bgColor, textColor, add } = this.props;
+    const { categoryName, tasks, bgColor, textColor, add, getAllTasks, addTask } = this.props;
     const { displayModal } = this.state;
-    const list = tasks.map((task) => <Task task={task} key={task.task_id} />);
+    const list = tasks.map((task) => (
+      <Task task={task} key={task.task_id} getAllTasks={getAllTasks} add={add}/>
+    ));
     return (
       <div className={styles.categoryList}>
         <h3 style={{ backgroundColor: bgColor, color: textColor }}>
@@ -61,7 +63,7 @@ class CategoryList extends React.Component {
                 >
                   &times;
                 </span>
-                <AddTaskModalForm />
+                <AddTaskModalForm addTask={addTask} handleCloseModal={this.handleCloseModal} />
               </div>
             </div>
           ) : null}

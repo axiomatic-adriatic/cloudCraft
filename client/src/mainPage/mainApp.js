@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-// import props from 'prop-types';
 import styles from './mainApp.css';
 import TaskListModule from './taskList/index.js';
 import Message from './message/index.js';
@@ -18,10 +17,6 @@ class MainApp extends React.Component {
   }
 
   componentDidMount() {
-    // this.setState({
-    //   user_id: 2,
-    //   channel_id: 1,
-    // });
     axios.get(`/userInfo?email=${this.props.email}`)
       .then((results) => {
         console.log(results.data.user_id)
@@ -35,9 +30,20 @@ class MainApp extends React.Component {
   }
 
   handleUserClick(userID) {
-    this.setState({
-      user_id: userID,
-    });
+    let channelID = [];
+    axios.get('/userChannel', {
+      params: {
+        user_id: userID
+       }
+    })
+    .then((response) => {
+      this.setState({
+        channel_id: response.data
+      })
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 
   handleChannelClick(channelID) {

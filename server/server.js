@@ -16,22 +16,16 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use('/home/', express.static(path.join(__dirname, '../client/dist')));
 
 io.on('connection', (client) => {
-  messagesController.getMessages(1/* will be replaced with channel id from client */)
-    .then((history) => {
-      // send back message history of specific channel when first connect
-      client.emit('message', { message: history });
-    });
-  console.log(client.handshake.headers['my-custom-header']);
+  const room = client.handshake.headers['my-custom-header'];
+  client.join(room);
   client.on('message', (data) => {
     console.log(data);
-    messagesController.createMessage(data);
-    io.emit('message', data);
+    messagesController.createMessage(data)
+      .then((message) => {
+        io.to(room).emit('message', { message });
+      });
   });
-  // setInterval(() => {
-  //   io.emit('date', { date: new Date() });
-  // }, 10000);
 });
-
 app.use(router);
 server.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

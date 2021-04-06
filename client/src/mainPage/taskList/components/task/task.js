@@ -8,13 +8,14 @@ class Task extends React.Component {
   constructor(props) {
     super(props);
     this.handleDeleteTask = this.handleDeleteTask.bind(this);
+    this.handleCompleteTask = this.handleCompleteTask.bind(this);
   }
 
   handleDeleteTask(e) {
-    const { task : { task_id } } = this.props;
-    console.log(task_id)
+    const { task : { task_id }, getAllTasks } = this.props;
     axios.put(`/task/delete?task_id=${task_id}`)
       .then((resp) => {
+        getAllTasks();
         console.log(resp.data);
       })
       .catch((err) => {
@@ -22,18 +23,43 @@ class Task extends React.Component {
       })
   }
 
+  handleCompleteTask(task_id) {
+    axios.put(`/task/complete?task_id=${task_id}`)
+      .then((resp) => {
+        console.log(resp.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   render() {
-    const { task } = this.props;
+    const { task, add } = this.props;
     return (
       <div className={styles.task}>
         <div className={styles.header}>
-          <span className={styles.delete} onClick={this.handleDeleteTask}>&#10006;</span>
+          <span
+            className={styles.delete}
+            onClick={this.handleDeleteTask}
+            role="button"
+            tabIndex="0"
+            onKeyPress={this.handleDeleteTask}
+          >
+            &#10006;
+          </span>
         </div>
-        <div>{createDateTime(task.datetime)}</div>
+        <div className={styles.date}>
+          <div><em>{createDateTime(task.datetime)}</em></div>
+        </div>
         <p>{task.task_text}</p>
-        <CompleteTask />
+        {add ? null : (
+          <div className={styles.name}>
+            <div>-{task.sender.sender_name}</div>
+          </div>
+        )}
+        <CompleteTask task={task} handleCompleteTask={this.handleCompleteTask} />
       </div>
-    )
+    );
   }
 }
 

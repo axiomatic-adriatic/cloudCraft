@@ -1,12 +1,27 @@
 /* eslint-disable camelcase */
 const db = require('../../db/db.js');
 
+/**
+   * create a new message in the table.
+   * @param {number} channel_id - A number representing the channel id
+   * @returns {Promise<Object>} A promise that is fulfilled with an object
+   * containing the results of the query or is rejected with the the error that occurred
+   * during the query.
+ */
 const getMessages = (channel_id) => {
-  const query = `SELECT * FROM messages WHERE channel_id = ${channel_id} ORDER BY datetime LIMIT 100`;
+  const query = `SELECT messages.*, users.name FROM messages LEFT JOIN users ON users.user_id=messages.user_id WHERE channel_id = ${channel_id} ORDER BY datetime LIMIT 100`;
   return db.promise().query(query)
     .then(([messages]) => messages)
     .catch((error) => error);
 };
+
+/**
+   * get inserted message in the table.
+   * @returns {Promise<Object>} A promise that is fulfilled with an object
+   * containing the results of the query or is rejected with the the error that occurred
+   * during the query.
+ */
+const getLatest = () => db.promise().query('SELECT * FROM messages WHERE message_id = LAST_INSERT_ID()').then(([message]) => message);
 
 /**
    * create a new message in the table.
@@ -17,8 +32,8 @@ const getMessages = (channel_id) => {
    * during the query.
  */
 const createMessage = (message) => {
-  const query = 'INSERT INTO messages SET ?';
-  return db.promise().query(query, [message]);
+  const query = 'INSERT INTO messages SET ?;';
+  return db.promise().query(query, [message]).then(() => getLatest());
 };
 
 module.exports = {

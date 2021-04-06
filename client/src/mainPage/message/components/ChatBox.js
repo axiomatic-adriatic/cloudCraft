@@ -15,34 +15,34 @@ const ChatBox = ({ chatHistory, addTask }) => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [chatHistory]);
+  });
   return (
     <div className="chatbox">
-      {dummyData.map((message) => (
+      {chatHistory.map((message) => (
         <div
           className="messageContainer"
-          key={message.messageId}
+          key={message.message_id}
         >
           <Header
             className="username"
             size={0.9}
             color="#202020"
           >
-            {message.username}
+            {message.user_id}
           </Header>
           <Paragraph
             className="message"
             size={0.8}
             color="#404040"
           >
-            {message.message}
+            {message.message_text}
           </Paragraph>
           <Paragraph
             className="dateTime"
             size={0.7}
             color="#808080"
           >
-            {message.dateTime}
+            {message.datetime}
           </Paragraph>
           <div className="extra">
             <div className="options">

@@ -19,3 +19,17 @@ exports.getChannels = (callback) => {
     }
   })
 };
+
+exports.getUserChannel = (userID, callback) => {
+  db.query(`select channel_id from users_channels where user_id=${userID};`, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      let result = [];
+      for (var i = 0; i < results.length; i++) {
+        result.push(results[i].channel_id);
+      }
+      callback(result, null);
+    }
+  })
+};
