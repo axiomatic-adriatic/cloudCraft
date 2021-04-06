@@ -7,7 +7,7 @@ const io = require('socket.io')(server);
 const router = require('./routes');
 const messagesController = require('./controller/messages');
 
-const port = 3000;
+const port = 3005;
 
 app.use(express.json());
 
@@ -23,15 +23,17 @@ io.on('connection', (client) => {
   messagesController.getMessages(1/* will be replaced with channel id from client */)
     .then((history) => {
       // send back message history of specific channel when first connect
-      io.emit('message', { message: history });
+      client.emit('message', { message: history });
     });
   console.log(client.handshake.headers['my-custom-header']);
   client.on('message', (data) => {
     console.log(data);
+    messagesController.createMessage(data);
+    io.emit('message', data);
   });
-  setInterval(() => {
-    io.emit('date', { date: new Date() });
-  }, 10000);
+  // setInterval(() => {
+  //   io.emit('date', { date: new Date() });
+  // }, 10000);
 });
 
 app.use(router);

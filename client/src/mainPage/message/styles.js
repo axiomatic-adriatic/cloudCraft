@@ -4,10 +4,8 @@ import { CeruleanFrost } from '../../../../ui/colors';
 export const Container = styled.div`
   display: grid;
   grid-template-columns: 0.5rem auto 0.5rem;
-  grid-template-rows: 3rem 8fr 1.5fr;
+  grid-template-rows: 3rem auto min-content;
   grid-gap: 0.5rem;
-  // background-color: ${CeruleanFrost};
-
 
   .banner {
     grid-column: 2 / 3;
@@ -19,9 +17,14 @@ export const Container = styled.div`
   .chatbox {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
-    display: flex;
-    align-self: flex-end;
     flex-direction: column;
+    max-height: 60vh;
+    min-height: 50vh;
+    overflow: auto;
+    ::-webkit-scrollbar {
+      width: 0px;
+      background: transparent;
+    }
 
     .messageContainer {
       position: relative;
@@ -33,13 +36,38 @@ export const Container = styled.div`
       grid-gap: 0.4rem;
       padding: 0.5rem;
       :hover {
-        background-color: #F0F0F0;
+        background-color: #F8F8F8;
       }
 
-      button {
+      .extra {
+        display: none;
+        background-color: #DCDCDC;
         position: absolute;
-        top: -0.4rem;
+        top: -1rem;
         right: 1rem;
+        border-radius: 1rem;
+      }
+
+      :hover .extra {
+        display: block;
+      }
+
+      .options {
+        display: flex;
+        padding: 1.5px 0.5rem;
+        width: 4rem;
+        justify-content: space-around;
+
+        .addTask, .delete {
+          padding: 0.5rem;
+          border-radius: 1rem;
+
+          :hover {
+
+            background-color: #D3D3D3;
+            cursor: pointer;
+          }
+        }
       }
 
       .username {
@@ -71,16 +99,12 @@ export const Container = styled.div`
 
     button {
       position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translate(0, -50%);
+      right: 10px;
+      bottom: 10px;
+      padding: 0;
       background-color: transparent;
       border: none;
       cursor: pointer;
-
-      :active {
-
-      }
 
       :focus {
         outline: none;

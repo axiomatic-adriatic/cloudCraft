@@ -1,22 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Header, Paragraph, Button } from '../styles';
+import { dummyData } from './dummyData';
 
-const dummydata = [{
-  username: 'peter parker', message: "I Know That Look. I Had It A Lot When I Was Your Age... There's No Stopping You. I Want You To Run Because You Don't Have Your Armor. But You Won't... 'Cause You're A Hero.", dateTime: '1:39pm', messageId: 1,
-}, {
-  username: 'tony stark', message: 'My bond is with the people, and I will serve this great nation at the pleasure of myself. If there’s one thing I’ve proven it’s that you can count on me to pleasure myself', dateTime: '1:39pm', messageId: 2,
-}];
+const ChatBox = ({ chatHistory, addTask }) => {
+  const messageEndRef = useRef(null);
+  const deleteMessage = (e) => {
+    e.preventDefault();
+    console.log('delete');
+  };
 
-const ChatBox = ({ chatHistory }) => {
-  const [popup, setPopup] = useState(false);
+  const scrollToBottom = () => {
+    messageEndRef.current.scrollIntoView(true);
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [chatHistory]);
   return (
     <div className="chatbox">
-      {dummydata.map((message) => (
+      {dummyData.map((message) => (
         <div
           className="messageContainer"
           key={message.messageId}
-          onMouseEnter={() => setPopup(true)}
-          onMouseLeave={() => setPopup(false)}
         >
           <Header
             className="username"
@@ -39,16 +44,15 @@ const ChatBox = ({ chatHistory }) => {
           >
             {message.dateTime}
           </Paragraph>
-          <Button
-            width={5}
-            height={1.5}
-            size={0.8}
-            style={{ display: popup ? 'block' : 'none' }}
-          >
-            Add Task
-          </Button>
+          <div className="extra">
+            <div className="options">
+              <i className="fas fa-plus addTask" onClick={addTask} />
+              <i className="far fa-trash-alt delete" onClick={deleteMessage} />
+            </div>
+          </div>
         </div>
       ))}
+      <div ref={messageEndRef} />
     </div>
   );
 };
