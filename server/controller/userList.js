@@ -20,3 +20,14 @@ const userModel = require('../model/users');
       }
     })
   };
+
+  exports.getUserChannel = (req, res) => {
+    const userID = req.query['user_id'];
+    userModel.getUserChannel(userID, (err, result) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(result);
+      }
+    })
+  };

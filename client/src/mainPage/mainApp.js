@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import styles from './mainApp.css';
 import SearchModule from './search/index.js'
 import TaskListModule from './taskList/index.js';
@@ -16,9 +17,21 @@ class MainApp extends React.Component {
     this.handleChannelClick = this.handleChannelClick.bind(this);
   }
 
+
   handleUserClick(userID) {
-    this.setState({
-      user_id: userID
+    let channelID = [];
+    axios.get('/userChannel', {
+      params: {
+        user_id: userID
+       }
+    })
+    .then((response) => {
+      this.setState({
+        channel_id: response.data
+      })
+    })
+    .catch((err) => {
+      console.log(err);
     })
   }
 
