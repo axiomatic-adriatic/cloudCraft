@@ -7,7 +7,7 @@ const io = require('socket.io')(server);
 const router = require('./routes');
 const messagesController = require('./controller/messages');
 
-const port = 3000;
+const port = 3005;
 
 app.use(express.json());
 
@@ -27,11 +27,11 @@ io.on('connection', (client) => {
     });
   console.log(client.handshake.headers['my-custom-header']);
   client.on('message', (data) => {
-    console.log(data);
+    io.emit('message', data);
   });
-  setInterval(() => {
-    io.emit('date', { date: new Date() });
-  }, 10000);
+  // setInterval(() => {
+  //   io.emit('date', { date: new Date() });
+  // }, 10000);
 });
 
 app.use(router);
