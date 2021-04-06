@@ -23,4 +23,5 @@ const createMessage = (message) => {
 
 module.exports = {
   getMessages,
+  createMessage,
 };

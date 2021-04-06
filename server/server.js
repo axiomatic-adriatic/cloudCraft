@@ -28,6 +28,7 @@ io.on('connection', (client) => {
   console.log(client.handshake.headers['my-custom-header']);
   client.on('message', (data) => {
     console.log(data);
+    messagesController.createMessage(data);
   });
   setInterval(() => {
     io.emit('date', { date: new Date() });
