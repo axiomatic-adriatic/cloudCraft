@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { YaleBlue, AliceBlue } from '../styles/colors';
 import faker from 'faker';
+import styles from './users.css';
 
 class Users extends React.Component {
   constructor(props) {
@@ -45,11 +46,11 @@ class Users extends React.Component {
       const imageSrc= faker.image.avatar();
       return (
       <div
-          className="user-container"
-          style={{
-            display: 'flex',
-            padding: '3px'
-          }}
+          className={styles.select}
+          // style={{
+          //   display: 'flex',
+          //   padding: '3px'
+          // }}
           key={user.user_id}
         >
         <img src={imageSrc} style={avatarStyle} />
@@ -69,9 +70,6 @@ class Users extends React.Component {
     return (
       <div
         className="userList"
-        style={{
-          marginLeft: '15px'
-        }}
       >
         <h3>Direct Messages</h3>
         {userList}

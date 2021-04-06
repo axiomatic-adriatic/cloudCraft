@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import styles from './styles.css';
 
 class Groups extends React.Component {
   constructor(props) {
@@ -32,22 +33,17 @@ class Groups extends React.Component {
     const { handleChannelClick } = this.props;
     const channelList = channels.map((channel) => {
       return (
+      <div key={channel.channel_id
+      } className={styles.select}>
       <p
-      key={channel.channel_id
-      }
-      style={{
-        marginLeft: '15px',
-        cursor: 'pointer',
-      }}
-      onClick={() => handleChannelClick(channel.channel_id)}>#{channel.channel_name}</p>
+      onClick={() => handleChannelClick(channel.channel_id)}># {channel.channel_name}</p>
+      </div>
       )
     })
     return (
       <div
       className="channels-container"
-      style={{
-        marginLeft: '15px'
-      }}>
+      >
         <h3>Channels</h3>
         {channelList}
       </div>
