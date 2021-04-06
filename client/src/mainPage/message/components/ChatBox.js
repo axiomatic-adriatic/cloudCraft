@@ -7,16 +7,18 @@ const dummydata = [{
   username: 'tony stark', message: 'My bond is with the people, and I will serve this great nation at the pleasure of myself. If there’s one thing I’ve proven it’s that you can count on me to pleasure myself', dateTime: '1:39pm', messageId: 2,
 }];
 
-const ChatBox = ({ chatHistory }) => {
-  const [popup, setPopup] = useState(false);
+const ChatBox = ({ chatHistory, addTask }) => {
+  const deleteMessage = (e) => {
+    e.preventDefault();
+    console.log('delete');
+  };
+
   return (
     <div className="chatbox">
       {dummydata.map((message) => (
         <div
           className="messageContainer"
           key={message.messageId}
-          onMouseEnter={() => setPopup(true)}
-          onMouseLeave={() => setPopup(false)}
         >
           <Header
             className="username"
@@ -39,14 +41,12 @@ const ChatBox = ({ chatHistory }) => {
           >
             {message.dateTime}
           </Paragraph>
-          <Button
-            width={5}
-            height={1.5}
-            size={0.8}
-            style={{ display: popup ? 'block' : 'none' }}
-          >
-            Add Task
-          </Button>
+          <div className="extra">
+            <div className="options">
+              <i className="fas fa-plus addTask" onClick={addTask} />
+              <i className="far fa-trash-alt delete" onClick={deleteMessage} />
+            </div>
+          </div>
         </div>
       ))}
     </div>
