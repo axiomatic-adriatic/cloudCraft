@@ -22,9 +22,8 @@ io.on('connection', (client) => {
   client.on('message', (data) => {
     console.log(data);
     messagesController.createMessage(data)
-      .then(result => {
-        console.log(result);
-        io.to(room).emit('message', { message: data });
+      .then((message) => {
+        io.to(room).emit('message', { message });
       });
   });
 });
