@@ -29,7 +29,7 @@ const getTasks = (user_id, callback) => {
         taskArray.push(result);
       }
       // console.log(taskArray);
-      callback(taskArray, null);
+      callback(null, taskArray);
     }
   });
 };
@@ -51,7 +51,7 @@ const deleteTask = (task_id, callback) => {
       callback(err, null);
       // console.log(err)
     } else {
-      callback(results.protocol41, null);
+      callback(null, results.protocol41);
       // console.log(results.protocol41);
     }
   });
@@ -63,12 +63,11 @@ const completeTask = (task_id, callback) => {
       callback(err, null);
       // console.log(err)
     } else {
-      callback(results.protocol41, null);
+      callback(null, results.protocol41);
       // console.log(results.protocol41);
     }
   });
 };
-
 
 // getTasks(2, (err, result) => {
 //   if (err) {
