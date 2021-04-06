@@ -4,10 +4,8 @@ import { CeruleanFrost } from '../../../../ui/colors';
 export const Container = styled.div`
   display: grid;
   grid-template-columns: 0.5rem auto 0.5rem;
-  grid-template-rows: 3rem 8fr 1.5fr;
+  grid-template-rows: 3rem auto min-content;
   grid-gap: 0.5rem;
-  // background-color: ${CeruleanFrost};
-
 
   .banner {
     grid-column: 2 / 3;
@@ -19,9 +17,14 @@ export const Container = styled.div`
   .chatbox {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
-    display: flex;
-    align-self: flex-end;
     flex-direction: column;
+    max-height: 60vh;
+    min-height: 50vh;
+    overflow: auto;
+    ::-webkit-scrollbar {
+      width: 0px;
+      background: transparent;
+    }
 
     .messageContainer {
       position: relative;
@@ -60,7 +63,7 @@ export const Container = styled.div`
           border-radius: 1rem;
 
           :hover {
-            background-color: #C0C0C0;
+            background-color: #D3D3D3;
             cursor: pointer;
           }
         }
