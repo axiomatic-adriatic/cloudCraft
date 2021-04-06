@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import { TextArea, Button } from '../styles';
 
-const TextBox = ({ submit }) => {
+const TextBox = ({ submit, userId, channelId }) => {
   const [input, setInput] = useState('');
   const formRef = useRef(null);
   const groupName = 'group one'; // sample
@@ -18,18 +18,22 @@ const TextBox = ({ submit }) => {
   //     .catch((err) => { throw err; });
   // };
 
-  // const onEnterPress = (e) => {
-  //   e.preventDefault();
-  //   if (e.keyCode === 13 && e.shiftKey === false) {
-  //     formRef.submit();
-  //   }
-  // };
-
   const sendMessage = (e) => {
     e.preventDefault();
     if (input) {
-      submit(input);
+      const message = {
+        user_id: userId,
+        channel_id: channelId,
+        message_text: input,
+      };
+      submit(message);
       setInput('');
+    }
+  };
+
+  const onEnterPress = (e) => {
+    if (e.keyCode === 13 && e.shiftKey === false && input) {
+      sendMessage(e);
     }
   };
 
@@ -44,14 +48,14 @@ const TextBox = ({ submit }) => {
         <TextArea
           placeholder={`Send a message to ${groupName}`}
           value={input}
-          onChange={getInput}
-          // onKeyDown={onEnterPress}
+          onChange={(e) => getInput(e)}
+          onKeyDown={(e) => onEnterPress(e)}
         />
         <Button
           size={1.2}
           onClick={sendMessage}
         >
-          <i className="fas fa-paper-plane" style={{ color: input ? 'green' : '#808080' }} />
+          <i className="fas fa-paper-plane" style={{ color: input ? '#04A777' : '#808080' }} />
         </Button>
       </form>
     </div>
