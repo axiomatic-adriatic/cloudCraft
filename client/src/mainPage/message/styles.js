@@ -33,13 +33,37 @@ export const Container = styled.div`
       grid-gap: 0.4rem;
       padding: 0.5rem;
       :hover {
-        background-color: #F0F0F0;
+        background-color: #F8F8F8;
       }
 
-      button {
+      .extra {
+        display: none;
+        background-color: #DCDCDC;
         position: absolute;
-        top: -0.4rem;
+        top: -1rem;
         right: 1rem;
+        border-radius: 1rem;
+      }
+
+      :hover .extra {
+        display: block;
+      }
+
+      .options {
+        display: flex;
+        padding: 1.5px 0.5rem;
+        width: 4rem;
+        justify-content: space-around;
+
+        .addTask, .delete {
+          padding: 0.5rem;
+          border-radius: 1rem;
+
+          :hover {
+            background-color: #C0C0C0;
+            cursor: pointer;
+          }
+        }
       }
 
       .username {
@@ -71,16 +95,12 @@ export const Container = styled.div`
 
     button {
       position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translate(0, -50%);
+      right: 10px;
+      bottom: 10px;
+      padding: 0;
       background-color: transparent;
       border: none;
       cursor: pointer;
-
-      :active {
-
-      }
 
       :focus {
         outline: none;
