@@ -27,11 +27,11 @@ io.on('connection', (client) => {
     });
   console.log(client.handshake.headers['my-custom-header']);
   client.on('message', (data) => {
-    console.log(data);
+    io.emit('message', data);
   });
-  setInterval(() => {
-    io.emit('date', { date: new Date() });
-  }, 10000);
+  // setInterval(() => {
+  //   io.emit('date', { date: new Date() });
+  // }, 10000);
 });
 
 app.use(router);
