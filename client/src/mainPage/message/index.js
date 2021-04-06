@@ -38,7 +38,7 @@ const Message = ({ channel_id, user_id }) => {
   // });
 
   socket.on('message', (data) => {
-    console.log(1);
+    console.log(data.message);
     // setMessages(data.message);
   });
 

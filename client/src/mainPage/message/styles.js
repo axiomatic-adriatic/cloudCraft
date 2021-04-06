@@ -17,7 +17,9 @@ export const Container = styled.div`
   .chatbox {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
-    flex-direction: column;
+    display: grid;
+    align-content: end;
+    grid-auto-rows: min-content;
     max-height: 60vh;
     min-height: 50vh;
     overflow: auto;
@@ -29,10 +31,11 @@ export const Container = styled.div`
     .messageContainer {
       position: relative;
       box-sizing: border-box;
+      height: min-content;
       width: 100%;
       display: grid;
       grid-template-columns: auto 1fr;
-      grid-template-rows: min-content auto;
+      grid-template-rows: repeat(2, min-content);
       grid-gap: 0.4rem;
       padding: 0.5rem;
       :hover {
@@ -55,12 +58,12 @@ export const Container = styled.div`
       .options {
         display: flex;
         padding: 1.5px 0.5rem;
-        width: 4rem;
-        justify-content: space-around;
+        justify-content: space-between;
 
-        .addTask, .delete {
+        .addTask, .delete, .edit {
           padding: 0.5rem;
           border-radius: 1rem;
+          font-size: .7rem;
 
           :hover {
 
