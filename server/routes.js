@@ -11,5 +11,6 @@ router.put('/task/complete', taskController.completeTask);
 
 router.get('/users', usersController.getUsers);
 router.get('/channels', usersController.getChannels);
+router.get('/userChannel', usersController.getUserChannel);
 
 module.exports = router;
