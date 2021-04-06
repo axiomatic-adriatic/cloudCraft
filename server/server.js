@@ -15,13 +15,8 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.use('/home/', express.static(path.join(__dirname, '../client/dist')));
 
-let test = 1;
-
 io.on('connection', (client) => {
-  // temp room
-  test += 1;
-  // TODO: replace with channel id
-  const room = Math.floor(test / 2);
+  const room = client.handshake.headers['my-custom-header'];
 
   client.join(room);
   messagesController.getMessages(room/* will be replaced with channel id from client */)
