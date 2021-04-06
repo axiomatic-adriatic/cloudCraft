@@ -18,7 +18,6 @@ app.use('/home/', express.static(path.join(__dirname, '../client/dist')));
 io.on('connection', (client) => {
   const room = client.handshake.headers['my-custom-header'];
   client.join(room);
-  console.log('a user joined room: ', room);
   client.on('message', (data) => {
     console.log(data);
     messagesController.createMessage(data)
