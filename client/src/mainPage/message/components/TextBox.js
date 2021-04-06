@@ -24,6 +24,7 @@ const TextBox = ({ submit }) => {
   //     formRef.submit();
   //   }
   // };
+
   const sendMessage = (e) => {
     e.preventDefault();
     if (input) {
@@ -47,12 +48,10 @@ const TextBox = ({ submit }) => {
           // onKeyDown={onEnterPress}
         />
         <Button
-          // width={4}
-          // height={2}
-          size={2}
+          size={1.2}
           onClick={sendMessage}
         >
-          <i className="fas fa-chevron-circle-right" style={{ color: input ? 'green' : '#808080' }} />
+          <i className="fas fa-paper-plane" style={{ color: input ? 'green' : '#808080' }} />
         </Button>
       </form>
     </div>
