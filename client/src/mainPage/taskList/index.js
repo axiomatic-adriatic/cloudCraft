@@ -21,7 +21,6 @@ class TaskListModule extends React.Component {
     const { user_id } = this.props;
     axios.get(`/tasks?user_id=${user_id}`)
       .then((resp) => {
-        console.log(resp.data);
         this.setState({
           tasks: [...resp.data],
         });
@@ -33,19 +32,17 @@ class TaskListModule extends React.Component {
 
   addTask(textBody) {
     const { user_id } = this.props;
-    console.log(textBody)
-    console.log(user_id)
     const data = {
       user_id,
       task_text: textBody,
     };
     axios.post('/task', data)
       .then((resp) => {
-        console.log(resp.data);
+        this.getAllTasks();
       })
       .catch((err) => {
-        console.log(err)
-      })
+        console.log(err);
+      });
   }
 
   render() {

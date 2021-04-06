@@ -26,6 +26,7 @@ const AllCateogryList = ({tasks, currentUserId, getAllTasks, addTask}) => {
         add={true}
         getAllTasks={getAllTasks}
         addTask={addTask}
+        getAllTasks={getAllTasks}
       />
       <CategoryList
         categoryName="Other User Tasks"

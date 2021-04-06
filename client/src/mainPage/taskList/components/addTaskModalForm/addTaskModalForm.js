@@ -21,8 +21,13 @@ class AddTaskModalForm extends React.Component {
   handleOnSubmit(e) {
     e.preventDefault();
     const { task } = this.state;
-    const { addTask } = this.props;
-    addTask(task);
+    const { addTask, handleCloseModal } = this.props;
+    this.setState({
+      task: '',
+    }, () => {
+      handleCloseModal();
+      addTask(task);
+    });
   }
 
   render() {

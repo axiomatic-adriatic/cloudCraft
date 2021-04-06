@@ -63,7 +63,7 @@ class CategoryList extends React.Component {
                 >
                   &times;
                 </span>
-                <AddTaskModalForm addTask={addTask}/>
+                <AddTaskModalForm addTask={addTask} handleCloseModal={this.handleCloseModal} />
               </div>
             </div>
           ) : null}
