@@ -2,7 +2,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 20vh;
+}
+
+#titleDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 50vh;
 }
 
 #loginButton {
@@ -20,8 +28,16 @@
 }
 
 #cloudIcon {
-  height: 200px;
-  width: 300px;
+  height: 150px;
+  width: 250px;
+}
+
+#titleFont {
+  font-family: 'Oxygen', sans-serif;
+  font-size: 100px;
+  color: #8B8C89;
+  font-weight: lighter;
+  font-style: italic;
 }
 
 #loginContainer {

@@ -15,7 +15,7 @@ const LoginApp = () => {
           <div>
             <div id={styles.titleDiv}>
               <img id={styles.cloudIcon} src={CloudIcon} alt="Cloud" />
-              <div id={styles.titleFont}>Craft</div>
+              <div id={styles.titleFont}>CloudCraft</div>
             </div>
             <div id={styles.loginButtonDiv}>
               <button type="button" id={styles.loginButton} onClick={() => loginWithRedirect()}>Log In</button>
