@@ -5,6 +5,15 @@ const getMessages = (channel_id) => model.getMessages(channel_id)
   .then((messages) => messages)
   .catch((error) => error);
 
+const getChatHistory = (req, res) => {
+  const { channel_id } = req.query;
+  getMessages(channel_id)
+    .then((messages) => {
+      res.status(200).send(messages);
+    })
+    .catch((error) => error);
+};
+
 /**
    * create a new message in the table.
    * @param {Object} message - An object where the keys are column names and
@@ -24,4 +33,5 @@ const createMessage = (message) => {
 module.exports = {
   getMessages,
   createMessage,
+  getChatHistory,
 };
