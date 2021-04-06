@@ -1,6 +1,7 @@
 .task {
-  border: 1px solid black;
+  border-top: 1px solid black;
   padding: 10px;
+  min-height: 100px;
 }
 
 .header {
@@ -10,4 +11,18 @@
 
 .delete {
   cursor: pointer;
+}
+
+.date {
+  /* display: flex;
+  justify-content: flex-end; */
+  /* margin-top: 10px; */
+}
+
+
+.name {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
