@@ -1,13 +1,10 @@
 const db = require('../../db/db.js');
 
 const getTasks = (user_id, callback) => {
-  const query = 'SELECT task_id,tasks.user_id,tasks.message_id,tasks.datetime,task_text,'
-    + "tasks.completed,users.user_id as 'sender_id',name as 'sender_name'FROM tasks"
-    + ' INNER JOIN messages'
-    + ' ON messages.message_id = tasks.message_id'
-    + ' INNER JOIN users'
-    + ' ON messages.user_id = users.user_id'
-    + ' WHERE tasks.user_id = ? AND tasks.is_delete=false';
+  const query = " SELECT *, tasks.task_id, tasks.user_id, tasks.message_id, tasks.datetime, tasks.task_text, tasks.completed, users.user_id as 'sender_id', name as 'sender_name' FROM tasks"
+  + ' LEFT JOIN messages  ON messages.message_id = tasks.message_id'
+  + ' LEFT JOIN users ON messages.user_id = users.user_id'
+  + ' WHERE cloud_craft.tasks.user_id = ? AND cloud_craft.tasks.is_delete = false;';
 
   db.query(query, [user_id], (err, results) => {
     if (err) {
