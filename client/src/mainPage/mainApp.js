@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './mainApp.css';
+import SearchModule from './search/index.js'
 import TaskListModule from './taskList/index.js';
 import Message from './message/index.js';
 import UserList from './userList/index.js';
@@ -33,24 +34,24 @@ class MainApp extends React.Component {
       <div>
         <div className={styles.parent}>
           <div className={styles.div4}>
-            <h1>Search Bar</h1>
+            <SearchModule />
           </div>
           <div className={styles.div1}>
             <UserList
-            handleUserClick={this.handleUserClick}
-            handleChannelClick={this.handleChannelClick}
-            user_id={user_id}
-            channel_id={channel_id} />
+              handleUserClick={this.handleUserClick}
+              handleChannelClick={this.handleChannelClick}
+              user_id={user_id}
+              channel_id={channel_id} />
           </div>
           <div className={styles.div2}>
             <Message
-            channel_id={channel_id} user_id={user_id} />
+              channel_id={channel_id} user_id={user_id} />
           </div>
           <div className={styles.div3}>
             <TaskListModule user_id={user_id} />
           </div>
+        </div>
       </div>
-    </div>
     );
   }
 }
