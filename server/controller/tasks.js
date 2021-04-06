@@ -10,6 +10,7 @@ const getTasks = (req, res) => {
     }
   });
 };
+
 const addTask = (req, res) => {
   const { user_id, task_text } = req.body;
   // console.log(req.body)

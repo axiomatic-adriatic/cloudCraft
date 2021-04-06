@@ -28,11 +28,11 @@ const getTasks = (user_id, callback) => {
         };
         taskArray.push(result);
       }
-      callback(null,taskArray);
+      // console.log(taskArray);
+      callback(null, taskArray);
     }
   });
 };
-
 
 const addTask = (user_id, task_text, callback) => {
   const post = { user_id, task_text };
@@ -45,13 +45,25 @@ const addTask = (user_id, task_text, callback) => {
   });
 };
 
-
 const deleteTask = (task_id, callback) => {
   db.query('UPDATE tasks SET is_delete =? WHERE task_id = ?', [true, task_id], (err, results) => {
     if (err) {
       callback(err, null);
     } else {
       callback(null, results.protocol41);
+      // console.log(results.protocol41);
+    }
+  });
+};
+
+const completeTask = (task_id, callback) => {
+  db.query('UPDATE tasks SET completed =? WHERE task_id = ?', [true, task_id], (err, results) => {
+    if (err) {
+      callback(err, null);
+      // console.log(err)
+    } else {
+      callback(null, results.protocol41);
+      // console.log(results.protocol41);
     }
   });
 };
@@ -83,13 +95,20 @@ const completeTask = (task_id, callback) => {
 //     }
 // })
 
-
 // completeTask(2, (err, result) => {
 //     if (err) {
 //         console.log(err);
 //     } else {
 //         console.log(result);
 //     }
+// })
+
+// addTask(2, "set up endpoint for getTask router", (err, result) => {
+//   if (err) {
+//     console.log(err)
+//   } else {
+//     console.log(result);
+//   }
 // })
 
 module.exports = {
