@@ -32,9 +32,9 @@ const Message = ({ groupdId }) => {
     },
   });
 
-  socket.on('date', (data) => {
-    console.log(data.date);
-  });
+  // socket.on('date', (data) => {
+  //   console.log(data.date);
+  // });
 
   socket.on('message', (data) => {
     console.log(data.message);
