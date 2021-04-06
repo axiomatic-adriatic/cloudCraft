@@ -21,8 +21,11 @@ io.on('connection', (client) => {
   console.log('a user joined room: ', room);
   client.on('message', (data) => {
     console.log(data);
-    messagesController.createMessage(data);
-    io.to(room).emit('message', { message: data });
+    messagesController.createMessage(data)
+      .then(result => {
+        console.log(result);
+        io.to(room).emit('message', { message: data });
+      });
   });
 });
 app.use(router);
