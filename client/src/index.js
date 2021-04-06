@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
 import LoginApp from './login/loginApp.jsx';
 import MainApp from './mainPage/mainApp';
-import LogoutButton from './login/logoutButton.jsx';
 
 ReactDOM.render(
   window.location.pathname === '/home/' ? <MainApp />
@@ -14,7 +13,6 @@ ReactDOM.render(
         redirectUri={window.location.origin}
       >
         <LoginApp />
-        <LogoutButton />
       </Auth0Provider>
     ),
   document.getElementById('app'),
