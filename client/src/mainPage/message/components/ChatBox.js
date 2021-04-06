@@ -1,21 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Header, Paragraph, Button } from '../styles';
-
-const dummydata = [{
-  username: 'peter parker', message: "I Know That Look. I Had It A Lot When I Was Your Age... There's No Stopping You. I Want You To Run Because You Don't Have Your Armor. But You Won't... 'Cause You're A Hero.", dateTime: '1:39pm', messageId: 1,
-}, {
-  username: 'tony stark', message: 'My bond is with the people, and I will serve this great nation at the pleasure of myself. If there’s one thing I’ve proven it’s that you can count on me to pleasure myself', dateTime: '1:39pm', messageId: 2,
-}];
+import { dummyData } from './dummyData';
 
 const ChatBox = ({ chatHistory, addTask }) => {
+  const messageEndRef = useRef(null);
   const deleteMessage = (e) => {
     e.preventDefault();
     console.log('delete');
   };
 
+  const scrollToBottom = () => {
+    messageEndRef.current.scrollIntoView(true);
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [chatHistory]);
   return (
     <div className="chatbox">
-      {dummydata.map((message) => (
+      {dummyData.map((message) => (
         <div
           className="messageContainer"
           key={message.messageId}
@@ -49,6 +52,7 @@ const ChatBox = ({ chatHistory, addTask }) => {
           </div>
         </div>
       ))}
+      <div ref={messageEndRef} />
     </div>
   );
 };
