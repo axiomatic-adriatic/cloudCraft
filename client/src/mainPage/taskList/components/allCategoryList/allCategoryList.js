@@ -8,7 +8,7 @@ const AllCateogryList = ({tasks, currentUserId, getAllTasks, addTask}) => {
   if (tasks.length > 0) {
     for (let i = 0; i < tasks.length; i++) {
       if (tasks[i].user_id === currentUserId) {
-        if (tasks[i].message_id !== 0) {
+        if (tasks[i].message_id !== null) {
           otherUserTasks.push(tasks[i]);
         } else {
           currentUserTasks.push(tasks[i]);

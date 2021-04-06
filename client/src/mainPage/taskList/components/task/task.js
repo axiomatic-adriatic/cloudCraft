@@ -34,7 +34,7 @@ class Task extends React.Component {
   }
 
   render() {
-    const { task } = this.props;
+    const { task, add } = this.props;
     return (
       <div className={styles.task}>
         <div className={styles.header}>
@@ -51,11 +51,12 @@ class Task extends React.Component {
         <div className={styles.date}>
           <div><em>{createDateTime(task.datetime)}</em></div>
         </div>
-
         <p>{task.task_text}</p>
-        <div className={styles.name}>
-          <div>-{task.sender.sender_name}</div>
-        </div>
+        {add ? null : (
+          <div className={styles.name}>
+            <div>-{task.sender.sender_name}</div>
+          </div>
+        )}
         <CompleteTask task={task} handleCompleteTask={this.handleCompleteTask} />
       </div>
     );
