@@ -15,25 +15,21 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.use('/home/', express.static(path.join(__dirname, '../client/dist')));
 
-// app.get('/', (req, res) => {
-//   res.render('index');
-// })
-
 io.on('connection', (client) => {
-  messagesController.getMessages(1/* will be replaced with channel id from client */)
+  const room = client.handshake.headers['my-custom-header'];
+
+  client.join(room);
+  messagesController.getMessages(room/* will be replaced with channel id from client */)
     .then((history) => {
       // send back message history of specific channel when first connect
       client.emit('message', { message: history });
     });
-  console.log(client.handshake.headers['my-custom-header']);
+  console.log(room);
   client.on('message', (data) => {
     console.log(data);
     messagesController.createMessage(data);
-    io.emit('message', data);
+    io.to(room).emit('message', { message: data });
   });
-  // setInterval(() => {
-  //   io.emit('date', { date: new Date() });
-  // }, 10000);
 });
 
 app.use(router);
