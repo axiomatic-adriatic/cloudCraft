@@ -26,7 +26,7 @@ class CategoryList extends React.Component {
   }
 
   render() {
-    const { categoryName, tasks, bgColor, textColor, add, getAllTasks } = this.props;
+    const { categoryName, tasks, bgColor, textColor, add, getAllTasks, addTask } = this.props;
     const { displayModal } = this.state;
     const list = tasks.map((task) => (
       <Task task={task} key={task.task_id} getAllTasks={getAllTasks} />
@@ -63,7 +63,7 @@ class CategoryList extends React.Component {
                 >
                   &times;
                 </span>
-                <AddTaskModalForm />
+                <AddTaskModalForm addTask={addTask}/>
               </div>
             </div>
           ) : null}

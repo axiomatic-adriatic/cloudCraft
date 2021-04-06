@@ -10,6 +10,7 @@ class TaskListModule extends React.Component {
       tasks: [],
     };
     this.getAllTasks = this.getAllTasks.bind(this);
+    this.addTask = this.addTask.bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +31,10 @@ class TaskListModule extends React.Component {
       });
   }
 
+  addTask(textBody) {
+
+  }
+
   render() {
     const { tasks } = this.state;
     const { user_id } = this.props;
@@ -39,6 +44,7 @@ class TaskListModule extends React.Component {
           tasks={tasks}
           currentUserId={user_id}
           getAllTasks={this.getAllTasks}
+          addTask={this.addTask}
         />
       </div>
     );

@@ -8,6 +8,7 @@ class AddTaskModalForm extends React.Component {
       task: '',
     };
     this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleOnSubmit = this.handleOnSubmit.bind(this);
   }
 
   handleOnChange(e) {
@@ -17,10 +18,15 @@ class AddTaskModalForm extends React.Component {
     });
   }
 
+  handleOnSubmit(e) {
+    e.preventDefault();
+    console.log(this.state.task)
+  }
+
   render() {
     const { task } = this.state;
     return (
-      <form className={styles.addTaskForm}>
+      <form className={styles.addTaskForm} onSubmit={this.handleOnSubmit}>
         <label htmlFor="task">
           <h3>Create Your Own Task!</h3>
         </label>

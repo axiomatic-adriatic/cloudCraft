@@ -2,7 +2,7 @@ import React from 'react';
 import CategoryList from '../categoryList/categoryList';
 import styles from './allCategoryList.css';
 
-const AllCateogryList = ({tasks, currentUserId, getAllTasks}) => {
+const AllCateogryList = ({tasks, currentUserId, getAllTasks, addTask}) => {
   const currentUserTasks = [];
   const otherUserTasks = [];
   if (tasks.length > 0) {
@@ -25,6 +25,7 @@ const AllCateogryList = ({tasks, currentUserId, getAllTasks}) => {
         textColor="#274C77"
         add={true}
         getAllTasks={getAllTasks}
+        addTask={addTask}
       />
       <CategoryList
         categoryName="Other User Tasks"
