@@ -63,6 +63,7 @@ export const Container = styled.div`
           border-radius: 1rem;
 
           :hover {
+
             background-color: #D3D3D3;
             cursor: pointer;
           }

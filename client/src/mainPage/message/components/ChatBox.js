@@ -16,7 +16,6 @@ const ChatBox = ({ chatHistory, addTask }) => {
   useEffect(() => {
     scrollToBottom();
   }, [chatHistory]);
-
   return (
     <div className="chatbox">
       {dummyData.map((message) => (
