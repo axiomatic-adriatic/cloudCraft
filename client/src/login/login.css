@@ -1,3 +1,45 @@
+#loginButtonDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+}
+
+#titleDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 50vh;
+}
+
+#loginButton {
+  color: #E7ECEF;
+  background-color: #6096BA;
+  box-shadow: 2px 2px 4px #8B8C89;
+  font-family: 'Oxygen', sans-serif;
+  font-size: 30px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  height: 100px;
+  width: 300px;
+  cursor: pointer;
+}
+
+#cloudIcon {
+  height: 150px;
+  width: 250px;
+}
+
+#titleFont {
+  font-family: 'Oxygen', sans-serif;
+  font-size: 100px;
+  color: #8B8C89;
+  font-weight: lighter;
+  font-style: italic;
+}
+
 #loginContainer {
   display: flex;
   justify-content: center;
@@ -46,12 +88,6 @@
   height: 10vh;
   font-size: 40px;
   font-weight: bold;
-}
-
-#loginButtonDiv {
-  display: flex;
-  justify-content: center;
-  margin: auto;
 }
 
 #emailInputDiv,

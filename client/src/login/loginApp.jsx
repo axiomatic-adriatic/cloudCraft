@@ -1,15 +1,44 @@
 import React from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import MainApp from '../mainPage/mainApp.js';
+import LogoutButton from './logoutButton.jsx';
+import CloudIcon from '../../dist/cloudIcon.jpg';
 import styles from './login.css';
-import { useAuth0 } from "@auth0/auth0-react";
 
 const LoginApp = () => {
-  const { loginWithRedirect } = useAuth0();
+  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
 
-  return <button onClick={() => loginWithRedirect()}>Log In</button>;
+  return (
+    <div>
+      {
+        !isAuthenticated && (
+          <div>
+            <div id={styles.titleDiv}>
+              <img id={styles.cloudIcon} src={CloudIcon} alt="Cloud" />
+              <div id={styles.titleFont}>CloudCraft</div>
+            </div>
+            <div id={styles.loginButtonDiv}>
+              <button type="button" id={styles.loginButton} onClick={() => loginWithRedirect()}>Log In</button>
+            </div>
+          </div>
+        )
+      }
+      {
+        isAuthenticated && (
+          <div>
+            <LogoutButton />
+            <img src={user.picture} alt={user.name} />
+            <h2>{user.name}</h2>
+            <p>{user.email}</p>
+            <MainApp />
+          </div>
+        )
+      }
+    </div>
+  );
 };
 
 export default LoginApp;
-
 
 /*
 class LoginApp extends React.Component {
