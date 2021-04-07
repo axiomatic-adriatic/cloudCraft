@@ -20,7 +20,6 @@ const Message = ({ channel_id, user_id }) => {
     })
       .then((result) => {
         setMessages(result.data);
-        // console.log(result);
       })
       .catch((err) => { throw err; });
   };
@@ -38,7 +37,7 @@ const Message = ({ channel_id, user_id }) => {
   // });
 
   socket.on('message', (data) => {
-    console.log(1);
+    console.log(data.message);
     // setMessages(data.message);
   });
 
