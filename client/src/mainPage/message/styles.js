@@ -6,12 +6,13 @@ export const Container = styled.div`
   grid-template-columns: 0.5rem auto 0.5rem;
   grid-template-rows: 3rem auto min-content;
   grid-gap: 0.5rem;
-  // height: 100%;
 
   .banner {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
-    align-self: center;
+    align-items: center;
+    display: flex;
+    height: 100%;
     border-bottom: 1px solid #808080;
   }
 
@@ -21,6 +22,7 @@ export const Container = styled.div`
     grid-auto-rows: min-content;
     display: flex;
     flex-direction: column;
+    padding-top: 1rem;
     height: 50vh;
     overflow-y: auto;
 

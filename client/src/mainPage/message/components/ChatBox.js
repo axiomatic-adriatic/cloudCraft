@@ -1,10 +1,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState, useRef, useEffect } from 'react';
-import { Header, Paragraph, Button } from '../styles';
+import { Header, Paragraph } from '../styles';
 import { dummyData } from './dummyData';
 
-const ChatBox = ({ chatHistory, deleteMessage, editMessage, addTask }) => {
+const ChatBox = ({
+  chatHistory, deleteMessage, editMessage, userId, addTask,
+}) => {
   const messageEndRef = useRef(null);
 
   const formatDate = (string) => {
@@ -30,7 +32,7 @@ const ChatBox = ({ chatHistory, deleteMessage, editMessage, addTask }) => {
   };
 
   const scrollToBottom = () => {
-    messageEndRef.current.scrollIntoView(true);
+    messageEndRef.current.scrollIntoView({behavior: 'auto'});
   };
 
   useEffect(() => {
@@ -49,7 +51,7 @@ const ChatBox = ({ chatHistory, deleteMessage, editMessage, addTask }) => {
             size={0.9}
             color="#202020"
           >
-            {message.user_id}
+            {message.name}
           </Header>
           <Paragraph
             className="message"
@@ -72,16 +74,20 @@ const ChatBox = ({ chatHistory, deleteMessage, editMessage, addTask }) => {
                 title="Add to Task"
                 onClick={addTask}
               />
-              <i
-                className="far fa-edit edit"
-                title="Edit Message"
-                onClick={edit}
-              />
-              <i
-                className="far fa-trash-alt delete"
-                title="delete Message"
-                onClick={remove}
-              />
+              {message.user_id === userId ? (
+                <i
+                  className="far fa-edit edit"
+                  title="Edit Message"
+                  onClick={edit}
+                />
+              ) : null}
+              {message.user_id === userId ? (
+                <i
+                  className="far fa-trash-alt delete"
+                  title="delete Message"
+                  onClick={remove}
+                />
+              ) : null}
             </div>
           </div>
         </div>
