@@ -44,11 +44,19 @@ const deleteMessage = (message_id) => {
   return Promise.reject(Error('Missed message id'));
 };
 
+const checkRowsMatched = (affectedRows, res) => {
+  if (affectedRows) {
+    res.sendStatus(200);
+    return;
+  }
+  res.status(404).send('Already deleted or message is tasked');
+};
+
 const deleteChat = (req, res) => {
   const { message_id } = req.query;
   deleteMessage(message_id)
-    .then(() => {
-      res.sendStatus(200);
+    .then(([result]) => {
+      checkRowsMatched(result.affectedRows, res);
     })
     .catch((error) => {
       res.status(500).send(error.message);

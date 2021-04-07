@@ -53,7 +53,7 @@ const createMessage = (message) => {
    * during the query.
  */
 const deleteMessage = (message_id) => {
-  const query = 'UPDATE messages SET ? WHERE message_id=?;';
+  const query = 'UPDATE messages SET ? WHERE message_id=? AND disabled=false AND is_delete=false;';
   const value = {
     is_delete: true,
   };
