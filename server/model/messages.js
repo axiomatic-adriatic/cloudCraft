@@ -21,7 +21,16 @@ const getMessages = (channel_id) => {
    * containing the results of the query or is rejected with the the error that occurred
    * during the query.
  */
-const getLatest = () => db.promise().query('SELECT * FROM messages WHERE message_id = LAST_INSERT_ID()').then(([message]) => message);
+const getLatest = () => db.promise().query('SELECT * FROM messages WHERE message_id = LAST_INSERT_ID() LIMIT 1').then(([message]) => message);
+
+/**
+   * get single message with message_id.
+   * @param {number} message_id - A number representing the channel id
+   * @returns {Promise<Object>} A promise that is fulfilled with an object
+   * containing the results of the query or is rejected with the the error that occurred
+   * during the query.
+ */
+const getMessage = (message_id) => db.promise().query(`SELECT * FROM messages WHERE message_id = ${message_id} LIMIT 1`).then(([message]) => message);
 
 /**
    * create a new message in the table.
@@ -36,7 +45,23 @@ const createMessage = (message) => {
   return db.promise().query(query, [message]).then(() => getLatest());
 };
 
+/**
+   * create a new message in the table.
+   * @param {Number} message_id
+   * @returns {Promise<Object>} A promise that is fulfilled with an object
+   * containing the results of the query or is rejected with the the error that occurred
+   * during the query.
+ */
+const deleteMessage = (message_id) => {
+  const query = 'UPDATE messages SET ? WHERE message_id=?;';
+  const value = {
+    is_delete: true,
+  };
+  return db.promise().query(query, [value, message_id]);
+};
+
 module.exports = {
   getMessages,
   createMessage,
+  deleteMessage,
 };
