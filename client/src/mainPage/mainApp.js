@@ -11,6 +11,7 @@ class MainApp extends React.Component {
     this.state = {
       user_id: 2,
       channel_id: 1,
+      user_name: '',
     };
     this.handleUserClick = this.handleUserClick.bind(this);
     this.handleChannelClick = this.handleChannelClick.bind(this);
@@ -19,9 +20,10 @@ class MainApp extends React.Component {
   componentDidMount() {
     axios.get(`/userInfo?email=${this.props.email}`)
       .then((results) => {
-        console.log(results.data.user_id)
+        console.log(results.data)
         this.setState({
           user_id: results.data.user_id || 2,
+          user_name: results.data.name || '',
         });
       })
       .catch((err) => {
@@ -58,11 +60,14 @@ class MainApp extends React.Component {
   }
 
   render() {
-    const { user_id, channel_id } = this.state;
+    const { user_id, channel_id, user_name } = this.state;
+    const { picture } = this.props;
     return (
       <div>
         <div className={styles.parent}>
           <div className={styles.div4}>
+            <h3>{`${user_name}`}</h3>
+            <img src={picture} alt={user_name} />
             <h1>Search Bar</h1>
           </div>
           <div className={styles.div1}>
