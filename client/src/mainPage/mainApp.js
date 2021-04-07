@@ -43,7 +43,6 @@ class MainApp extends React.Component {
   render() {
     const { user_id, channel_id } = this.state;
     return (
-      <div>
         <div className={styles.parent}>
           <div className={styles.div4}>
             <h1>Search Bar</h1>
@@ -62,8 +61,7 @@ class MainApp extends React.Component {
           <div className={styles.div3}>
             <TaskListModule user_id={user_id} />
           </div>
-      </div>
-    </div>
+        </div>
     );
   }
 }
