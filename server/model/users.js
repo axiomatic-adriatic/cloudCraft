@@ -21,7 +21,7 @@ exports.getChannels = (userLoggedIn, callback) => {
 };
 
 exports.getUserChannel = (userID, callback) => {
-  db.query(`select channel_id from users_channels where user_id=${userID};`, (err, results) => {
+  db.query(`SELECT t1.channel_id, t2.user_id FROM cloud_craft.users_channels t1 INNER JOIN cloud_craft.users_channels t2 ON t1.channel_id = t2.channel_id WHERE t1.user_id=2;`, (err, results) => {
     if (err) {
       callback(err, null);
     } else {

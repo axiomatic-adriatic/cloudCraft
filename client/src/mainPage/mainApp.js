@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import styles from './mainApp.css';
-import SearchModule from './search/index.js'
+import SearchModule from './search/index.js';
 import TaskListModule from './taskList/index.js';
 import Message from './message/index.js';
 import UserList from './userList/index.js';
@@ -13,6 +13,7 @@ class MainApp extends React.Component {
       user_id: 2,
       channel_id: 1,
       user_name: '',
+      messages: [],
     };
     this.handleUserClick = this.handleUserClick.bind(this);
     this.handleChannelClick = this.handleChannelClick.bind(this);
@@ -29,8 +30,23 @@ class MainApp extends React.Component {
       .catch((err) => {
         console.log('user get request err', err);
       });
+    axios({
+      method: 'get',
+      url: '/chat',
+      params: { channel_id: this.state.channel_id },
+    })
+      .then((result) => {
+        const allMessages = result.data.filter((message) => message.is_delete === 0);
+        this.setState({ messages: allMessages });
+      })
+      .catch((err) => { throw err; });
   }
 
+  handleChannelClick(channelID) {
+    this.setState({
+      channel_id: channelID,
+    });
+  }
 
   handleUserClick(userID) {
     const channelID = [];
@@ -67,13 +83,6 @@ class MainApp extends React.Component {
   //     });
   // }
 
-
-  handleChannelClick(channelID) {
-    this.setState({
-      channel_id: channelID,
-    });
-  }
-
   render() {
     const { user_id, channel_id, user_name } = this.state;
     const { picture } = this.props;
@@ -81,7 +90,7 @@ class MainApp extends React.Component {
       <div className={styles.parent}>
         <div className={styles.div4}>
           {/* <h3>{`${user_name}`}</h3> */}
-          <SearchModule name={user_name}avatar={picture} />
+          <SearchModule name={user_name} avatar={picture} />
         </div>
         <div className={styles.div1}>
           <UserList
@@ -93,6 +102,8 @@ class MainApp extends React.Component {
         </div>
         <div className={styles.div2}>
           <Message
+            messages={this.state.messages}
+            userName={user_name}
             channel_id={channel_id}
             user_id={user_id}
           />
