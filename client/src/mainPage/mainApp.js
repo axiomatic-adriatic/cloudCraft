@@ -66,7 +66,7 @@ class MainApp extends React.Component {
       <div className={styles.parent}>
         <div className={styles.div4}>
           {/* <h3>{`${user_name}`}</h3> */}
-          <SearchModule name={user_name}avatar={picture} />
+          <SearchModule name={user_name} avatar={picture} />
         </div>
         <div className={styles.div1}>
           <UserList
