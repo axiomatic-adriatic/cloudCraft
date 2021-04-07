@@ -23,16 +23,16 @@ class MainApp extends React.Component {
     axios.get('/userChannel', {
       params: {
         user_id: userID
-       }
+      }
     })
-    .then((response) => {
-      this.setState({
-        channel_id: response.data
+      .then((response) => {
+        this.setState({
+          channel_id: response.data
+        })
       })
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   handleChannelClick(channelID) {
