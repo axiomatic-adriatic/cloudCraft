@@ -18,7 +18,6 @@ const Search = ({ avatar }) => {
   };
   return (
     <Container>
-      <Logo> Search Bar</Logo>
       <SearchBar>
         <SearchWrapper>
           <SearchInput placeholder="search" value={searchContent} onKeyDown={keyPress} onChange={handleChange} />
