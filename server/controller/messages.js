@@ -30,8 +30,35 @@ const createMessage = (message) => {
   return Promise.reject(Error('have empty property'));
 };
 
+/**
+   * delete a message in the table.
+   * @param {number} message_id
+   * @returns {Promise<Object>} A promise that is fulfilled with an object
+   * containing the results of the query or is rejected with the the error that occurred
+   * during the query.
+ */
+const deleteMessage = (message_id) => {
+  if (message_id) {
+    return model.deleteMessage(message_id);
+  }
+  return Promise.reject(Error('Missed message id'));
+};
+
+const deleteChat = (req, res) => {
+  const { message_id } = req.query;
+  deleteMessage(message_id)
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      res.status(500).send(error.message);
+    });
+};
+
 module.exports = {
   getMessages,
   createMessage,
   getChatHistory,
+  deleteMessage,
+  deleteChat,
 };
