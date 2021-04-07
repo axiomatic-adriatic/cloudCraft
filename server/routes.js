@@ -5,6 +5,7 @@ const taskController = require('./controller/tasks');
 const usersController = require('./controller/userList');
 const getUserID = require('./controller/usersInfo');
 const messagesController = require('./controller/messages');
+const searchController = require('./controller/search');
 
 router.get('/tasks', taskController.getTasks);
 router.post('/task', taskController.addTask);
@@ -19,5 +20,8 @@ router.get('/chat', messagesController.getChatHistory);
 router.put('/chat/delete', messagesController.deleteChat);
 
 router.get('/userInfo', getUserID);
+
+router.get('/search/tasks', searchController.searchTasks);
+router.get('/search/messages', searchController.searchMessages);
 
 module.exports = router;
