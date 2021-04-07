@@ -21,6 +21,7 @@ class TaskListModule extends React.Component {
     const { user_id } = this.props;
     axios.get(`/tasks?user_id=${user_id}`)
       .then((resp) => {
+        console.log(resp.data);
         this.setState({
           tasks: [...resp.data],
         });
