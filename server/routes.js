@@ -16,6 +16,7 @@ router.get('/channels', usersController.getChannels);
 router.get('/userChannel', usersController.getUserChannel);
 
 router.get('/chat', messagesController.getChatHistory);
+router.put('/chat/delete', messagesController.deleteChat);
 
 router.get('/userInfo', getUserID);
 
