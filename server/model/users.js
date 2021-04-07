@@ -33,3 +33,16 @@ exports.getUserChannel = (userID, callback) => {
     }
   })
 };
+
+exports.getDmChannel = (userLoggedIn, userClicked, callback) => {
+  db.query(`SELECT dm_channel_id from direct_messages
+  WHERE user_id_1=${userLoggedIn}
+  AND user_id_2=${userClicked};
+  `, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(results, null);
+    }
+  })
+};

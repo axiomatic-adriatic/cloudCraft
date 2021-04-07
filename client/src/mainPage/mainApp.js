@@ -36,22 +36,41 @@ class MainApp extends React.Component {
   //     user_id: userID,
   //   });
 
-  handleUserClick(userID) {
-    const channelID = [];
-    axios.get('/userChannel', {
+  // handleUserClick(userID) {
+  //   const channelID = [];
+  //   axios.get('/userChannel', {
+  //     params: {
+  //       user_id: userID,
+  //     },
+  //   })
+  //     .then((response) => {
+  //       this.setState({
+  //         channel_id: response.data,
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
+
+  handleUserClick(userClickedID) {
+    const { user_id } = this.state;
+    axios.get('/directMessageChannel', {
       params: {
-        user_id: userID,
+        userLoggedIn: user_id,
+        userClicked: userClickedID
       },
     })
       .then((response) => {
         this.setState({
-          channel_id: response.data,
+          channel_id: response.data[0].dm_channel_id,
         });
       })
       .catch((err) => {
         console.log(err);
       });
   }
+
 
   handleChannelClick(channelID) {
     this.setState({
@@ -60,6 +79,7 @@ class MainApp extends React.Component {
   }
 
   render() {
+    console.log('state in main app:', this.state);
     const { user_id, channel_id, user_name } = this.state;
     const { picture } = this.props;
     return (
