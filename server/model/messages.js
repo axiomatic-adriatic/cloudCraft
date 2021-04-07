@@ -76,9 +76,28 @@ const editMessage = (message) => {
   return db.promise().query(query, [value, message_id]).then(() => getMessage(message_id));
 };
 
+/**
+   * search message in the table.
+   * @param {String} keyWord need message_id and message_text for update
+   * @param {Number} channel_id need message_id and message_text for update
+   * @returns {Promise<Object>} A promise that is fulfilled with an object
+   * containing the results of the query or is rejected with the the error that occurred
+   * during the query.
+ */
+const searchMessage = (keyWord, channel_id) => {
+  const query = 'SELECT messages.*, users.name FROM messages '
+  + 'LEFT JOIN users ON users.user_id=messages.user_id '
+  + `WHERE (messages.message_text LIKE "%${keyWord}%" OR users.name LIKE "%${keyWord}%") `
+  + 'AND channel_id = ? ORDER BY datetime LIMIT 100';
+  return db.promise().query(query, channel_id)
+    .then(([results]) => results)
+    .catch((error) => error);
+};
+
 module.exports = {
   getMessages,
   createMessage,
   deleteMessage,
   editMessage,
+  searchMessage,
 };
