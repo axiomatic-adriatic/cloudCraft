@@ -90,9 +90,9 @@ class MainApp extends React.Component {
         <div className={styles.div2}>
           <Message
             messages={this.state.messages}
-            userName={user_name}
-            channel_id={channel_id}
-            user_id={user_id}
+            userName={this.state.user_name}
+            channel_id={this.state.channel_id}
+            user_id={this.state.user_id}
           />
         </div>
         <div className={styles.div3}>
