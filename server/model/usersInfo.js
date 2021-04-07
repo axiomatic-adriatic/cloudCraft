@@ -5,7 +5,6 @@ exports.getUserID = (email, callback) => {
     if (err) {
       callback(err, null);
     } else {
-      console.log(result)
       callback(null, result[0]);
     }
   });

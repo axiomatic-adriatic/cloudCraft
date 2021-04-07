@@ -2,7 +2,7 @@ import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import MainApp from '../mainPage/mainApp.js';
 import LogoutButton from './logoutButton.jsx';
-import CloudIcon from '../../dist/cloudIcon.jpg';
+import CloudIcon from '../../dist/images/cloudIcon.jpg';
 import styles from './login.css';
 
 const LoginApp = () => {
