@@ -29,6 +29,11 @@ class MainApp extends React.Component {
       });
   }
 
+  // handleUserClick(userID) {
+  //   this.setState({
+  //     user_id: userID,
+  //   });
+
   handleUserClick(userID) {
     let channelID = [];
     axios.get('/userChannel', {
