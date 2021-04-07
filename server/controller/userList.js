@@ -17,6 +17,7 @@ const userModel = require('../model/users');
       if (err) {
         res.send(err);
       } else {
+        console.log(result);
         res.send(result);
       }
     })
@@ -33,11 +34,9 @@ const userModel = require('../model/users');
     })
   };
 
-  exports.getDmChannel = (req, res) => {
-    const userLoggedIn = req.query['userLoggedIn'];
-    const userClicked = req.query['userClicked'];
-
-    userModel.getDmChannel(userLoggedIn, userClicked, (err, result) => {
+  exports.getChannelUsers = (req, res) => {
+    const channel = req.query.channel;
+    userModel.getChannelUsers(channel, (err, result) => {
       if (err) {
         res.send(err);
       } else {
@@ -45,3 +44,28 @@ const userModel = require('../model/users');
       }
     })
   };
+
+  // exports.getChannels = (req, res) => {
+  //   const userID = req.query['userLoggedIn'];
+  //   userModel.getUserChannel(userID, (err, result) => {
+  //     if (err) {
+  //       res.send(err);
+  //     } else {
+  //       res.send(result);
+  //     }
+  //   })
+  // };
+
+
+  // exports.getDmChannel = (req, res) => {
+  //   const userLoggedIn = req.query['userLoggedIn'];
+  //   const userClicked = req.query['userClicked'];
+
+  //   userModel.getDmChannel(userLoggedIn, userClicked, (err, result) => {
+  //     if (err) {
+  //       res.send(err);
+  //     } else {
+  //       res.send(result);
+  //     }
+  //   })
+  // };

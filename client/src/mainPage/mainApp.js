@@ -65,24 +65,6 @@ class MainApp extends React.Component {
       });
   }
 
-  // handleUserClick(userClickedID) {
-  //   const { user_id } = this.state;
-  //   axios.get('/directMessageChannel', {
-  //     params: {
-  //       userLoggedIn: user_id,
-  //       userClicked: userClickedID
-  //     },
-  //   })
-  //     .then((response) => {
-  //       this.setState({
-  //         channel_id: response.data[0].dm_channel_id,
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }
-
   render() {
     const { user_id, channel_id, user_name } = this.state;
     const { picture } = this.props;

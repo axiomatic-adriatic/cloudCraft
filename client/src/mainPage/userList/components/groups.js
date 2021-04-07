@@ -6,38 +6,73 @@ class Groups extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      channels: [],
+      allChannels: [],
+      groupChannels: [],
+      directChannels: [],
+      channelUsers: []
     }
-    this.getChannels = this.getChannels.bind(this);
+    this.getAllChannels = this.getAllChannels.bind(this);
+    // this.getChannelUsers = this.getChannelUsers.bind(this);
   }
 
-  getChannels() {
+  getAllChannels() {
     const { user_id } = this.props;
-    axios.get('/channels')
+    axios.get('/channels', {
+      params: {
+        userLoggedIn: user_id
+      }
+    })
     .then((response) => {
      const channelData = response.data;
+     const channels = [];
+
+     for (var i = 0; i < channelData.length; i++) {
+       channels.push(channelData[i].channel_id);
+     }
      this.setState({
-       channels: channelData
-     })
+       allChannels: channels
+     });
     })
     .catch((error) => {
       console.log(error);
     })
   }
 
+  // getChannelUsers() {
+  //   const { allChannels } = this.state;
+  //   for (var i = 0; i < allChannels.length; i++) {
+  //     let currentChannel = allChannels[i];
+  //     axios.get('/channelUsers', {
+  //       params: {
+  //         channel: currentChannel
+  //       }
+  //     })
+  //     .then((success) => {
+  //       this.setState({
+  //         channelUsers: success
+  //       })
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     })
+  //   }
+  // }
+
   componentDidMount() {
-    this.getChannels();
+    this.getAllChannels();
+    this.getChannelUsers();
   }
 
   render() {
-    const { channels } = this.state;
+    console.log('state in groups:', this.state);
+    const { allChannels } = this.state;
     const { handleChannelClick } = this.props;
-    const channelList = channels.map((channel) => {
+    const channelList = allChannels.map((channel) => {
       return (
-      <div key={channel.channel_id
+      <div key={channel
       } className={styles.select}>
       <p
-      onClick={() => handleChannelClick(channel.channel_id)}># {channel.channel_name}</p>
+      onClick={() => handleChannelClick(channel)}># Channel {channel}</p>
       </div>
       )
     })

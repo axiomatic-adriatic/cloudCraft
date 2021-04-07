@@ -15,7 +15,9 @@ router.put('/task/complete', taskController.completeTask);
 router.get('/users', usersController.getUsers);
 router.get('/channels', usersController.getChannels);
 router.get('/userChannel', usersController.getUserChannel);
-router.get('/directMessageChannel', usersController.getDmChannel);
+router.get('/channelUsers', usersController.getChannelUsers);
+
+// router.get('/directMessageChannel', usersController.getDmChannel);
 
 router.get('/chat', messagesController.getChatHistory);
 router.post('/chat', messagesController.editChat);

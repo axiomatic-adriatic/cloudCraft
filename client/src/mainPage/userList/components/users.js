@@ -26,6 +26,21 @@ class Users extends React.Component {
     })
   }
 
+  // getChannels() {
+  //   const { user_id } = this.props;
+  //   axios.get('/channels', {
+  //     params: {
+  //       userLoggedIn: user_id
+  //     }
+  //   })
+  //   .then((success) => {
+  //     console.log(success);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   })
+  // }
+
   componentDidMount() {
     this.getUsers();
   }
