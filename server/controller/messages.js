@@ -73,8 +73,8 @@ const editMessage = (message) => {
 const editChat = (req, res) => {
   const { message } = req.body;
   editMessage(message)
-    .then(() => {
-      res.sendStatus(200);
+    .then((modifiedMessage) => {
+      res.status(200).send(modifiedMessage);
     })
     .catch((error) => {
       res.status(500).send(error.message);
