@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const taskController = require('./controller/tasks');
 const usersController = require('./controller/userList');
+const getUserID = require('./controller/usersInfo');
 const messagesController = require('./controller/messages');
 
 router.get('/tasks', taskController.getTasks);
@@ -15,5 +16,7 @@ router.get('/channels', usersController.getChannels);
 router.get('/userChannel', usersController.getUserChannel);
 
 router.get('/chat', messagesController.getChatHistory);
+
+router.get('/userInfo', getUserID);
 
 module.exports = router;

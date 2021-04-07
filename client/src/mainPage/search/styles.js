@@ -57,6 +57,18 @@ width:30px;
 padding:2px;
 `;
 
+
+export const UserAvatar = styled.img`
+width:35px;
+height:35px;
+color: '#8B8C89';
+margin-top:10%;
+border-radius:50%;
+&:hover{
+    opacity: 0.9;
+}
+`;
+
 export const DefaultIcon = styled(PersonCircle)`
 width:30px;
 color: '#8B8C89';
