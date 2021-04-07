@@ -30,15 +30,22 @@ const searchTasks = (user_id, searchString, callback) => {
   });
 };
 
-const searchMessages = (user_id, searchString, callback) => {
-  const query = `SELECT * FROM cloud_craft.messages WHERE user_id = ? AND message_text LIKE '%${searchString}%';`;
-  db.query(query, [user_id], (err, results) => {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, results);
-    }
-  });
+/**
+   * search message in the table.
+   * @param {String} keyWord need message_id and message_text for update
+   * @param {Number} channel_id need message_id and message_text for update
+   * @returns {Promise<Object>} A promise that is fulfilled with an object
+   * containing the results of the query or is rejected with the the error that occurred
+   * during the query.
+ */
+ const searchMessages = (keyWord, channel_id) => {
+  const query = 'SELECT messages.*, users.name FROM messages '
+  + 'LEFT JOIN users ON users.user_id=messages.user_id '
+  + `WHERE (messages.message_text LIKE "%${keyWord}%" OR users.name LIKE "%${keyWord}%") `
+  + 'AND channel_id = ? ORDER BY datetime LIMIT 100';
+  return db.promise().query(query, channel_id)
+    .then(([results]) => results)
+    .catch((error) => error);
 };
 
 // searchTasks(2, 'cras', (err, result) => {

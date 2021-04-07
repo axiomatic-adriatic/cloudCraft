@@ -19,11 +19,11 @@ router.get('/userChannel', usersController.getUserChannel);
 router.get('/chat', messagesController.getChatHistory);
 router.post('/chat', messagesController.editChat);
 router.put('/chat/delete', messagesController.deleteChat);
-router.get('/chat/search', messagesController.searchChat);
+// router.get('/chat/search', messagesController.searchChat);
 
 router.get('/userInfo', getUserID);
 
 router.get('/search/tasks', searchController.searchTasks);
-router.get('/search/messages', searchController.searchMessages);
+router.get('/search/messages', searchController.searchChat);
 
 module.exports = router;
