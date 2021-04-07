@@ -20,7 +20,6 @@ class MainApp extends React.Component {
   componentDidMount() {
     axios.get(`/userInfo?email=${this.props.email}`)
       .then((results) => {
-        console.log(results.data);
         this.setState({
           user_id: results.data.user_id || 2,
           user_name: results.data.name || '',
