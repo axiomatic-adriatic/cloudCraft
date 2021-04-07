@@ -2,7 +2,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState, useRef, useEffect } from 'react';
 import { Header, Paragraph } from '../styles';
-import { dummyData } from './dummyData';
 
 const ChatBox = ({
   chatHistory, deleteMessage, editMessage, userId, addTask,
