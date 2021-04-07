@@ -6,17 +6,6 @@ const TextBox = ({ submit, userId, channelId }) => {
   const [input, setInput] = useState('');
   const formRef = useRef(null);
   const groupName = 'group one'; // sample
-  // const postMessage = (id) => {
-  //   axios({
-  //     method: 'post',
-  //     url: '/chat',
-  //     params: { groupId: id },
-  //   })
-  //     .then((result) => {
-  //       console.log(result);
-  //     })
-  //     .catch((err) => { throw err; });
-  // };
 
   const sendMessage = (e) => {
     e.preventDefault();
@@ -26,8 +15,8 @@ const TextBox = ({ submit, userId, channelId }) => {
         channel_id: channelId,
         message_text: input,
       };
-      submit(message);
       setInput('');
+      submit(message);
     }
   };
 
