@@ -7,24 +7,21 @@ import ChatBox from './components/ChatBox';
 import TextBox from './components/TextBox';
 
 const Message = ({ channel_id, user_id }) => {
-  // need messages, timestamp and username
-  // message with be store as object
-  // {username: name, message: 'some message', dateTime: date, messageId: id}
   const [messages, setMessages] = useState([]);
   const [groupName, setGroupName] = useState('');
-  const getChatHistory = (id) => {
+
+  const getChatHistory = () => {
     axios({
       method: 'get',
       url: '/chat',
       params: { channel_id },
     })
       .then((result) => {
-        setMessages(result.data);
+        const allMessages = result.data.filter((message) => message.is_delete === 0);
+        setMessages(allMessages);
       })
       .catch((err) => { throw err; });
   };
-
-  const randomNumber = Math.floor(Math.random() * 100000 + 1);
 
   const socket = io({
     extraHeaders: {
@@ -32,50 +29,55 @@ const Message = ({ channel_id, user_id }) => {
     },
   });
 
-  // socket.on('date', (data) => {
-  //   console.log(data.date);
-  // });
-
   socket.on('message', (data) => {
     console.log(data.message);
-    // setMessages(data.message);
+    setMessages([...messages, data.message[0]]);
   });
 
-  // message = {
-  //   user_id: userID,
-  //   channel_id: channelID,
-  //   message_text: message,
-  // }
+  const deleteMessage = (messageId) => {
+    const allMessages = messages.filter((message) => message.message_id !== Number(messageId));
+    setMessages(allMessages);
+    axios({
+      method: 'put',
+      url: '/chat/delete',
+      params: { message_id: Number(messageId) },
+    })
+      .catch((err) => { throw err; });
+  };
+
+  const editMessage = (editdMessage) => {
+    const { message_id, message_text } = editdMessage;
+    const allMessages = messages.filter((message) => {
+      if (message.message_id === message_id) {
+        message.message_text = message_text
+      }
+      return message;
+    });
+    setMessages(allMessages);
+    console.log('test')
+    axios({
+      method: 'post',
+      url: '/chat',
+      params: { message_id, message_text },
+    })
+      .catch((err) => { throw err; });
+  };
+
   const submit = (message) => {
     socket.emit('message', message);
-    setMessages([...messages, message]);
   };
 
   useEffect(() => {
-    getChatHistory(channel_id);
+    getChatHistory();
   }, [channel_id]);
 
   return (
     <Container>
       <Banner groupName={groupName} />
-      <ChatBox chatHistory={messages} />
+      <ChatBox chatHistory={messages} deleteMessage={deleteMessage} editMessage={editMessage} />
       <TextBox submit={submit} userId={user_id} channelId={channel_id} />
     </Container>
   );
 };
 
 export default Message;
-
-// axios({
-//   method: 'post',
-//   url: '/chat',
-//   body: {
-//     groupId: message.groupId,
-//     message: message.message,
-//     userId: message.userId,
-//   },
-// })
-//   .then((result) => {
-//     console.log(result);
-//   })
-//   .catch((err) => { throw err; });

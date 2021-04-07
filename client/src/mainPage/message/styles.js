@@ -6,6 +6,7 @@ export const Container = styled.div`
   grid-template-columns: 0.5rem auto 0.5rem;
   grid-template-rows: 3rem auto min-content;
   grid-gap: 0.5rem;
+  // height: 100%;
 
   .banner {
     grid-column: 2 / 3;
@@ -20,8 +21,7 @@ export const Container = styled.div`
     grid-auto-rows: min-content;
     display: flex;
     flex-direction: column;
-    max-height: 60vh;
-    min-height: 50vh;
+    height: 50vh;
     overflow-y: auto;
 
     .messageContainer {
@@ -34,7 +34,7 @@ export const Container = styled.div`
       grid-template-rows: repeat(2, min-content);
       grid-gap: 0.4rem;
       padding: 0.5rem;
-      margin: auto;
+      margin: 0;
       :hover {
         background-color: #F8F8F8;
       }
@@ -80,6 +80,7 @@ export const Container = styled.div`
       .message {
         grid-column: span 2;
         grid-row: 2 / 3;
+        overflow-wrap: break-word;
       }
 
       .dateTime {

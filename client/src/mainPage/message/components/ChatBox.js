@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Header, Paragraph, Button } from '../styles';
 import { dummyData } from './dummyData';
 
-const ChatBox = ({ chatHistory, addTask }) => {
+const ChatBox = ({ chatHistory, deleteMessage, editMessage, addTask }) => {
   const messageEndRef = useRef(null);
 
   const formatDate = (string) => {
@@ -17,16 +17,16 @@ const ChatBox = ({ chatHistory, addTask }) => {
     return new Date(string).toLocaleTimeString([], options);
   };
 
-  const deleteMessage = (e) => {
+  const remove = (e) => {
     e.preventDefault();
     const messageId = e.target.closest('.messageContainer').getAttribute('data-key');
-    // delete message with messageId
+    deleteMessage(messageId);
   };
 
-  const editMessage = (e) => {
+  const edit = (e) => {
     e.preventDefault();
     const messageId = e.target.closest('.messageContainer').getAttribute('data-key');
-    // edit message with messageId
+    editMessage(messageId);
   };
 
   const scrollToBottom = () => {
@@ -75,12 +75,12 @@ const ChatBox = ({ chatHistory, addTask }) => {
               <i
                 className="far fa-edit edit"
                 title="Edit Message"
-                onClick={editMessage}
+                onClick={edit}
               />
               <i
                 className="far fa-trash-alt delete"
                 title="delete Message"
-                onClick={deleteMessage}
+                onClick={remove}
               />
             </div>
           </div>
