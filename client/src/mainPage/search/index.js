@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 import {
-  Container, Logo, SearchBar, SearchInput, SearchWrapper, SearchIcon, DefaultIcon, UserAvatar,
+  Container, SearchBar, SearchInput, SearchWrapper, SearchIcon, DefaultIcon, UserAvatar, Name,
 } from './styles.js';
 
-const Search = ({ avatar }) => {
+const Search = ({ avatar, name }) => {
   const [searchContent, setSearchContent] = useState('');
 
   const handleChange = (e) => {
@@ -18,6 +18,7 @@ const Search = ({ avatar }) => {
   };
   return (
     <Container>
+      <Name>{`Welcome ${name}`}</Name>
       <SearchBar>
         <SearchWrapper>
           <SearchInput placeholder="search" value={searchContent} onKeyDown={keyPress} onChange={handleChange} />
