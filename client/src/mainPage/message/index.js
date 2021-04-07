@@ -6,25 +6,11 @@ import Banner from './components/Banner';
 import ChatBox from './components/ChatBox';
 import TextBox from './components/TextBox';
 
-const Message = ({ channel_id, user_id, user_name, messages }) => {
-  // const [messages, setMessages] = useState([]);
+const Message = ({
+  channel_id, user_id, user_name, messages,
+}) => {
+  const [chatHistory, setchatHistory] = useState([]);
   const [groupName, setGroupName] = useState('');
-
-  // const getChatHistory = () => {
-  //   axios({
-  //     method: 'get',
-  //     url: '/chat',
-  //     params: { channel_id },
-  //   })
-  //     .then((result) => {
-  //       const names = result.data.map((message) => message.name);
-  //       const userNames = [...new Set(names)];
-  //       const allMessages = result.data.filter((message) => message.is_delete === 0);
-  //       setMessages(allMessages);
-  //       setGroupName(userNames.join(', '));
-  //     })
-  //     .catch((err) => { throw err; });
-  // };
 
   const socket = io({
     extraHeaders: {
@@ -33,14 +19,13 @@ const Message = ({ channel_id, user_id, user_name, messages }) => {
   });
 
   socket.on('message', (data) => {
-    console.log('test');
     const message = { ...data.message[0], name: user_name || 'Avery' };
-    // setMessages([...messages, message]);
+    setchatHistory([...chatHistory, message]);
   });
 
   const deleteMessage = (messageId) => {
-    const allMessages = messages.filter((message) => message.message_id !== Number(messageId));
-    setMessages(allMessages);
+    const allMessages = chatHistory.filter((message) => message.message_id !== Number(messageId));
+    setchatHistory(allMessages);
     axios({
       method: 'put',
       url: '/chat/delete',
@@ -53,11 +38,10 @@ const Message = ({ channel_id, user_id, user_name, messages }) => {
     const { message_id, message_text } = editdMessage;
     const allMessages = messages.filter((message) => {
       if (message.message_id === message_id) {
-        message.message_text = message_text
+        message.message_text = message_text;
       }
       return message;
     });
-    setMessages(allMessages);
     // axios({
     //   method: 'post',
     //   url: '/chat',
@@ -66,20 +50,27 @@ const Message = ({ channel_id, user_id, user_name, messages }) => {
     //   .catch((err) => { throw err; });
   };
 
+  const getGroupName = () => {
+    const userNames = messages.map((message) => message.name);
+    const group = [...new Set(userNames)];
+    setGroupName(group.join(', '));
+  };
+
   const submit = (message) => {
     socket.emit('message', message);
   };
 
-  // useEffect(() => {
-  //   getChatHistory();
-  // }, [channel_id]);
+  useEffect(() => {
+    getGroupName();
+    setchatHistory(messages);
+  }, [messages]);
 
   return (
     <Container>
       <Banner groupName={groupName} />
       <ChatBox
         userId={user_id}
-        chatHistory={messages}
+        chatHistory={chatHistory || null}
         deleteMessage={deleteMessage}
         editMessage={editMessage}
       />
