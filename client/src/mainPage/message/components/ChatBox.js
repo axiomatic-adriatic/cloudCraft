@@ -31,12 +31,12 @@ const ChatBox = ({
   };
 
   const scrollToBottom = () => {
-    messageEndRef.current.scrollIntoView({behavior: 'auto'});
+    messageEndRef.current.scrollIntoView(true);
   };
 
   useEffect(() => {
     scrollToBottom();
-  });
+  }, [chatHistory]);
   return (
     <div className="chatbox">
       {chatHistory.map((message) => (

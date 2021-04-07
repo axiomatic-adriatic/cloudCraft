@@ -41,7 +41,6 @@ class MainApp extends React.Component {
       params: { channel_id: this.state.channel_id },
     })
       .then((result) => {
-        console.log(result.data)
         const allMessages = result.data.filter((message) => message.is_delete === 0);
         this.setState({ messages: allMessages });
       })

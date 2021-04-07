@@ -9,7 +9,7 @@ import TextBox from './components/TextBox';
 const Message = ({
   channel_id, user_id, user_name, messages,
 }) => {
-  const [chatHistory, setchatHistory] = useState();
+  const [chatHistory, setchatHistory] = useState([]);
   const [groupName, setGroupName] = useState('');
 
   const socket = io({
@@ -24,7 +24,7 @@ const Message = ({
   });
 
   const deleteMessage = (messageId) => {
-    const allMessages = messages.filter((message) => message.message_id !== Number(messageId));
+    const allMessages = chatHistory.filter((message) => message.message_id !== Number(messageId));
     setchatHistory(allMessages);
     axios({
       method: 'put',
@@ -70,7 +70,7 @@ const Message = ({
       <Banner groupName={groupName} />
       <ChatBox
         userId={user_id}
-        chatHistory={chatHistory || messages}
+        chatHistory={chatHistory || null}
         deleteMessage={deleteMessage}
         editMessage={editMessage}
       />
