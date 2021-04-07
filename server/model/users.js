@@ -10,7 +10,7 @@ exports.getUsers = (callback) => {
   })
 };
 
-exports.getChannels = (callback) => {
+exports.getChannels = (userLoggedIn, callback) => {
   db.query('select channel_id, channel_name from channels;', (err, results) => {
     if (err) {
       callback(err, null);

@@ -12,6 +12,7 @@ class Groups extends React.Component {
   }
 
   getChannels() {
+    const { user_id } = this.props;
     axios.get('/channels')
     .then((response) => {
      const channelData = response.data;

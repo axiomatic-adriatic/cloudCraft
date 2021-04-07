@@ -8,12 +8,12 @@ class UserList extends React.Component {
     super(props)
   }
   render() {
-    const { handleUserClick, handleChannelClick } = this.props;
+    const { handleUserClick, handleChannelClick, user_id } = this.props;
     return (
       <div
       className={styles.userListContainer}
       >
-        <Groups handleChannelClick={handleChannelClick}/>
+        <Groups user_id={user_id}handleChannelClick={handleChannelClick}/>
         <Users handleUserClick={handleUserClick}/>
       </div>
     )

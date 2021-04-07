@@ -31,45 +31,41 @@ class MainApp extends React.Component {
       });
   }
 
-  // handleUserClick(userID) {
-  //   this.setState({
-  //     user_id: userID,
-  //   });
 
-  // handleUserClick(userID) {
-  //   const channelID = [];
-  //   axios.get('/userChannel', {
-  //     params: {
-  //       user_id: userID,
-  //     },
-  //   })
-  //     .then((response) => {
-  //       this.setState({
-  //         channel_id: response.data,
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }
-
-  handleUserClick(userClickedID) {
-    const { user_id } = this.state;
-    axios.get('/directMessageChannel', {
+  handleUserClick(userID) {
+    const channelID = [];
+    axios.get('/userChannel', {
       params: {
-        userLoggedIn: user_id,
-        userClicked: userClickedID
+        user_id: userID,
       },
     })
       .then((response) => {
         this.setState({
-          channel_id: response.data[0].dm_channel_id,
+          channel_id: response.data[0],
         });
       })
       .catch((err) => {
         console.log(err);
       });
   }
+
+  // handleUserClick(userClickedID) {
+  //   const { user_id } = this.state;
+  //   axios.get('/directMessageChannel', {
+  //     params: {
+  //       userLoggedIn: user_id,
+  //       userClicked: userClickedID
+  //     },
+  //   })
+  //     .then((response) => {
+  //       this.setState({
+  //         channel_id: response.data[0].dm_channel_id,
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
 
 
   handleChannelClick(channelID) {
@@ -79,7 +75,6 @@ class MainApp extends React.Component {
   }
 
   render() {
-    console.log('state in main app:', this.state);
     const { user_id, channel_id, user_name } = this.state;
     const { picture } = this.props;
     return (
