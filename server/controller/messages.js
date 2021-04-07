@@ -44,11 +44,45 @@ const deleteMessage = (message_id) => {
   return Promise.reject(Error('Missed message id'));
 };
 
+const checkRowsMatched = (affectedRows, res) => {
+  if (affectedRows) {
+    res.sendStatus(200);
+    return;
+  }
+  res.status(404).send('Already deleted or message is tasked');
+};
+
 const deleteChat = (req, res) => {
   const { message_id } = req.query;
   deleteMessage(message_id)
-    .then(() => {
-      res.sendStatus(200);
+    .then(([result]) => {
+      checkRowsMatched(result.affectedRows, res);
+    })
+    .catch((error) => {
+      res.status(500).send(error.message);
+    });
+};
+
+/**
+   * edit a message in the table.
+   * @param {Object} message contain messge_id, message_text
+   * @returns {Promise<Object>} A promise that is fulfilled with an object
+   * containing the results of the query or is rejected with the the error that occurred
+   * during the query.
+ */
+const editMessage = (message) => {
+  const { message_id, message_text } = message;
+  if (message_id && message_text) {
+    return model.editMessage(message);
+  }
+  return Promise.reject(Error('Missed property'));
+};
+
+const editChat = (req, res) => {
+  const { message } = req.body;
+  editMessage(message)
+    .then((modifiedMessage) => {
+      res.status(200).send(modifiedMessage);
     })
     .catch((error) => {
       res.status(500).send(error.message);
@@ -61,4 +95,5 @@ module.exports = {
   getChatHistory,
   deleteMessage,
   deleteChat,
+  editChat,
 };
