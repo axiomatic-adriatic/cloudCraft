@@ -55,10 +55,37 @@ const deleteChat = (req, res) => {
     });
 };
 
+/**
+   * edit a message in the table.
+   * @param {Object} message contain messge_id, message_text
+   * @returns {Promise<Object>} A promise that is fulfilled with an object
+   * containing the results of the query or is rejected with the the error that occurred
+   * during the query.
+ */
+const editMessage = (message) => {
+  const { message_id, message_text } = message;
+  if (message_id && message_text) {
+    return model.editMessage(message);
+  }
+  return Promise.reject(Error('Missed property'));
+};
+
+const editChat = (req, res) => {
+  const { message } = req.body;
+  editMessage(message)
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      res.status(500).send(error.message);
+    });
+};
+
 module.exports = {
   getMessages,
   createMessage,
   getChatHistory,
   deleteMessage,
   deleteChat,
+  editChat,
 };

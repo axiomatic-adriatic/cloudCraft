@@ -46,7 +46,7 @@ const createMessage = (message) => {
 };
 
 /**
-   * create a new message in the table.
+   * toggle is delete of message in the table.
    * @param {Number} message_id
    * @returns {Promise<Object>} A promise that is fulfilled with an object
    * containing the results of the query or is rejected with the the error that occurred
@@ -60,8 +60,25 @@ const deleteMessage = (message_id) => {
   return db.promise().query(query, [value, message_id]);
 };
 
+/**
+   * update message in the table.
+   * @param {Object} message need message_id and message_text for update
+   * @returns {Promise<Object>} A promise that is fulfilled with an object
+   * containing the results of the query or is rejected with the the error that occurred
+   * during the query.
+ */
+const editMessage = (message) => {
+  const { message_id, message_text } = message;
+  const query = 'UPDATE messages SET ? WHERE message_id=?;';
+  const value = {
+    message_text,
+  };
+  return db.promise().query(query, [value, message_id]).then(() => getMessage(message_id));
+};
+
 module.exports = {
   getMessages,
   createMessage,
   deleteMessage,
+  editMessage,
 };
