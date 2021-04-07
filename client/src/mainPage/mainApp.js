@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import styles from './mainApp.css';
+import SearchModule from './search/index.js'
 import TaskListModule from './taskList/index.js';
 import Message from './message/index.js';
 import UserList from './userList/index.js';
@@ -65,8 +66,8 @@ class MainApp extends React.Component {
       <div className={styles.parent}>
         <div className={styles.div4}>
           <h3>{`${user_name}`}</h3>
-          <img src={picture} alt={user_name} />
-          <h1>Search Bar</h1>
+          {/* <img src={picture} alt={user_name} /> */}
+          <SearchModule avatar={picture} />
         </div>
         <div className={styles.div1}>
           <UserList
