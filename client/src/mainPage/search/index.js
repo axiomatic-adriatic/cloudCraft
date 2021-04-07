@@ -18,7 +18,7 @@ const Search = ({ avatar, name }) => {
   };
   return (
     <Container>
-      <Name>{`Welcome ${name}`}</Name>
+      <Name>{`Welcome back, ${name}.`}</Name>
       <SearchBar>
         <SearchWrapper>
           <SearchInput placeholder="search" value={searchContent} onKeyDown={keyPress} onChange={handleChange} />
