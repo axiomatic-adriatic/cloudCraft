@@ -6,8 +6,9 @@ import { dummyData } from './dummyData';
 
 const ChatBox = ({ chatHistory, addTask }) => {
   const messageEndRef = useRef(null);
+
   const formatDate = (string) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const options = { month: 'long', day: 'numeric', weekday: 'long' };
     return new Date(string).toLocaleDateString([], options);
   };
 
@@ -18,14 +19,14 @@ const ChatBox = ({ chatHistory, addTask }) => {
 
   const deleteMessage = (e) => {
     e.preventDefault();
-    const message_id = e.target.closest('.messageContainer').getAttribute('data-key');
-    // delete message with message_id
+    const messageId = e.target.closest('.messageContainer').getAttribute('data-key');
+    // delete message with messageId
   };
 
   const editMessage = (e) => {
     e.preventDefault();
-    const message_id = e.target.closest('.messageContainer').getAttribute('data-key');
-    // edit message with message_id
+    const messageId = e.target.closest('.messageContainer').getAttribute('data-key');
+    // edit message with messageId
   };
 
   const scrollToBottom = () => {

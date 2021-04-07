@@ -17,16 +17,12 @@ export const Container = styled.div`
   .chatbox {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
-    display: grid;
-    align-content: end;
     grid-auto-rows: min-content;
+    display: flex;
+    flex-direction: column;
     max-height: 60vh;
     min-height: 50vh;
-    overflow: auto;
-    ::-webkit-scrollbar {
-      width: 0px;
-      background: transparent;
-    }
+    overflow-y: auto;
 
     .messageContainer {
       position: relative;
@@ -38,6 +34,7 @@ export const Container = styled.div`
       grid-template-rows: repeat(2, min-content);
       grid-gap: 0.4rem;
       padding: 0.5rem;
+      margin: auto;
       :hover {
         background-color: #F8F8F8;
       }

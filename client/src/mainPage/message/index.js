@@ -20,7 +20,6 @@ const Message = ({ channel_id, user_id }) => {
     })
       .then((result) => {
         setMessages(result.data);
-        // console.log(result);
       })
       .catch((err) => { throw err; });
   };
