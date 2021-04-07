@@ -10,7 +10,9 @@ export const Container = styled.div`
   .banner {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
-    align-self: center;
+    align-items: center;
+    display: flex;
+    height: 100%;
     border-bottom: 1px solid #808080;
   }
 
@@ -20,8 +22,8 @@ export const Container = styled.div`
     grid-auto-rows: min-content;
     display: flex;
     flex-direction: column;
-    max-height: 60vh;
-    min-height: 50vh;
+    padding-top: 1rem;
+    height: 50vh;
     overflow-y: auto;
 
     .messageContainer {
@@ -34,7 +36,7 @@ export const Container = styled.div`
       grid-template-rows: repeat(2, min-content);
       grid-gap: 0.4rem;
       padding: 0.5rem;
-      margin: auto;
+      margin: 0;
       :hover {
         background-color: #F8F8F8;
       }
@@ -80,6 +82,7 @@ export const Container = styled.div`
       .message {
         grid-column: span 2;
         grid-row: 2 / 3;
+        overflow-wrap: break-word;
       }
 
       .dateTime {
