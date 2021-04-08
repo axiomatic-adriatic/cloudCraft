@@ -1,0 +1,1 @@
+Put private.key and certificate.crt in this folder to enable https
