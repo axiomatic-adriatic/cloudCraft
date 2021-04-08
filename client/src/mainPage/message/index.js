@@ -34,7 +34,12 @@ const Message = ({
   });
 
   const deleteMessage = (messageId) => {
-    const allMessages = chatHistory.filter((message) => message.message_id !== Number(messageId));
+    const allMessages = chatHistory.map((date) => {
+      const messages = Object.values(date)[0];
+      const results = messages.filter((message) =>
+        message.message_id !== Number(messageId));
+      return { [Object.keys(date)[0]]: results };
+    });
     setchatHistory(allMessages);
     axios({
       method: 'put',
