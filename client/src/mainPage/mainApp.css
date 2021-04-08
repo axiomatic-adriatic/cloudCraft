@@ -10,4 +10,4 @@ height: 100%;
 .div1 { grid-area: 2 / 2 / 3 / 3; }
 .div2 { grid-area: 2 / 3 / 3 / 4; }
 .div3 { grid-area: 2 / 4 / 3 / 5; }
-.div4 { grid-area: 1 / 2 / 3 / 5; }
+.div4 { grid-area: 1 / 2 / 2 / 5; }

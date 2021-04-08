@@ -43,13 +43,14 @@ const Message = ({
   };
 
   const editMessage = (editdMessage) => {
-    const { message_id, message_text } = editdMessage;
-    const allMessages = messages.filter((message) => {
-      if (message.message_id === message_id) {
-        message.message_text = message_text;
-      }
-      return message;
-    });
+    // const { message_id, message_text } = editdMessage;
+    // const allMessages = messages.filter((message) => {
+    //   if (message.message_id === message_id) {
+    //     message.message_text = message_text;
+    //   }
+    //   return message;
+    // });
+    console.log(editdMessage)
     // axios({
     //   method: 'post',
     //   url: '/chat',
@@ -66,12 +67,13 @@ const Message = ({
 
   const submit = (messageObject) => {
     socket.emit('message', messageObject);
-    const date = formatDate(new Date());
+    const time = new Date();
+    const date = formatDate(time);
     const lastDay = chatHistory[chatHistory.length - 1];
     const allMessages = Object.values(lastDay)[0];
     const latestMessages = allMessages[allMessages.length - 1];
     const newMessageId = latestMessages.message_id + 1;
-    const newMessage = { ...messageObject, name: user_name || 'Avery', message_id: newMessageId, datetime: date };
+    const newMessage = { ...messageObject, name: user_name || 'Avery', message_id: newMessageId, datetime: time };
     const updatedMessages = chatHistory.map((message) => {
       if (Object.keys(message)[0] === date) {
         message[date].push(newMessage);
@@ -133,3 +135,16 @@ const Message = ({
 };
 
 export default Message;
+
+// const newMessage = { ...data.message[0], name: user_name || 'Avery' };
+// const date = formatDate(newMessage.datetime)
+// const insert = chatHistory.map((message) => {
+//   if (Object.keys(message)[0] === date) {
+//     const lastMessageIndex = message[date].length - 1;
+//     if (message[date][lastMessageIndex].message_id !== newMessage.message_id) {
+//       message[date].push(newMessage);
+//     }
+//   }
+//   return message;
+// });
+// setchatHistory(insert);
