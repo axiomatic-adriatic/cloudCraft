@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import {
@@ -8,12 +8,46 @@ import {
 
 // eslint-disable-next-line camelcase
 const Search = ({
-  avatar, name, channel_id, user_id, getMessages,
+  avatar, name, channel_id, user_id, getMessages, getTasks,
 }) => {
   const [keyWord, setkeyWord] = useState('');
 
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: '/chat',
+      params: { channel_id },
+    })
+      .then((result) => {
+        const allMessages = result.data.filter((message) => message.is_delete === 0);
+        getMessages(allMessages);
+      })
+      .catch((err) => { throw err; });
+
+    axios.get(`/tasks?user_id=${user_id}`)
+      .then((resp) => {
+        getTasks(resp.data);
+      })
+      .catch((err) => {
+        throw err;
+      });
+    // console.log(keyWord)
+  }, [keyWord]);
+
   const handleChange = (e) => {
     setkeyWord(e.target.value);
+    // if (keyWord === '') {
+    //   axios({
+    //     method: 'get',
+    //     url: '/chat',
+    //     params: { channel_id },
+    //   })
+    //     .then((result) => {
+    //       const allMessages = result.data.filter((message) => message.is_delete === 0);
+    //       getMessages(allMessages);
+    //     })
+    //     .catch((err) => { throw err; });
+    // }
   };
   const keyPress = (e) => {
     if (e.keyCode === 13) {
@@ -25,10 +59,11 @@ const Search = ({
         },
       })
         .then((response) => {
-          console.log(response.data);
+          const tasksList = response.data;
+          getTasks(tasksList);
         })
         .catch((err) => {
-          console.log(err);
+          throw err;
         });
 
       axios.get('/search/messages', {
@@ -38,16 +73,12 @@ const Search = ({
         },
       })
         .then((response) => {
-          //console.log('message search');
-          let messageList = response.data;
-          if(messageList.length === 0){
-            alert('No results found');
-          }else{
-            getMessages(response.data);
-          }
+          // console.log('message search');
+          const messageList = response.data;
+          getMessages(messageList);
         })
         .catch((err) => {
-          alert(err)
+          throw err;
         });
     }
   };
