@@ -11,10 +11,11 @@ exports.getUsers = (callback) => {
 };
 
 exports.getChannels = (userLoggedIn, callback) => {
-  db.query(`select channel_id from users_channels where user_id=${userLoggedIn};`, (err, results) => {
+  db.query(`select channel_id from users_channels where user_id=${userLoggedIn}`, (err, results) => {
     if (err) {
       callback(err, null);
     } else {
+      console.log('results from query:', results);
       callback(results, null);
     }
   })
@@ -47,19 +48,19 @@ exports.getChannelUsers = (channel, callback) => {
 //   })
 // };
 
-exports.getUserChannel = (userID, callback) => {
-  db.query(`Select channel_id from users_channels where user_id=2`, (err, results) => {
-    if (err) {
-      callback(err, null);
-    } else {
-      let result = [];
-      for (var i = 0; i < results.length; i++) {
-        result.push(results[i].channel_id);
-      }
-      callback(result, null);
-    }
-  })
-};
+// exports.getUserChannel = (userID, callback) => {
+//   db.query(`Select channel_id from users_channels where user_id=2`, (err, results) => {
+//     if (err) {
+//       callback(err, null);
+//     } else {
+//       let result = [];
+//       for (var i = 0; i < results.length; i++) {
+//         result.push(results[i].channel_id);
+//       }
+//       callback(result, null);
+//     }
+//   })
+// };
 
 exports.getDmChannel = (userLoggedIn, userClicked, callback) => {
   db.query(`SELECT dm_channel_id from direct_messages

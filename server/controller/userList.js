@@ -12,12 +12,12 @@ const userModel = require('../model/users');
   };
 
   exports.getChannels = (req, res) => {
-    const userLoggedIn = req.query.userLoggedIn;
+    const userLoggedIn = req.query['userLoggedIn'];
+    console.log('userLoggedIn:', userLoggedIn);
     userModel.getChannels(userLoggedIn, (err, result) => {
       if (err) {
         res.send(err);
       } else {
-        console.log(result);
         res.send(result);
       }
     })
