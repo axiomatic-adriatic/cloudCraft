@@ -21,6 +21,8 @@ class MainApp extends React.Component {
     this.handleChannelClick = this.handleChannelClick.bind(this);
 
     this.getMessages = this.getMessages.bind(this);
+    this.getTasks = this.getTasks.bind(this);
+
     this.getChatHistory = this.getChatHistory.bind(this);
     this.getAllTasks = this.getAllTasks.bind(this);
     this.addTask = this.addTask.bind(this);
@@ -93,6 +95,10 @@ class MainApp extends React.Component {
       });
   }
 
+  getTasks(tasks) {
+    this.setState({ taskList: tasks });
+  }
+
   render() {
     const {
       user_id, channel_id, user_name, taskList,
@@ -109,6 +115,7 @@ class MainApp extends React.Component {
             channel_id={channel_id}
             user_id={user_id}
             getMessages={this.getMessages}
+            getTasks={this.getTasks}
           />
         </div>
         <div className={styles.div1}>
