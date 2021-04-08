@@ -1,4 +1,14 @@
-const db = require('../../db/db.js')
+const db = require('../../db/db.js');
+
+exports.getChannelName = (channel, callback) => {
+  db.query(`select channel_name from channels where channel_id=${channel};`, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(results, null);
+    }
+  });
+};
 
 exports.getUsers = (callback) => {
   db.query('select user_id, name from users;', (err, results) => {
@@ -15,10 +25,9 @@ exports.getChannels = (userLoggedIn, callback) => {
     if (err) {
       callback(err, null);
     } else {
-      console.log('results from query:', results);
       callback(results, null);
     }
-  })
+  });
 };
 
 
@@ -29,7 +38,7 @@ exports.getChannelUsers = (channel, callback) => {
     } else {
       callback(results, null);
     }
-  })
+  });
 };
 
 

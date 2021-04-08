@@ -1,14 +1,18 @@
 import React from 'react';
 import axios from 'axios';
 import styles from './styles.css';
+import Groups2 from './groups2.js';
 
 class Groups extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       allChannels: [],
+      directMessages: [],
+      groupChannels: [],
     };
     this.getAllChannels = this.getAllChannels.bind(this);
+    this.getChannelUsers = this.getChannelUsers.bind(this);
   }
 
   // eslint-disable-next-line react/sort-comp
@@ -40,10 +44,41 @@ class Groups extends React.Component {
 
   componentDidUpdate(prevProps) {
     const { user_id } = this.props;
-
     if (this.props.user_id !== prevProps.user_id) {
       this.getAllChannels(user_id);
     }
+  }
+
+  getChannelUsers() {
+    const { allChannels } = this.state;
+
+    let directMessageChannels = [];
+    let groupMessageChannels = [];
+
+    for (var i = 0; i < allChannels.length; i++) {
+      let currentChannel = allChannels[i];
+      axios.get('/channelUsers', {
+        params: {
+          channel: currentChannel
+        }
+      })
+      .then((success) => {
+        if (success.data.length === 2) {
+          directMessageChannels.push(currentChannel);
+        } else {
+          groupMessageChannels.push(currentChannel);
+        }
+        console.log('group message channels:', groupMessageChannels);
+        console.log('dms:', directMessageChannels);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+    this.setState({
+      groupChannels: groupMessageChannels,
+      directMessages: directMessageChannels
+    })
   }
 
   render() {
@@ -64,6 +99,7 @@ class Groups extends React.Component {
         </div>
         )
       })}
+      <Groups2 allChannels={allChannels} />
       </div>
     );
   }

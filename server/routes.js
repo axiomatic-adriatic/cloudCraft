@@ -16,7 +16,7 @@ router.get('/users', usersController.getUsers);
 router.get('/channels', usersController.getChannels);
 router.get('/userChannel', usersController.getUserChannel);
 router.get('/channelUsers', usersController.getChannelUsers);
-
+router.get('/channelName', usersController.getChannelName);
 // router.get('/directMessageChannel', usersController.getDmChannel);
 
 router.get('/chat', messagesController.getChatHistory);

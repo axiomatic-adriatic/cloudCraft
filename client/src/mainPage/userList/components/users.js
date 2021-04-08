@@ -58,7 +58,7 @@ class Users extends React.Component {
     };
 
     const userList = users.map((user) => {
-      const imageSrc= faker.image.avatar();
+      const imageSrc = faker.image.avatar();
       return (
       <div
           className={styles.select}

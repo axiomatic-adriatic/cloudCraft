@@ -1,5 +1,15 @@
 const userModel = require('../model/users');
 
+exports.getChannelName = (req, res) => {
+  const { channel } = req.query;
+  userModel.getChannelName(channel, (err, result) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result);
+    }
+  });
+};
 
   exports.getUsers = (req, res) => {
     userModel.getUsers((err, result) => {
@@ -13,7 +23,6 @@ const userModel = require('../model/users');
 
   exports.getChannels = (req, res) => {
     const userLoggedIn = req.query['userLoggedIn'];
-    console.log('userLoggedIn:', userLoggedIn);
     userModel.getChannels(userLoggedIn, (err, result) => {
       if (err) {
         res.send(err);
