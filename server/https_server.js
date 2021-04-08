@@ -33,5 +33,5 @@ io.on('connection', (client) => {
 });
 app.use(router);
 server.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Example app listening at port: ${port}`);
 });
