@@ -7,9 +7,10 @@ const db = require('../../db/db.js');
    * @returns {Promise<Object>} A promise that is fulfilled with an object
    * containing the results of the query or is rejected with the the error that occurred
    * during the query.
+   * TODO: LIMIT 100 add limit per request to speed up init latency
  */
 const getMessages = (channel_id) => {
-  const query = `SELECT messages.*, users.name FROM messages LEFT JOIN users ON users.user_id=messages.user_id WHERE channel_id = ${channel_id} ORDER BY datetime LIMIT 100`;
+  const query = `SELECT messages.*, users.name FROM messages LEFT JOIN users ON users.user_id=messages.user_id WHERE channel_id = ${channel_id} ORDER BY datetime`;
   return db.promise().query(query)
     .then(([messages]) => messages)
     .catch((error) => error);
@@ -83,21 +84,34 @@ const editMessage = (message) => {
    * @returns {Promise<Object>} A promise that is fulfilled with an object
    * containing the results of the query or is rejected with the the error that occurred
    * during the query.
+   * TODO: LIMIT 100 add limit per request to speed up init latency
  */
+
+// const searchMessage = (keyWord, channel_id) => {
+//   const query = 'SELECT messages.*, users.name FROM messages '
+//   + 'LEFT JOIN users ON users.user_id=messages.user_id '
+//   + `WHERE (messages.message_text LIKE "%${keyWord}%" OR users.name LIKE "%${keyWord}%") `
+//   + 'AND channel_id = ? ORDER BY datetime LIMIT 100';
+//   return db.promise().query(query, channel_id)
+//     .then(([results]) => results)
+//     .catch((error) => error);
+// };
+
 const searchMessage = (keyWord, channel_id) => {
   const query = 'SELECT messages.*, users.name FROM messages '
   + 'LEFT JOIN users ON users.user_id=messages.user_id '
   + `WHERE (messages.message_text LIKE "%${keyWord}%" OR users.name LIKE "%${keyWord}%") `
-  + 'AND channel_id = ? ORDER BY datetime LIMIT 100';
+  + 'AND channel_id = ? ORDER BY datetime';
   return db.promise().query(query, channel_id)
     .then(([results]) => results)
     .catch((error) => error);
 };
+
 
 module.exports = {
   getMessages,
   createMessage,
   deleteMessage,
   editMessage,
-  searchMessage,
+  // searchMessage,
 };

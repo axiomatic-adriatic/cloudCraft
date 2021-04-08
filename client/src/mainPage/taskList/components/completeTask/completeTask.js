@@ -35,7 +35,7 @@ class CompleteTask extends React.Component {
           htmlFor="completed"
         >
           <input
-            id="completed"
+            id={`${task.task_id}`}
             type="checkbox"
             name="completed"
             onChange={this.handleOnChange}

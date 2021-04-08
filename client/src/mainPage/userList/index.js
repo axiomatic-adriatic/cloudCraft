@@ -5,18 +5,19 @@ import styles from './index.css';
 
 class UserList extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
+
   render() {
-    const { handleUserClick, handleChannelClick } = this.props;
+    const { handleUserClick, handleChannelClick, user_id } = this.props;
     return (
       <div
-      className={styles.userListContainer}
+        className={styles.userListContainer}
       >
-        <Groups handleChannelClick={handleChannelClick}/>
-        <Users handleUserClick={handleUserClick}/>
+        <Groups user_id={user_id} handleChannelClick={handleChannelClick} />
+        <Users handleUserClick={handleUserClick} />
       </div>
-    )
+    );
   }
 }
 

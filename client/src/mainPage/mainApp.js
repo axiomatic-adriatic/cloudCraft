@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import axios from 'axios';
 import styles from './mainApp.css';
@@ -14,15 +15,17 @@ class MainApp extends React.Component {
       channel_id: 1,
       user_name: '',
       messages: [],
+      taskList: [],
     };
     this.handleUserClick = this.handleUserClick.bind(this);
     this.handleChannelClick = this.handleChannelClick.bind(this);
-  }
 
-  // handleUserClick(userID) {
-  //   this.setState({
-  //     user_id: userID,
-  //   });
+    this.getMessages = this.getMessages.bind(this);
+
+    this.getAllTasks = this.getAllTasks.bind(this);
+    this.addTask = this.addTask.bind(this);
+
+  }
 
   componentDidMount() {
     axios.get(`/userInfo?email=${this.props.email}`)
@@ -45,6 +48,8 @@ class MainApp extends React.Component {
         this.setState({ messages: allMessages });
       })
       .catch((err) => { throw err; });
+
+    this.getAllTasks();
   }
 
   handleChannelClick(channelID) {
@@ -54,7 +59,6 @@ class MainApp extends React.Component {
   }
 
   handleUserClick(userID) {
-    const channelID = [];
     axios.get('/userChannel', {
       params: {
         user_id: userID,
@@ -62,7 +66,7 @@ class MainApp extends React.Component {
     })
       .then((response) => {
         this.setState({
-          channel_id: response.data,
+          channel_id: response.data[0],
         });
       })
       .catch((err) => {
@@ -70,14 +74,54 @@ class MainApp extends React.Component {
       });
   }
 
+
+  getMessages(list) {
+    this.setState({ messages: list });
+  }
+  getAllTasks() {
+    const { user_id } = this.state;
+    axios.get(`/tasks?user_id=${user_id}`)
+      .then((resp) => {
+        this.setState({
+          taskList: [...resp.data],
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  addTask(textBody) {
+    const { user_id } = this.state;
+    const data = {
+      user_id,
+      task_text: textBody,
+    };
+    axios.post('/task', data)
+      .then((resp) => {
+        this.getAllTasks();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+  }
+
   render() {
-    const { user_id, channel_id, user_name } = this.state;
+    console.log('state in main app:', this.state);
+    const { user_id, channel_id, user_name, taskList } = this.state;
     const { picture } = this.props;
     return (
       <div className={styles.parent}>
         <div className={styles.div4}>
           {/* <h3>{`${user_name}`}</h3> */}
-          <SearchModule name={user_name} avatar={picture} />
+          <SearchModule
+            name={user_name}
+            avatar={picture}
+            channel_id={channel_id}
+            user_id={user_id}
+            getMessages={this.getMessages}
+          />
         </div>
         <div className={styles.div1}>
           <UserList
@@ -90,13 +134,18 @@ class MainApp extends React.Component {
         <div className={styles.div2}>
           <Message
             messages={this.state.messages}
-            userName={user_name}
-            channel_id={channel_id}
-            user_id={user_id}
+            userName={this.state.user_name}
+            channel_id={this.state.channel_id}
+            user_id={this.state.user_id}
           />
         </div>
         <div className={styles.div3}>
-          <TaskListModule user_id={user_id} />
+          <TaskListModule
+            tasks={taskList}
+            user_id={user_id}
+            getAllTasks={this.getAllTasks}
+            addTask={this.addTask}
+          />
         </div>
       </div>
     );
