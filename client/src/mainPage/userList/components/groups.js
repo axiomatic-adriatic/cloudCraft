@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import styles from './styles.css';
+import ChannelName from './channelNames.js';
 import Groups2 from './groups2.js';
 
 class Groups extends React.Component {
@@ -8,7 +9,7 @@ class Groups extends React.Component {
     super(props);
     this.state = {
       allChannels: [],
-      channelName: '',
+      channelName: [],
     };
     this.getAllChannels = this.getAllChannels.bind(this);
     this.getChannelName = this.getChannelName.bind(this);
@@ -22,7 +23,7 @@ class Groups extends React.Component {
   })
   .then((success) => {
     this.setState({
-      channelName: `${success.data[0].channel_name}`
+      channelName: [...`${success.data[0].channel_name}`]
     })
   })
   .catch((err) => {
@@ -80,12 +81,8 @@ class Groups extends React.Component {
         <h3>Channels</h3>
         {allChannels && allChannels.map((channel) => {
         return (
-        <div key={channel} className={styles.select}>
-          <p onClick={() => handleChannelClick(channel)}>
-            #
-            {this.getChannelName(channel)}
-            {this.state.channelName}
-          </p>
+        <div key={channel} className={styles.select} onClick={() => handleChannelClick(channel)}>
+          <ChannelName channel={channel} />
         </div>
         )
       })}

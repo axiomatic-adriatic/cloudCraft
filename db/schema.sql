@@ -130,6 +130,7 @@ INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`, `type`
 INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`, `type`) VALUES (13, 8,5, 'group');
 INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`, `type`) VALUES (14, 3,5, 'group');
 INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`, `type`) VALUES (15, 6,6, 'direct');
+INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`, `type`) VALUES (16, 2, 2, 'group');
 
 
 INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (1, 1, 2);
