@@ -31,8 +31,8 @@ const getTasks = (user_id, callback) => {
   });
 };
 
-const addTask = (user_id, task_text, callback) => {
-  const post = { user_id, task_text };
+const addTask = (user_id, task_text, message_id = null, callback) => {
+  const post = { user_id, task_text, message_id };
   db.query('INSERT INTO tasks SET ?', [post], (err, results) => {
     if (err) {
       callback(err, null);

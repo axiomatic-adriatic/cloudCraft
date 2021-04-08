@@ -84,7 +84,10 @@ const Search = ({
   };
   return (
     <Container>
-      <Name>{`Welcome back, ${name}.`}</Name>
+      {
+        name !== '' &&
+        <Name>{`Welcome back, ${name}.`}</Name>
+      }
       <SearchBar>
         <SearchWrapper>
           <SearchInput placeholder="search" value={keyWord} onKeyDown={keyPress} onChange={handleChange} />

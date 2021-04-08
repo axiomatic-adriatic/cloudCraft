@@ -26,7 +26,6 @@ const LoginApp = () => {
       {
         isAuthenticated && (
           <div>
-            <LogoutButton />
             <MainApp email={user.email} picture={user.picture} />
           </div>
         )

@@ -6,6 +6,7 @@ import SearchModule from './search/index.js';
 import TaskListModule from './taskList/index.js';
 import Message from './message/index.js';
 import UserList from './userList/index.js';
+import LogoutButton from '../login/logoutButton.jsx';
 
 class MainApp extends React.Component {
   constructor(props) {
@@ -20,6 +21,8 @@ class MainApp extends React.Component {
     this.handleChannelClick = this.handleChannelClick.bind(this);
 
     this.getMessages = this.getMessages.bind(this);
+    this.getTasks = this.getTasks.bind(this);
+
     this.getChatHistory = this.getChatHistory.bind(this);
     this.getAllTasks = this.getAllTasks.bind(this);
     this.addTask = this.addTask.bind(this);
@@ -92,6 +95,10 @@ class MainApp extends React.Component {
       });
   }
 
+  getTasks(tasks) {
+    this.setState({ taskList: tasks });
+  }
+
   render() {
     const {
       user_id, channel_id, user_name, taskList,
@@ -101,13 +108,14 @@ class MainApp extends React.Component {
     return (
       <div className={styles.parent}>
         <div className={styles.div4}>
-          {/* <h3>{`${user_name}`}</h3> */}
+          <LogoutButton />
           <SearchModule
             name={user_name}
             avatar={picture}
             channel_id={channel_id}
             user_id={user_id}
             getMessages={this.getMessages}
+            getTasks={this.getTasks}
           />
         </div>
         <div className={styles.div1}>
