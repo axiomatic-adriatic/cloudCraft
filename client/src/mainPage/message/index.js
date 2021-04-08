@@ -19,8 +19,18 @@ const Message = ({
   });
 
   socket.on('message', (data) => {
-    const message = { ...data.message[0], name: user_name || 'Avery' };
-    setchatHistory([...chatHistory, message]);
+    const newMessage = { ...data.message[0], name: user_name || 'Avery' };
+    const date = formatDate(newMessage.datetime)
+    const insert = chatHistory.map((message) => {
+      if (Object.keys(message)[0] === date) {
+        const lastMessageIndex = message[date].length - 1;
+        if (message[date][lastMessageIndex].message_id !== newMessage.message_id) {
+          message[date].push(newMessage);
+        }
+      }
+      return message;
+    });
+    setchatHistory(insert);
   });
 
   const deleteMessage = (messageId) => {
@@ -60,9 +70,33 @@ const Message = ({
     socket.emit('message', message);
   };
 
+  const formatDate = (string) => {
+    const options = { month: 'long', day: 'numeric', weekday: 'long' };
+    return new Date(string).toLocaleDateString([], options);
+  };
+
+  const groupByDate = (history) => {
+    const result = [];
+    const groupBy = {};
+    history.forEach((entry) => {
+      const date = formatDate(entry.datetime);
+      if (!groupBy[date]) {
+        groupBy[date] = [entry];
+      } else {
+        groupBy[date] = [...groupBy[date], entry];
+      }
+    });
+    const keys = Object.keys(groupBy);
+    const values = Object.values(groupBy);
+    keys.forEach((key, index) => {
+      result.push({ [key]: values[index] });
+    });
+    setchatHistory(result);
+  };
+
   useEffect(() => {
     getGroupName();
-    setchatHistory(messages);
+    groupByDate(messages);
   }, [messages]);
 
   return (
@@ -70,7 +104,7 @@ const Message = ({
       <Banner groupName={groupName} />
       <ChatBox
         userId={user_id}
-        chatHistory={chatHistory || null}
+        chatHistory={chatHistory}
         deleteMessage={deleteMessage}
         editMessage={editMessage}
       />
