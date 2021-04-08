@@ -86,7 +86,7 @@ class Groups2 extends React.Component {
       width: '35px',
       height: '35px',
       borderRadius: '15%',
-      marginLeft: '15px',
+      marginRight: '15px',
     };
 
     return (
