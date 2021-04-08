@@ -6,6 +6,7 @@ import SearchModule from './search/index.js';
 import TaskListModule from './taskList/index.js';
 import Message from './message/index.js';
 import UserList from './userList/index.js';
+import LogoutButton from '../login/logoutButton.jsx';
 
 class MainApp extends React.Component {
   constructor(props) {
@@ -107,7 +108,7 @@ class MainApp extends React.Component {
     return (
       <div className={styles.parent}>
         <div className={styles.div4}>
-          {/* <h3>{`${user_name}`}</h3> */}
+          <LogoutButton />
           <SearchModule
             name={user_name}
             avatar={picture}
