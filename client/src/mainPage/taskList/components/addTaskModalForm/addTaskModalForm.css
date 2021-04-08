@@ -3,8 +3,8 @@
   flex-direction: column;
 }
 .addTaskForm textarea {
-  width: 95%;
-  margin: 10px 10px 10px 0;
+  width: 300px;
+  margin: 10px 0px 10px 0px;
   height: 60px;
 }
 .button {
