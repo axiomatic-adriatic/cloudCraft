@@ -17,7 +17,6 @@ class MainApp extends React.Component {
       messages: [],
       taskList: [],
     };
-    this.handleUserClick = this.handleUserClick.bind(this);
     this.handleChannelClick = this.handleChannelClick.bind(this);
 
     this.getMessages = this.getMessages.bind(this);
@@ -57,23 +56,6 @@ class MainApp extends React.Component {
     });
   }
 
-  handleUserClick(userID) {
-    axios.get('/userChannel', {
-      params: {
-        user_id: userID,
-      },
-    })
-      .then((response) => {
-        this.setState({
-          channel_id: response.data[0],
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-
   getMessages(list) {
     this.setState({ messages: list });
   }
@@ -109,6 +91,7 @@ class MainApp extends React.Component {
   render() {
     const { user_id, channel_id, user_name, taskList } = this.state;
     const { picture } = this.props;
+    console.log('state in main app:', this.state);
     return (
       <div className={styles.parent}>
         <div className={styles.div4}>
