@@ -1,6 +1,7 @@
 import React from 'react';
 import Users from './components/users.js';
 import Groups from './components/groups.js';
+import Groups2 from './components/groups2.js'
 import styles from './index.css';
 
 class UserList extends React.Component {
@@ -9,13 +10,6 @@ class UserList extends React.Component {
     this.state = {
       allChannels: [],
     };
-    this.updateChannels = this.updateChannels.bind(this);
-  }
-
-  updateChannels(channels) {
-    this.setState({
-      allChannels: channels,
-    });
   }
 
   render() {
@@ -25,6 +19,7 @@ class UserList extends React.Component {
         className={styles.userListContainer}
       >
         <Groups user_id={user_id} handleChannelClick={handleChannelClick} />
+        <Groups2 user_id={user_id} handleChannelClick={handleChannelClick} />
       </div>
     );
   }

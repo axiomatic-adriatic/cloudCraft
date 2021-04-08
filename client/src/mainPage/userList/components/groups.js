@@ -78,18 +78,17 @@ class Groups extends React.Component {
         }}
       >
         <h3>Channels</h3>
-        {allChannels.map((channel) => {
+        {allChannels && allChannels.map((channel) => {
         return (
         <div key={channel} className={styles.select}>
           <p onClick={() => handleChannelClick(channel)}>
-            # Channel
-            {channel}
+            #
+            {this.getChannelName(channel)}
+            {this.state.channelName}
           </p>
         </div>
         )
       })}
-      <h3>Direct Messages</h3>
-      <Groups2 handleChannelClick={handleChannelClick} user_id={user_id} />
       </div>
     );
   }
