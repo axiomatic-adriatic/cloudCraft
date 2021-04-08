@@ -6,25 +6,11 @@ import Banner from './components/Banner';
 import ChatBox from './components/ChatBox';
 import TextBox from './components/TextBox';
 
-const Message = ({ channel_id, user_id, user_name, messages }) => {
-  // const [messages, setMessages] = useState([]);
+const Message = ({
+  channel_id, user_id, user_name, messages,
+}) => {
+  const [chatHistory, setchatHistory] = useState([]);
   const [groupName, setGroupName] = useState('');
-
-  // const getChatHistory = () => {
-  //   axios({
-  //     method: 'get',
-  //     url: '/chat',
-  //     params: { channel_id },
-  //   })
-  //     .then((result) => {
-  //       const names = result.data.map((message) => message.name);
-  //       const userNames = [...new Set(names)];
-  //       const allMessages = result.data.filter((message) => message.is_delete === 0);
-  //       setMessages(allMessages);
-  //       setGroupName(userNames.join(', '));
-  //     })
-  //     .catch((err) => { throw err; });
-  // };
 
   const socket = io({
     extraHeaders: {
@@ -33,14 +19,28 @@ const Message = ({ channel_id, user_id, user_name, messages }) => {
   });
 
   socket.on('message', (data) => {
-    console.log('test');
-    const message = { ...data.message[0], name: user_name || 'Avery' };
-    // setMessages([...messages, message]);
+    const newMessage = { ...data.message[0], name: user_name || 'Avery' };
+    const date = formatDate(newMessage.datetime)
+    const insert = chatHistory.map((message) => {
+      if (Object.keys(message)[0] === date) {
+        const lastMessageIndex = message[date].length - 1;
+        if (message[date][lastMessageIndex].message_id !== newMessage.message_id) {
+          message[date].push(newMessage);
+        }
+      }
+      return message;
+    });
+    setchatHistory(insert);
   });
 
   const deleteMessage = (messageId) => {
-    const allMessages = messages.filter((message) => message.message_id !== Number(messageId));
-    setMessages(allMessages);
+    const allMessages = chatHistory.map((date) => {
+      const messages = Object.values(date)[0];
+      const results = messages.filter((message) =>
+        message.message_id !== Number(messageId));
+      return { [Object.keys(date)[0]]: results };
+    });
+    setchatHistory(allMessages);
     axios({
       method: 'put',
       url: '/chat/delete',
@@ -53,11 +53,10 @@ const Message = ({ channel_id, user_id, user_name, messages }) => {
     const { message_id, message_text } = editdMessage;
     const allMessages = messages.filter((message) => {
       if (message.message_id === message_id) {
-        message.message_text = message_text
+        message.message_text = message_text;
       }
       return message;
     });
-    setMessages(allMessages);
     // axios({
     //   method: 'post',
     //   url: '/chat',
@@ -66,20 +65,51 @@ const Message = ({ channel_id, user_id, user_name, messages }) => {
     //   .catch((err) => { throw err; });
   };
 
+  const getGroupName = () => {
+    const userNames = messages.map((message) => message.name);
+    const group = [...new Set(userNames)];
+    setGroupName(group.join(', '));
+  };
+
   const submit = (message) => {
     socket.emit('message', message);
   };
 
-  // useEffect(() => {
-  //   getChatHistory();
-  // }, [channel_id]);
+  const formatDate = (string) => {
+    const options = { month: 'long', day: 'numeric', weekday: 'long' };
+    return new Date(string).toLocaleDateString([], options);
+  };
+
+  const groupByDate = (history) => {
+    const result = [];
+    const groupBy = {};
+    history.forEach((entry) => {
+      const date = formatDate(entry.datetime);
+      if (!groupBy[date]) {
+        groupBy[date] = [entry];
+      } else {
+        groupBy[date] = [...groupBy[date], entry];
+      }
+    });
+    const keys = Object.keys(groupBy);
+    const values = Object.values(groupBy);
+    keys.forEach((key, index) => {
+      result.push({ [key]: values[index] });
+    });
+    setchatHistory(result);
+  };
+
+  useEffect(() => {
+    getGroupName();
+    groupByDate(messages);
+  }, [messages]);
 
   return (
     <Container>
       <Banner groupName={groupName} />
       <ChatBox
         userId={user_id}
-        chatHistory={messages}
+        chatHistory={chatHistory}
         deleteMessage={deleteMessage}
         editMessage={editMessage}
       />

@@ -12,7 +12,9 @@ const userModel = require('../model/users');
   };
 
   exports.getChannels = (req, res) => {
-    userModel.getChannels((err, result) => {
+    const userLoggedIn = req.query['userLoggedIn'];
+    console.log('userLoggedIn:', userLoggedIn);
+    userModel.getChannels(userLoggedIn, (err, result) => {
       if (err) {
         res.send(err);
       } else {
@@ -31,3 +33,39 @@ const userModel = require('../model/users');
       }
     })
   };
+
+  exports.getChannelUsers = (req, res) => {
+    const channel = req.query.channel;
+    userModel.getChannelUsers(channel, (err, result) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(result);
+      }
+    })
+  };
+
+  // exports.getChannels = (req, res) => {
+  //   const userID = req.query['userLoggedIn'];
+  //   userModel.getUserChannel(userID, (err, result) => {
+  //     if (err) {
+  //       res.send(err);
+  //     } else {
+  //       res.send(result);
+  //     }
+  //   })
+  // };
+
+
+  // exports.getDmChannel = (req, res) => {
+  //   const userLoggedIn = req.query['userLoggedIn'];
+  //   const userClicked = req.query['userClicked'];
+
+  //   userModel.getDmChannel(userLoggedIn, userClicked, (err, result) => {
+  //     if (err) {
+  //       res.send(err);
+  //     } else {
+  //       res.send(result);
+  //     }
+  //   })
+  // };

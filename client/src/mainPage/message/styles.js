@@ -26,6 +26,13 @@ export const Container = styled.div`
     height: 50vh;
     overflow-y: auto;
 
+    .date {
+      font-size: 0.7rem;
+      display: flex;
+      justify-content: center;
+      background-color: #D3D3D3;
+    }
+
     .messageContainer {
       position: relative;
       box-sizing: border-box;

@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Header, Paragraph } from '../styles';
-import { dummyData } from './dummyData';
 
 const ChatBox = ({
   chatHistory, deleteMessage, editMessage, userId, addTask,
@@ -32,64 +31,69 @@ const ChatBox = ({
   };
 
   const scrollToBottom = () => {
-    messageEndRef.current.scrollIntoView({behavior: 'auto'});
+    messageEndRef.current.scrollIntoView(true);
   };
 
   useEffect(() => {
     scrollToBottom();
-  });
+  }, [chatHistory]);
   return (
     <div className="chatbox">
-      {chatHistory.map((message) => (
-        <div
-          className="messageContainer"
-          key={message.message_id}
-          data-key={message.message_id}
-        >
-          <Header
-            className="username"
-            size={0.9}
-            color="#202020"
-          >
-            {message.name}
-          </Header>
-          <Paragraph
-            className="message"
-            size={0.8}
-            color="#404040"
-          >
-            {message.message_text}
-          </Paragraph>
-          <Paragraph
-            className="dateTime"
-            size={0.7}
-            color="#808080"
-          >
-            {formatTime(message.datetime)}
-          </Paragraph>
-          <div className="extra">
-            <div className="options">
-              <i
-                className="fas fa-plus addTask"
-                title="Add to Task"
-                onClick={addTask}
-              />
-              {message.user_id === userId ? (
-                <i
-                  className="far fa-edit edit"
-                  title="Edit Message"
-                  onClick={edit}
-                />
-              ) : null}
-              {message.user_id === userId ? (
-                <i
-                  className="far fa-trash-alt delete"
-                  title="delete Message"
-                  onClick={remove}
-                />
-              ) : null}
+      {chatHistory.map((entry) => (
+        <div  key={Object.keys(entry)[0]}>
+          <div className="date">{Object.keys(entry)[0]}</div>
+          {entry[Object.keys(entry)[0]].map((message) => (
+            <div
+              className="messageContainer"
+              key={message.message_id}
+              data-key={message.message_id}
+            >
+              <Header
+                className="username"
+                size={0.9}
+                color="#202020"
+              >
+                {message.name}
+              </Header>
+              <Paragraph
+                className="message"
+                size={0.8}
+                color="#404040"
+              >
+                {message.message_text}
+              </Paragraph>
+              <Paragraph
+                className="dateTime"
+                size={0.7}
+                color="#808080"
+              >
+                {formatTime(message.datetime)}
+              </Paragraph>
+              <div className="extra">
+                <div className="options">
+                  <i
+                    className="fas fa-plus addTask"
+                    title="Add to Task"
+                    onClick={addTask}
+                  />
+                  {message.user_id === userId ? (
+                    <i
+                      className="far fa-edit edit"
+                      title="Edit Message"
+                      onClick={edit}
+                    />
+                  ) : null}
+                  {message.user_id === userId ? (
+                    <i
+                      className="far fa-trash-alt delete"
+                      title="delete Message"
+                      onClick={remove}
+                    />
+                  ) : null}
+                </div>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       ))}
       <div ref={messageEndRef} />
