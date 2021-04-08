@@ -32,6 +32,18 @@ exports.getChannelName = (req, res) => {
     })
   };
 
+
+  exports.getDirectMessages = (req, res) => {
+    const { userLoggedIn } = req.query;
+    userModel.getDirectMessages(userLoggedIn, (err, result) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(result);
+      }
+    })
+  };
+
   exports.getUserChannel = (req, res) => {
     const userID = req.query['user_id'];
     userModel.getUserChannel(userID, (err, result) => {
@@ -54,16 +66,6 @@ exports.getChannelName = (req, res) => {
     })
   };
 
-  // exports.getChannels = (req, res) => {
-  //   const userID = req.query['userLoggedIn'];
-  //   userModel.getUserChannel(userID, (err, result) => {
-  //     if (err) {
-  //       res.send(err);
-  //     } else {
-  //       res.send(result);
-  //     }
-  //   })
-  // };
 
 
   // exports.getDmChannel = (req, res) => {

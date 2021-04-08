@@ -33,6 +33,7 @@ CREATE TABLE `users_channels` (
 	`user_channel_id` INT NOT NULL AUTO_INCREMENT,
 	`user_id` INT NOT NULL,
 	`channel_id` INT NOT NULL,
+	`type` varchar(255) NOT NULL,
 	PRIMARY KEY (`user_channel_id`),
 	FOREIGN KEY (`user_id`)
 	  REFERENCES `users`(`user_id`)
@@ -104,31 +105,31 @@ INSERT INTO `users` (`user_id`, `name`, `password`, `email`) VALUES (8, 'Ocean',
 
 
 -- group data
-INSERT INTO `channels` (`channel_id`, `channel_name`) VALUES (1, 'Hack Reactor');
+INSERT INTO `channels` (`channel_id`, `channel_name`) VALUES (1, 'Robin, Avery');
 INSERT INTO `channels` (`channel_id`, `channel_name`) VALUES (2, 'Communications');
-INSERT INTO `channels` (`channel_id`, `channel_name`) VALUES (3, 'Technical Support');
-INSERT INTO `channels` (`channel_id`, `channel_name`) VALUES (4, 'Career Services');
+INSERT INTO `channels` (`channel_id`, `channel_name`) VALUES (3, 'Alex, Aiden');
+INSERT INTO `channels` (`channel_id`, `channel_name`) VALUES (4, 'River, Frankie');
 INSERT INTO `channels` (`channel_id`, `channel_name`) VALUES (5, 'Announcements');
-INSERT INTO `channels` (`channel_id`, `channel_name`) VALUES (6, 'Chatter');
+INSERT INTO `channels` (`channel_id`, `channel_name`) VALUES (6, 'River');
 INSERT INTO `channels` (`channel_id`, `channel_name`) VALUES (7, 'Study Group');
 
 
 -- users_groups
 
-INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`) VALUES (1, 7, 1);
-INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`) VALUES (2, 2, 1);
-INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`) VALUES (3, 3, 2);
-INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`) VALUES (4, 1, 2);
-INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`) VALUES (5, 4, 2);
-INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`) VALUES (6, 5, 3);
-INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`) VALUES (8, 7, 3);
-INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`) VALUES (9, 6, 4);
-INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`) VALUES (10, 4,4);
-INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`) VALUES (11,2 ,5);
-INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`) VALUES (12, 4,5);
-INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`) VALUES (13, 8,5);
-INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`) VALUES (14, 3,5);
-INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`) VALUES (15, 6,6);
+INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`, `type`) VALUES (1, 7, 1, 'direct');
+INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`, `type`) VALUES (2, 2, 1, 'direct');
+INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`, `type`) VALUES (3, 3, 2, 'group');
+INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`, `type`) VALUES (4, 1, 2, 'group');
+INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`, `type`) VALUES (5, 4, 2, 'group');
+INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`, `type`) VALUES (6, 5, 3, 'direct');
+INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`, `direct_message`, `type`) VALUES (8, 7, 3, 'direct');
+INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`, `type`) VALUES (9, 6, 4, 'direct');
+INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`, `type`) VALUES (10, 4, 4, 'direct');
+INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`, `type`) VALUES (11,2 ,5, 'group');
+INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`, `type`) VALUES (12, 4,5, 'group');
+INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`, `type`) VALUES (13, 8,5, 'group');
+INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`, `type`) VALUES (14, 3,5, 'group');
+INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`, `type`) VALUES (15, 6,6, 'direct');
 
 
 INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (1, 1, 2);

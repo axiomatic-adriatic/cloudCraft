@@ -1,71 +1,86 @@
 import React from 'react';
 import axios from 'axios';
+import faker from 'faker';
 import styles from './styles.css';
-import GroupChannels from './groupChannels';
+// import GroupChannels from './groupChannels';
 
 class Groups2 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       directMessages: [],
-      groupChannels: [],
     };
-    this.getChannelUsers = this.getChannelUsers.bind(this);
+    this.getDirectMessages = this.getDirectMessages.bind(this);
   }
 
-  // eslint-disable-next-line react/sort-comp
-
-  // componentDidMount() {
-  //   const { allChannels } = this.props;
-  //   // this.getChannelUsers();
-  // }
-
-  componentDidUpdate(prevProps) {
-    const { allChannels } = this.props;
-    if (this.props.allChannels !== prevProps.allChannels) {
-      this.getChannelUsers();
-    }
-  }
-
-  getChannelUsers() {
-    const { allChannels } = this.props;
-
-    let directMessageChannels = [];
-    let groupMessageChannels = [];
-
-    for (var i = 0; i < allChannels.length; i++) {
-      let currentChannel = allChannels[i];
-      axios.get('/channelUsers', {
-        params: {
-          channel: currentChannel
-        }
-      })
-      .then((success) => {
-        if (success.data.length === 2) {
-          directMessageChannels.push(currentChannel);
-        } else {
-          groupMessageChannels.push(currentChannel);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    }
-    this.setState({
-      groupChannels: groupMessageChannels,
-      directMessages: directMessageChannels
+  getDirectMessages() {
+    const { user_id } = this.props;
+    axios.get('/directMessages', {
+      params: {
+        userLoggedIn: user_id,
+      }
     })
+    .then((success) => {
+      const channelData = success.data;
+      const channels = [];
+      for (let i = 0; i < channelData.length; i++) {
+        channels.push(channelData[i].channel_id);
+      }
+      this.setState({
+        directMessages: channels,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
+  componentDidMount() {
+    this.getDirectMessages();
   }
 
   render() {
-    const { groupChannels, directMessages } = this.state;
-    console.log('state in groups2:', this.state);
+    const { directMessages } = this.state;
+
+    const avatarStyle = {
+      verticalAlign: 'middle',
+      width: '35px',
+      height: '35px',
+      borderRadius: '15%',
+      marginLeft: '15px',
+    };
+
+    const { handleChannelClick } = this.props;
+
     return (
-      <div>
-        {groupChannels.length > 0 && <GroupChannels groupChannels={groupChannels} />}
+      <div className={styles.select}>
+        <h3>Direct Messages </h3>
+        {directMessages.map((channel) => {
+          const imageSrc = faker.image.avatar();
+          return (
+            <div
+              key={channel}
+              className={styles.select}
+            >
+              <img
+                alt="avatar-img"
+                src={imageSrc}
+                style={avatarStyle}
+              />
+             <p onClick={() => handleChannelClick(channel)}
+            style={{
+              fontSize: '14px',
+              marginLeft: '25px',
+              cursor: 'pointer',
+            }}>
+            # Channel {channel}
+          </p>
+        </div>
+          );
+        })}
       </div>
     );
   }
 }
 
-export default Groups2;
+export default React.memo(Groups2);

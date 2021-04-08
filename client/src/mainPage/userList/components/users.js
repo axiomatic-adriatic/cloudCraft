@@ -26,20 +26,6 @@ class Users extends React.Component {
     })
   }
 
-  // getChannels() {
-  //   const { user_id } = this.props;
-  //   axios.get('/channels', {
-  //     params: {
-  //       userLoggedIn: user_id
-  //     }
-  //   })
-  //   .then((success) => {
-  //     console.log(success);
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   })
-  // }
 
   componentDidMount() {
     this.getUsers();
@@ -86,7 +72,7 @@ class Users extends React.Component {
       <div
         className="userList"
       >
-        <h3>Direct Messages</h3>
+        <h3>Online </h3>
         {userList}
       </div>
     )

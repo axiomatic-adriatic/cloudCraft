@@ -8,15 +8,30 @@ class Groups extends React.Component {
     super(props);
     this.state = {
       allChannels: [],
-      directMessages: [],
-      groupChannels: [],
+      channelName: '',
     };
     this.getAllChannels = this.getAllChannels.bind(this);
-    this.getChannelUsers = this.getChannelUsers.bind(this);
+    this.getChannelName = this.getChannelName.bind(this);
   }
 
-  // eslint-disable-next-line react/sort-comp
+ getChannelName(channelID) {
+  axios.get('/channelName', {
+    params: {
+      channel: channelID,
+    }
+  })
+  .then((success) => {
+    this.setState({
+      channelName: `${success.data[0].channel_name}`
+    })
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+}
+
   getAllChannels(userID) {
+    const { updateChannels } = this.props;
     axios.get('/channels', {
       params: {
         userLoggedIn: userID,
@@ -49,41 +64,10 @@ class Groups extends React.Component {
     }
   }
 
-  getChannelUsers() {
-    const { allChannels } = this.state;
-
-    let directMessageChannels = [];
-    let groupMessageChannels = [];
-
-    for (var i = 0; i < allChannels.length; i++) {
-      let currentChannel = allChannels[i];
-      axios.get('/channelUsers', {
-        params: {
-          channel: currentChannel
-        }
-      })
-      .then((success) => {
-        if (success.data.length === 2) {
-          directMessageChannels.push(currentChannel);
-        } else {
-          groupMessageChannels.push(currentChannel);
-        }
-        console.log('group message channels:', groupMessageChannels);
-        console.log('dms:', directMessageChannels);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    }
-    this.setState({
-      groupChannels: groupMessageChannels,
-      directMessages: directMessageChannels
-    })
-  }
-
   render() {
-    const { allChannels } = this.state;
-    const { handleChannelClick } = this.props;
+    const { allChannels, channelName } = this.state;
+
+    const { handleChannelClick, user_id } = this.props;
 
     return (
       <div
@@ -94,12 +78,13 @@ class Groups extends React.Component {
         return (
         <div key={channel} className={styles.select}>
           <p onClick={() => handleChannelClick(channel)}>
-            # Channel {channel}
+            # Channel
+            {channel}
           </p>
         </div>
         )
       })}
-      <Groups2 allChannels={allChannels} />
+      <Groups2 handleChannelClick={handleChannelClick} user_id={user_id} />
       </div>
     );
   }

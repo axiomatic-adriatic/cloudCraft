@@ -17,11 +17,11 @@ exports.getUsers = (callback) => {
     } else {
       callback(results, null);
     }
-  })
+  });
 };
 
 exports.getChannels = (userLoggedIn, callback) => {
-  db.query(`select channel_id from users_channels where user_id=${userLoggedIn}`, (err, results) => {
+  db.query(`select channel_id from users_channels where user_id=${userLoggedIn} and type='group'`, (err, results) => {
     if (err) {
       callback(err, null);
     } else {
@@ -29,6 +29,17 @@ exports.getChannels = (userLoggedIn, callback) => {
     }
   });
 };
+
+exports.getDirectMessages = (userLoggedIn, callback) => {
+  db.query(`select channel_id from users_channels where user_id=${userLoggedIn} and type='direct'`, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(results, null);
+    }
+  });
+};
+
 
 
 exports.getChannelUsers = (channel, callback) => {
