@@ -89,7 +89,7 @@ const messageToTask = (message_id) => {
   const value = {
     disabled: true,
   };
-  return db.promise().query(query, [value, message_id]).then(() => getMessage(message_id));
+  return db.promise().query(query, [value, message_id]);
 };
 
 module.exports = {
