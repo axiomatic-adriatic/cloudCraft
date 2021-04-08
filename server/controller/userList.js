@@ -1,5 +1,15 @@
 const userModel = require('../model/users');
 
+exports.getChannelName = (req, res) => {
+  const { channel } = req.query;
+  userModel.getChannelName(channel, (err, result) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result);
+    }
+  });
+};
 
   exports.getUsers = (req, res) => {
     userModel.getUsers((err, result) => {
@@ -13,8 +23,19 @@ const userModel = require('../model/users');
 
   exports.getChannels = (req, res) => {
     const userLoggedIn = req.query['userLoggedIn'];
-    console.log('userLoggedIn:', userLoggedIn);
     userModel.getChannels(userLoggedIn, (err, result) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(result);
+      }
+    })
+  };
+
+
+  exports.getDirectMessages = (req, res) => {
+    const { userLoggedIn } = req.query;
+    userModel.getDirectMessages(userLoggedIn, (err, result) => {
       if (err) {
         res.send(err);
       } else {
@@ -45,16 +66,6 @@ const userModel = require('../model/users');
     })
   };
 
-  // exports.getChannels = (req, res) => {
-  //   const userID = req.query['userLoggedIn'];
-  //   userModel.getUserChannel(userID, (err, result) => {
-  //     if (err) {
-  //       res.send(err);
-  //     } else {
-  //       res.send(result);
-  //     }
-  //   })
-  // };
 
 
   // exports.getDmChannel = (req, res) => {
