@@ -14,6 +14,7 @@ class AddTaskModalForm extends React.Component {
 
   handleCloseModal(e) {
     const {removeModal} = this.props;
+    console.log('close me')
     this.setState({
       task: '',
     }, () => {
@@ -35,7 +36,7 @@ class AddTaskModalForm extends React.Component {
     this.setState({
       task: '',
     }, () => {
-      handleCloseModal();
+      this.handleCloseModal();
       addTask(task);
     });
   }
@@ -46,22 +47,29 @@ class AddTaskModalForm extends React.Component {
     return (
       <div id="myModal" className={styles.modal} style={{display: displayModal}}>
         <div className={styles.modal_content}>
-          <span
-            className={styles.modal_close}
-            onClick={this.handleCloseModal}
-            onKeyDown={this.handleCloseModal}
-            role="button"
-            tabIndex={0}
-          >
-            &times;
-          </span>
-          <form className={styles.addTaskForm} onSubmit={this.handleOnSubmit}>
-            <label htmlFor="task">
-              <h3>Create Your Own Task!</h3>
-            </label>
-            <textarea type="text" id="task" name="task" value={task} onChange={this.handleOnChange} />
-            <input type="submit" value="Add" className={styles.button} />
-          </form>
+          <div>
+            <span
+              className={styles.modal_close}
+              onClick={this.handleCloseModal}
+              onKeyDown={this.handleCloseModal}
+              role="button"
+              tabIndex={0}
+            >
+              &times;
+            </span>
+          </div>
+          <div>
+            <form className={styles.addTaskForm} onSubmit={this.handleOnSubmit}>
+              <label htmlFor="task">
+                <h3>Create Your Own Task</h3>
+                <textarea type="text" id="task" name="task" value={task} onChange={this.handleOnChange} />
+              </label>
+              <input type="submit" value="Add" className={styles.button} />
+            </form>
+          </div>
+
+
+
         </div>
       </div>
     );
