@@ -54,7 +54,6 @@ class Groups2 extends React.Component {
 
     return (
       <div className={styles.select}>
-        <h3>Direct Messages </h3>
         {directMessages.map((channel) => {
           const imageSrc = faker.image.avatar();
           return (

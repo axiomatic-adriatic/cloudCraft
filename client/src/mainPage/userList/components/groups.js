@@ -72,6 +72,10 @@ class Groups extends React.Component {
     return (
       <div
         className="channels-container"
+        style={{
+          marginLeft: '15px',
+          paddingTop: '5px'
+        }}
       >
         <h3>Channels</h3>
         {allChannels.map((channel) => {
@@ -84,6 +88,7 @@ class Groups extends React.Component {
         </div>
         )
       })}
+      <h3>Direct Messages</h3>
       <Groups2 handleChannelClick={handleChannelClick} user_id={user_id} />
       </div>
     );

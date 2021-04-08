@@ -106,7 +106,6 @@ class MainApp extends React.Component {
         </div>
         <div className={styles.div1}>
           <UserList
-            handleUserClick={this.handleUserClick}
             handleChannelClick={this.handleChannelClick}
             user_id={user_id}
             channel_id={channel_id}
