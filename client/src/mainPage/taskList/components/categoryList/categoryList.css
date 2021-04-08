@@ -1,7 +1,4 @@
-
-
 .addTask {
-  /* float:right; */
   position: absolute;
   top: 7px;
   right: 12px;
@@ -10,6 +7,10 @@
 .categoryList {
   margin-top: 20px;
   background-color: #E7ECEF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
 }
 
 .categoryList h3 {
@@ -20,9 +21,10 @@
 }
 
 .scrollList {
-  min-height: 200px;
+  min-height: 280px;
   overflow-y: scroll;
-  max-height: 350px;
+  max-height: 280px;
+  overflow-y: scroll;
 }
 /* width */
 .scrollList::-webkit-scrollbar {
