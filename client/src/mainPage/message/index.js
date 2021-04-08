@@ -42,23 +42,6 @@ const Message = ({
       .catch((err) => { throw err; });
   };
 
-  const editMessage = (editdMessage) => {
-    // const { message_id, message_text } = editdMessage;
-    // const allMessages = messages.filter((message) => {
-    //   if (message.message_id === message_id) {
-    //     message.message_text = message_text;
-    //   }
-    //   return message;
-    // });
-    console.log(editdMessage)
-    // axios({
-    //   method: 'post',
-    //   url: '/chat',
-    //   params: { message_id, message_text },
-    // })
-    //   .catch((err) => { throw err; });
-  };
-
   const getGroupName = () => {
     const userNames = messages.map((message) => message.name);
     const group = [...new Set(userNames)];
