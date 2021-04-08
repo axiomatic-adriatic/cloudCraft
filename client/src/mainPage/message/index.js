@@ -7,7 +7,7 @@ import ChatBox from './components/ChatBox';
 import TextBox from './components/TextBox';
 
 const Message = ({
-  channel_id, user_id, user_name, messages,
+  channel_id, user_id, user_name, messages, getAllTasks
 }) => {
   const [chatHistory, setchatHistory] = useState([]);
   const [groupName, setGroupName] = useState('');
@@ -104,6 +104,14 @@ const Message = ({
     setchatHistory(result);
   };
 
+  const addTask = (e) => {
+    e.preventDefault();
+    console.log(e.target.closest('.messageContainer').getAttribute('data-key'));
+    // post request to task table, once post request is done
+    // update current message disabled column to true
+    // call getAllTasks();
+  };
+
   useEffect(() => {
     getGroupName();
     groupByDate(messages);
@@ -117,6 +125,7 @@ const Message = ({
         chatHistory={chatHistory}
         deleteMessage={deleteMessage}
         editMessage={editMessage}
+        addTask={addTask}
       />
       <TextBox submit={submit} userId={user_id} channelId={channel_id} />
     </Container>

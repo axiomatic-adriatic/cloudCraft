@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useRef, useEffect } from 'react';
@@ -66,11 +67,13 @@ const ChatBox = ({
               </Paragraph>
               <div className="extra">
                 <div className="options">
-                  <i
-                    className="fas fa-plus addTask"
-                    title="Add to Task"
-                    onClick={addTask}
-                  />
+                  {message.user_id === userId ? null : message.disabled === 1 ? <i className="fas fa-check" title="Claimed" /> : (
+                    <i
+                      className="fas fa-plus addTask"
+                      title="Add to Task"
+                      onClick={addTask}
+                    />
+                  )}
                   {message.user_id === userId ? (
                     <i
                       className="far fa-edit edit"
