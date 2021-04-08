@@ -18,11 +18,10 @@ class MainApp extends React.Component {
       messages: [],
       taskList: [],
     };
-    this.handleUserClick = this.handleUserClick.bind(this);
     this.handleChannelClick = this.handleChannelClick.bind(this);
 
     this.getMessages = this.getMessages.bind(this);
-
+    this.getChatHistory = this.getChatHistory.bind(this);
     this.getAllTasks = this.getAllTasks.bind(this);
     this.addTask = this.addTask.bind(this);
   }
@@ -38,6 +37,18 @@ class MainApp extends React.Component {
       .catch((err) => {
         console.log('user get request err', err);
       });
+    this.getChatHistory();
+    this.getAllTasks();
+  }
+
+  handleChannelClick(channelID) {
+    this.setState({
+      channel_id: channelID,
+    });
+    getChatHistory();
+  }
+
+  getChatHistory() {
     axios({
       method: 'get',
       url: '/chat',
@@ -48,36 +59,12 @@ class MainApp extends React.Component {
         this.setState({ messages: allMessages });
       })
       .catch((err) => { throw err; });
-
-    this.getAllTasks();
   }
-
-  handleChannelClick(channelID) {
-    this.setState({
-      channel_id: channelID,
-    });
-  }
-
-  handleUserClick(userID) {
-    axios.get('/userChannel', {
-      params: {
-        user_id: userID,
-      },
-    })
-      .then((response) => {
-        this.setState({
-          channel_id: response.data[0],
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
 
   getMessages(list) {
     this.setState({ messages: list });
   }
+
   getAllTasks() {
     const { user_id } = this.state;
     axios.get(`/tasks?user_id=${user_id}`)
@@ -104,12 +91,14 @@ class MainApp extends React.Component {
       .catch((err) => {
         console.log(err);
       });
-
   }
 
   render() {
-    const { user_id, channel_id, user_name, taskList } = this.state;
+    const {
+      user_id, channel_id, user_name, taskList,
+    } = this.state;
     const { picture } = this.props;
+    console.log('state in main app:', this.state);
     return (
       <div className={styles.parent}>
         <div className={styles.div4}>
@@ -132,6 +121,7 @@ class MainApp extends React.Component {
         </div>
         <div className={styles.div2}>
           <Message
+            getAllTasks={this.getAllTasks}
             messages={this.state.messages}
             userName={this.state.user_name}
             channel_id={this.state.channel_id}

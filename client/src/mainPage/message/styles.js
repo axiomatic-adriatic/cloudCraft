@@ -6,6 +6,7 @@ export const Container = styled.div`
   grid-template-columns: 0.5rem auto 0.5rem;
   grid-template-rows: 3rem auto min-content;
   grid-gap: 0.5rem;
+  height: 100%;
 
   .banner {
     grid-column: 2 / 3;

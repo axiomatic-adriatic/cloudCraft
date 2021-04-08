@@ -25,7 +25,6 @@ class UserList extends React.Component {
         className={styles.userListContainer}
       >
         <Groups user_id={user_id} handleChannelClick={handleChannelClick} />
-        <Users handleUserClick={handleUserClick} />
       </div>
     );
   }
