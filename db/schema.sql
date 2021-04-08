@@ -16,6 +16,19 @@ CREATE TABLE `channels` (
 	 PRIMARY KEY (`channel_id`)
 );
 
+CREATE TABLE `direct_messages` (
+	`dm_channel_id` INT NOT NULL AUTO_INCREMENT,
+	`user_id_1` INT NOT NULL,
+	`user_id_2` INT NOT NULL,
+	 PRIMARY KEY (`dm_channel_id`),
+	 FOREIGN KEY (`user_id_1`)
+	  REFERENCES `users`(`user_id`)
+	  ON UPDATE CASCADE ON DELETE RESTRICT,
+	FOREIGN KEY (`user_id_2`)
+	  REFERENCES `users`(`user_id`)
+	  ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
 CREATE TABLE `users_channels` (
 	`user_channel_id` INT NOT NULL AUTO_INCREMENT,
 	`user_id` INT NOT NULL,
@@ -116,6 +129,36 @@ INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`) VALUES
 INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`) VALUES (13, 8,5);
 INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`) VALUES (14, 3,5);
 INSERT INTO `users_channels` (`user_channel_id`, `user_id`, `channel_id`) VALUES (15, 6,6);
+
+
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (1, 1, 2);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (2, 1, 3);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (3, 1, 4);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (4, 1, 5);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (5, 1, 6);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (6, 1, 7);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (7, 1, 8);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (8, 2, 1);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (9, 2, 3);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (10, 2, 4);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (11, 2, 5);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (12, 2, 6);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (13, 2, 7);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (14, 2, 8);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (15, 3, 1);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (16, 3, 2);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (17, 3, 4);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (18, 3, 5);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (19, 3, 6);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (20, 3, 7);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (21, 3, 8);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (22, 4, 1);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (23, 4, 2);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (24, 4, 3);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (25, 4, 5);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (26, 4, 6);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (27, 4, 7);
+INSERT INTO `direct_messages` (`dm_channel_id`, `user_id_1`, `user_id_2`) VALUES (28, 4, 8);
 
 
 -- messages

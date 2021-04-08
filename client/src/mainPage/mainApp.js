@@ -22,11 +22,6 @@ class MainApp extends React.Component {
     this.addTask = this.addTask.bind(this);
   }
 
-  // handleUserClick(userID) {
-  //   this.setState({
-  //     user_id: userID,
-  //   });
-
   componentDidMount() {
     axios.get(`/userInfo?email=${this.props.email}`)
       .then((results) => {
@@ -59,7 +54,6 @@ class MainApp extends React.Component {
   }
 
   handleUserClick(userID) {
-    const channelID = [];
     axios.get('/userChannel', {
       params: {
         user_id: userID,
@@ -67,7 +61,7 @@ class MainApp extends React.Component {
     })
       .then((response) => {
         this.setState({
-          channel_id: response.data,
+          channel_id: response.data[0],
         });
       })
       .catch((err) => {
@@ -104,6 +98,7 @@ class MainApp extends React.Component {
   }
 
   render() {
+    console.log('state in main app:', this.state);
     const { user_id, channel_id, user_name, taskList } = this.state;
     const { picture } = this.props;
     return (
