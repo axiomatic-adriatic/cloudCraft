@@ -89,30 +89,30 @@ const editChat = (req, res) => {
     });
 };
 
-/**
-   * edit a message in the table.
-   * @param {Object} options contain channel_id, keyWord
-   * @returns {Promise<Object>} A promise that is fulfilled with an object
-   * containing the results of the query or is rejected with the the error that occurred
-   * during the query.
- */
-const searchMessage = (keyWord, channel_id) => {
-  if (keyWord && channel_id) {
-    return model.searchMessage(keyWord, channel_id);
-  }
-  return Promise.reject(Error('Missed property'));
-};
+// /**
+//    * edit a message in the table.
+//    * @param {Object} options contain channel_id, keyWord
+//    * @returns {Promise<Object>} A promise that is fulfilled with an object
+//    * containing the results of the query or is rejected with the the error that occurred
+//    * during the query.
+//  */
+// const searchMessage = (keyWord, channel_id) => {
+//   if (keyWord && channel_id) {
+//     return model.searchMessage(keyWord, channel_id);
+//   }
+//   return Promise.reject(Error('Missed property'));
+// };
 
-const searchChat = (req, res) => {
-  const { keyWord, channel_id } = req.query;
-  searchMessage(keyWord, channel_id)
-    .then((results) => {
-      res.status(200).send(results);
-    })
-    .catch((error) => {
-      res.status(500).send(error.message);
-    });
-};
+// const searchChat = (req, res) => {
+//   const { keyWord, channel_id } = req.query;
+//   searchMessage(keyWord, channel_id)
+//     .then((results) => {
+//       res.status(200).send(results);
+//     })
+//     .catch((error) => {
+//       res.status(500).send(error.message);
+//     });
+// };
 
 module.exports = {
   getMessages,
@@ -121,5 +121,5 @@ module.exports = {
   deleteMessage,
   deleteChat,
   editChat,
-  searchChat,
+  // searchChat,
 };
