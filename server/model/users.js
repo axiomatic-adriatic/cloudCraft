@@ -1,4 +1,14 @@
-const db = require('../../db/db.js')
+const db = require('../../db/db.js');
+
+exports.getChannelName = (channel, callback) => {
+  db.query(`select channel_name from channels where channel_id=${channel};`, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(results, null);
+    }
+  });
+};
 
 exports.getUsers = (callback) => {
   db.query('select user_id, name from users;', (err, results) => {
@@ -7,19 +17,29 @@ exports.getUsers = (callback) => {
     } else {
       callback(results, null);
     }
-  })
+  });
 };
 
 exports.getChannels = (userLoggedIn, callback) => {
-  db.query(`select channel_id from users_channels where user_id=${userLoggedIn}`, (err, results) => {
+  db.query(`select channel_id from users_channels where user_id=${userLoggedIn} and type='group'`, (err, results) => {
     if (err) {
       callback(err, null);
     } else {
-      console.log('results from query:', results);
       callback(results, null);
     }
-  })
+  });
 };
+
+exports.getDirectMessages = (userLoggedIn, callback) => {
+  db.query(`select channel_id from users_channels where user_id=${userLoggedIn} and type='direct'`, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(results, null);
+    }
+  });
+};
+
 
 
 exports.getChannelUsers = (channel, callback) => {
@@ -29,7 +49,7 @@ exports.getChannelUsers = (channel, callback) => {
     } else {
       callback(results, null);
     }
-  })
+  });
 };
 
 

@@ -17,14 +17,12 @@ class MainApp extends React.Component {
       messages: [],
       taskList: [],
     };
-    this.handleUserClick = this.handleUserClick.bind(this);
     this.handleChannelClick = this.handleChannelClick.bind(this);
 
     this.getMessages = this.getMessages.bind(this);
 
     this.getAllTasks = this.getAllTasks.bind(this);
     this.addTask = this.addTask.bind(this);
-
   }
 
   componentDidMount() {
@@ -57,23 +55,6 @@ class MainApp extends React.Component {
       channel_id: channelID,
     });
   }
-
-  handleUserClick(userID) {
-    axios.get('/userChannel', {
-      params: {
-        user_id: userID,
-      },
-    })
-      .then((response) => {
-        this.setState({
-          channel_id: response.data[0],
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
 
   getMessages(list) {
     this.setState({ messages: list });
@@ -108,9 +89,9 @@ class MainApp extends React.Component {
   }
 
   render() {
-    console.log('state in main app:', this.state);
     const { user_id, channel_id, user_name, taskList } = this.state;
     const { picture } = this.props;
+    console.log('state in main app:', this.state);
     return (
       <div className={styles.parent}>
         <div className={styles.div4}>

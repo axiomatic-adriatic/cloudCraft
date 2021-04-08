@@ -6,6 +6,16 @@ import styles from './index.css';
 class UserList extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      allChannels: [],
+    };
+    this.updateChannels = this.updateChannels.bind(this);
+  }
+
+  updateChannels(channels) {
+    this.setState({
+      allChannels: channels,
+    });
   }
 
   render() {
@@ -15,7 +25,6 @@ class UserList extends React.Component {
         className={styles.userListContainer}
       >
         <Groups user_id={user_id} handleChannelClick={handleChannelClick} />
-        <Users handleUserClick={handleUserClick} />
       </div>
     );
   }

@@ -1,18 +1,37 @@
 import React from 'react';
 import axios from 'axios';
 import styles from './styles.css';
+import Groups2 from './groups2.js';
 
 class Groups extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       allChannels: [],
+      channelName: '',
     };
     this.getAllChannels = this.getAllChannels.bind(this);
+    this.getChannelName = this.getChannelName.bind(this);
   }
 
-  // eslint-disable-next-line react/sort-comp
+ getChannelName(channelID) {
+  axios.get('/channelName', {
+    params: {
+      channel: channelID,
+    }
+  })
+  .then((success) => {
+    this.setState({
+      channelName: `${success.data[0].channel_name}`
+    })
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+}
+
   getAllChannels(userID) {
+    const { updateChannels } = this.props;
     axios.get('/channels', {
       params: {
         userLoggedIn: userID,
@@ -40,15 +59,15 @@ class Groups extends React.Component {
 
   componentDidUpdate(prevProps) {
     const { user_id } = this.props;
-
     if (this.props.user_id !== prevProps.user_id) {
       this.getAllChannels(user_id);
     }
   }
 
   render() {
-    const { allChannels } = this.state;
-    const { handleChannelClick } = this.props;
+    const { allChannels, channelName } = this.state;
+
+    const { handleChannelClick, user_id } = this.props;
 
     return (
       <div
@@ -59,11 +78,13 @@ class Groups extends React.Component {
         return (
         <div key={channel} className={styles.select}>
           <p onClick={() => handleChannelClick(channel)}>
-            # Channel {channel}
+            # Channel
+            {channel}
           </p>
         </div>
         )
       })}
+      <Groups2 handleChannelClick={handleChannelClick} user_id={user_id} />
       </div>
     );
   }
