@@ -86,6 +86,17 @@ const editMessage = (message) => {
    * during the query.
    * TODO: LIMIT 100 add limit per request to speed up init latency
  */
+
+// const searchMessage = (keyWord, channel_id) => {
+//   const query = 'SELECT messages.*, users.name FROM messages '
+//   + 'LEFT JOIN users ON users.user_id=messages.user_id '
+//   + `WHERE (messages.message_text LIKE "%${keyWord}%" OR users.name LIKE "%${keyWord}%") `
+//   + 'AND channel_id = ? ORDER BY datetime LIMIT 100';
+//   return db.promise().query(query, channel_id)
+//     .then(([results]) => results)
+//     .catch((error) => error);
+// };
+
 const searchMessage = (keyWord, channel_id) => {
   const query = 'SELECT messages.*, users.name FROM messages '
   + 'LEFT JOIN users ON users.user_id=messages.user_id '
@@ -96,10 +107,11 @@ const searchMessage = (keyWord, channel_id) => {
     .catch((error) => error);
 };
 
+
 module.exports = {
   getMessages,
   createMessage,
   deleteMessage,
   editMessage,
-  searchMessage,
+  // searchMessage,
 };
