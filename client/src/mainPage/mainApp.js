@@ -44,6 +44,7 @@ class MainApp extends React.Component {
     this.setState({
       channel_id: channelID,
     });
+    getChatHistory();
   }
 
   getChatHistory() {
