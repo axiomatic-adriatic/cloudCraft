@@ -7,7 +7,7 @@ import ChatBox from './components/ChatBox';
 import TextBox from './components/TextBox';
 
 const Message = ({
-  channel_id, user_id, user_name, messages, getAllTasks
+  channel_id, user_id, user_name, messages, getAllTasks, socket
 }) => {
   const [chatHistory, setchatHistory] = useState([]);
   const [groupName, setGroupName] = useState('');
@@ -17,14 +17,22 @@ const Message = ({
     return new Date(string).toLocaleDateString([], options);
   };
 
-  const socket = io({
-    extraHeaders: {
-      'my-custom-header': channel_id,
-    },
-  });
+  // const socket = io({
+  //   extraHeaders: {
+  //     'my-custom-header': channel_id,
+  //   },
+  // });
 
   socket.on('message', (data) => {
     console.log(data.message);
+    // const incomingMessage = data.message[0];
+    // const lastDay = chatHistory[chatHistory.length - 1];
+    // const allMessages = Object.values(lastDay)[0];
+    // const date = formatDate(incomingMessage.datetime);
+    // console.log(incomingMessage);
+    // console.log(lastDay);
+    // console.log(allMessages);
+    // console.log(date);
   });
 
   const deleteMessage = (messageId) => {
@@ -50,24 +58,26 @@ const Message = ({
 
   const submit = (messageObject) => {
     socket.emit('message', messageObject);
-    const time = new Date();
-    const date = formatDate(time);
-    const lastDay = chatHistory[chatHistory.length - 1];
-    const allMessages = Object.values(lastDay)[0];
-    const latestMessages = allMessages[allMessages.length - 1];
-    const newMessageId = latestMessages.message_id + 1;
-    const newMessage = { ...messageObject, name: user_name || 'Avery', message_id: newMessageId, datetime: time };
-    const updatedMessages = chatHistory.map((message) => {
-      if (Object.keys(message)[0] === date) {
-        message[date].push(newMessage);
-        console.log('test')
-      }
-      return message;
-    });
-    if (Object.keys(lastDay)[0] !== date) {
-      updatedMessages.push({ [date]: [newMessage] });
-    }
-    setchatHistory(updatedMessages);
+    // const time = new Date();
+    // const date = formatDate(time);
+    // const lastDay = chatHistory[chatHistory.length - 1];
+    // const allMessages = Object.values(lastDay)[0];
+    // const latestMessages = allMessages[allMessages.length - 1];
+    // const newMessageId = latestMessages.message_id + 1;
+    // const newMessage = {
+    //   ...messageObject, name: user_name || 'Avery', message_id: newMessageId, datetime: time,
+    // };
+    // const updatedMessages = chatHistory.map((message) => {
+    //   if (Object.keys(message)[0] === date) {
+    //     message[date].push(newMessage);
+    //     console.log('test');
+    //   }
+    //   return message;
+    // });
+    // if (Object.keys(lastDay)[0] !== date) {
+    //   updatedMessages.push({ [date]: [newMessage] });
+    // }
+    // setchatHistory(updatedMessages);
   };
 
   const groupByDate = (history) => {
@@ -109,7 +119,6 @@ const Message = ({
         userId={user_id}
         chatHistory={chatHistory}
         deleteMessage={deleteMessage}
-        editMessage={editMessage}
         addTask={addTask}
       />
       <TextBox submit={submit} userId={user_id} channelId={channel_id} />

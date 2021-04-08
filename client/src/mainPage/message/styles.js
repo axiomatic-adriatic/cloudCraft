@@ -24,7 +24,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     padding-top: 1rem;
-    height: 50vh;
+    height: 70vh;
     overflow-y: auto;
 
     .date {

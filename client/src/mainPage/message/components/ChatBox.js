@@ -7,7 +7,7 @@ import EditMessageModal from './EditMessageModal';
 import { Header, Paragraph } from '../styles';
 
 const ChatBox = ({
-  chatHistory, deleteMessage, editMessage, userId, addTask,
+  chatHistory, deleteMessage, userId, addTask,
 }) => {
   const messageEndRef = useRef(null);
   const [modal, setModal] = useState(false);
@@ -27,14 +27,6 @@ const ChatBox = ({
     e.preventDefault();
     const messageId = e.target.closest('.messageContainer').getAttribute('data-key');
     deleteMessage(messageId);
-  };
-
-  const submitEditChange = (e) => {
-    e.preventDefault();
-    const messageId = e.target.closest('.messageContainer').getAttribute('data-key');
-    const messageText = e.target.closest('.messageContainer').getAttribute('data-object');
-    console.log(messageText);
-    // editMessage(messageText);
   };
 
   const edit = (e) => {

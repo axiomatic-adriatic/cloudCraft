@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import axios from 'axios';
+import { io } from 'socket.io-client';
 import styles from './mainApp.css';
 import SearchModule from './search/index.js';
 import TaskListModule from './taskList/index.js';
@@ -8,16 +9,23 @@ import Message from './message/index.js';
 import UserList from './userList/index.js';
 import LogoutButton from '../login/logoutButton.jsx';
 
+var socket;
+
 class MainApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       user_id: 2,
-      channel_id: 1,
+      channel_id: 100,
       user_name: '',
       messages: [],
       taskList: [],
     };
+    this.socket = io({
+      extraHeaders: {
+        'my-custom-header': this.state.channel_id,
+      },
+    });
     this.handleChannelClick = this.handleChannelClick.bind(this);
 
     this.getMessages = this.getMessages.bind(this);
@@ -36,6 +44,13 @@ class MainApp extends React.Component {
           user_name: results.data.name || '',
         });
       })
+      .then(() => {
+        socket = io({
+          extraHeaders: {
+            'my-custom-header': this.state.channel_id,
+          },
+        });
+      })
       .catch((err) => {
         console.log('user get request err', err);
       });
@@ -46,6 +61,11 @@ class MainApp extends React.Component {
   handleChannelClick(channelID) {
     this.setState({
       channel_id: channelID,
+    });
+    this.socket = io({
+      extraHeaders: {
+        'my-custom-header': this.state.channel_id,
+      },
     });
     getChatHistory();
   }
@@ -133,6 +153,7 @@ class MainApp extends React.Component {
             userName={this.state.user_name}
             channel_id={this.state.channel_id}
             user_id={this.state.user_id}
+            socket={this.socket}
           />
         </div>
         <div className={styles.div3}>
