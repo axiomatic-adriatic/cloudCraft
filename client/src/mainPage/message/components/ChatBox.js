@@ -8,11 +8,6 @@ const ChatBox = ({
 }) => {
   const messageEndRef = useRef(null);
 
-  const formatDate = (string) => {
-    const options = { month: 'long', day: 'numeric', weekday: 'long' };
-    return new Date(string).toLocaleDateString([], options);
-  };
-
   const formatTime = (string) => {
     const options = { hour: '2-digit', minute: '2-digit' };
     return new Date(string).toLocaleTimeString([], options);
@@ -31,7 +26,7 @@ const ChatBox = ({
   };
 
   const scrollToBottom = () => {
-    messageEndRef.current.scrollIntoView(true);
+    messageEndRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
   };
 
   useEffect(() => {
@@ -40,8 +35,8 @@ const ChatBox = ({
   return (
     <div className="chatbox">
       {chatHistory.map((entry) => (
-        <div  key={Object.keys(entry)[0]}>
-          <div className="date">{Object.keys(entry)[0]}</div>
+        <div key={Object.keys(entry)[0]}>
+          {Object.values(entry)[0].length === 0 ? null : <div className="date">{Object.keys(entry)[0]}</div>}
           {entry[Object.keys(entry)[0]].map((message) => (
             <div
               className="messageContainer"

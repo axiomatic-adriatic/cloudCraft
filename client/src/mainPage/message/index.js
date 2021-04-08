@@ -12,6 +12,11 @@ const Message = ({
   const [chatHistory, setchatHistory] = useState([]);
   const [groupName, setGroupName] = useState('');
 
+  const formatDate = (string) => {
+    const options = { month: 'long', day: 'numeric', weekday: 'long' };
+    return new Date(string).toLocaleDateString([], options);
+  };
+
   const socket = io({
     extraHeaders: {
       'my-custom-header': channel_id,
@@ -19,25 +24,13 @@ const Message = ({
   });
 
   socket.on('message', (data) => {
-    const newMessage = { ...data.message[0], name: user_name || 'Avery' };
-    const date = formatDate(newMessage.datetime)
-    const insert = chatHistory.map((message) => {
-      if (Object.keys(message)[0] === date) {
-        const lastMessageIndex = message[date].length - 1;
-        if (message[date][lastMessageIndex].message_id !== newMessage.message_id) {
-          message[date].push(newMessage);
-        }
-      }
-      return message;
-    });
-    setchatHistory(insert);
+    console.log(data.message);
   });
 
   const deleteMessage = (messageId) => {
     const allMessages = chatHistory.map((date) => {
       const messages = Object.values(date)[0];
-      const results = messages.filter((message) =>
-        message.message_id !== Number(messageId));
+      const results = messages.filter((message) => message.message_id !== Number(messageId));
       return { [Object.keys(date)[0]]: results };
     });
     setchatHistory(allMessages);
@@ -71,13 +64,25 @@ const Message = ({
     setGroupName(group.join(', '));
   };
 
-  const submit = (message) => {
-    socket.emit('message', message);
-  };
-
-  const formatDate = (string) => {
-    const options = { month: 'long', day: 'numeric', weekday: 'long' };
-    return new Date(string).toLocaleDateString([], options);
+  const submit = (messageObject) => {
+    socket.emit('message', messageObject);
+    const date = formatDate(new Date());
+    const lastDay = chatHistory[chatHistory.length - 1];
+    const allMessages = Object.values(lastDay)[0];
+    const latestMessages = allMessages[allMessages.length - 1];
+    const newMessageId = latestMessages.message_id + 1;
+    const newMessage = { ...messageObject, name: user_name || 'Avery', message_id: newMessageId, datetime: date };
+    const updatedMessages = chatHistory.map((message) => {
+      if (Object.keys(message)[0] === date) {
+        message[date].push(newMessage);
+        console.log('test')
+      }
+      return message;
+    });
+    if (Object.keys(lastDay)[0] !== date) {
+      updatedMessages.push({ [date]: [newMessage] });
+    }
+    setchatHistory(updatedMessages);
   };
 
   const groupByDate = (history) => {
