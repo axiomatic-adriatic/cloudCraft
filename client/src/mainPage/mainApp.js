@@ -17,11 +17,9 @@ class MainApp extends React.Component {
       messages: [],
       taskList: [],
     };
-    this.handleUserClick = this.handleUserClick.bind(this);
     this.handleChannelClick = this.handleChannelClick.bind(this);
 
     this.getMessages = this.getMessages.bind(this);
-    this.getTasks = this.getTasks.bind(this);
 
     this.getAllTasks = this.getAllTasks.bind(this);
     this.addTask = this.addTask.bind(this);
@@ -58,30 +56,9 @@ class MainApp extends React.Component {
     });
   }
 
-  handleUserClick(userID) {
-    axios.get('/userChannel', {
-      params: {
-        user_id: userID,
-      },
-    })
-      .then((response) => {
-        this.setState({
-          channel_id: response.data[0],
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
   getMessages(list) {
     this.setState({ messages: list });
   }
-
-  getTasks(tasks) {
-    this.setState({ taskList: tasks });
-  }
-
   getAllTasks() {
     const { user_id } = this.state;
     axios.get(`/tasks?user_id=${user_id}`)
@@ -108,14 +85,13 @@ class MainApp extends React.Component {
       .catch((err) => {
         console.log(err);
       });
+
   }
 
   render() {
-    console.log('state in main app:', this.state);
-    const {
-      user_id, channel_id, user_name, taskList,
-    } = this.state;
+    const { user_id, channel_id, user_name, taskList } = this.state;
     const { picture } = this.props;
+    console.log('state in main app:', this.state);
     return (
       <div className={styles.parent}>
         <div className={styles.div4}>
@@ -126,7 +102,6 @@ class MainApp extends React.Component {
             channel_id={channel_id}
             user_id={user_id}
             getMessages={this.getMessages}
-            getTasks={this.getTasks}
           />
         </div>
         <div className={styles.div1}>
