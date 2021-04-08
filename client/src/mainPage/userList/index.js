@@ -13,13 +13,13 @@ class UserList extends React.Component {
   }
 
   render() {
-    const { handleUserClick, handleChannelClick, user_id } = this.props;
+    const { handleUserClick, handleChannelClick, username, user_id } = this.props;
     return (
       <div
         className={styles.userListContainer}
       >
         <Groups user_id={user_id} handleChannelClick={handleChannelClick} />
-        <Groups2 user_id={user_id} handleChannelClick={handleChannelClick} />
+        <Groups2 username={username} user_id={user_id} handleChannelClick={handleChannelClick} />
       </div>
     );
   }

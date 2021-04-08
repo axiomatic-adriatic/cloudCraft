@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import faker from 'faker';
 import styles from './styles.css';
-// import GroupChannels from './groupChannels';
+import ChannelName from './channelNames.js';
 
 class Groups2 extends React.Component {
   constructor(props) {
@@ -54,8 +54,8 @@ class Groups2 extends React.Component {
 
 
   componentDidMount() {
-    const { user_id } = this.props;
-    // this.getDirectMessages(user_id);
+    const { user_id, username } = this.props;
+
     Promise.all([this.getDirectMessages(user_id), this.getChannelName(this.state.directMessages[0])])
     .then(([directMessages, name]) => {
       this.setState({
@@ -79,7 +79,7 @@ class Groups2 extends React.Component {
     const { directMessages, channelName } = this.state;
     console.log('state in group two:', this.state);
 
-    const { handleChannelClick, user_id } = this.props;
+    const { handleChannelClick, user_id, username} = this.props;
 
     const avatarStyle = {
       verticalAlign: 'middle',
@@ -90,33 +90,34 @@ class Groups2 extends React.Component {
     };
 
     return (
-      <div>
+      <div
+       style={{
+         marginLeft: '15px'
+       }}>
         <h3>Direct Messages</h3>
+        <div>
         {directMessages && directMessages.map((channel) => {
           const imageSrc = faker.image.avatar();
           return (
             <div
               key={channel}
               className={styles.select}
+              onClick={() => handleChannelClick(channel)}
+               style={{
+               display: 'flex',
+               padding: '3px'
+              }}
             >
               <img
                 alt="avatar-img"
                 src={imageSrc}
                 style={avatarStyle}
               />
-             <p onClick={() => handleChannelClick(channel)}
-            style={{
-              fontSize: '14px',
-              marginLeft: '25px',
-              cursor: 'pointer',
-            }}>
-            #
-            {/* {this.getChannelName(channel)} */}
-            {this.state.channelName}
-          </p>
+          <ChannelName channel={channel} username={username}/>
         </div>
           );
         })}
+        </div>
       </div>
     );
   }

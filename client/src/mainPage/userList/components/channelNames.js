@@ -33,8 +33,12 @@ getChannelName(channelID) {
   }
 
   render() {
-    const { channel } = this.props;
-    const { name } = this.state;
+    const { channel, username } = this.props;
+    let { name } = this.state;
+    if (name.includes(username)) {
+      name = name.replace(`${username}`, '');
+    }
+
     return (
       <div>
       {name && name.length > 0 && <p>{name}</p>}

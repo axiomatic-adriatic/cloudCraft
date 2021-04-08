@@ -7,7 +7,7 @@ function getChannelName(channelID) {
     }
   })
   .then((success) => {
-    return success.data[0].channel_name;
+    const name = success.data[0].channel_name;
   })
   .catch((err) => {
     console.log(err);
