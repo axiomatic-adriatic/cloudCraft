@@ -9,19 +9,20 @@ class CategoryList extends React.Component {
     this.state = {
       displayModal: 'none',
     };
-    this.handlOpenModal = this.handlOpenModal.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.removeModal = this.removeModal.bind(this);
   }
 
-  handleCloseModal(e) {
+  handleOpenModal(e) {
     this.setState({
-      displayModal: 'none',
+      displayModal: 'block',
     });
   }
 
-  handlOpenModal(e) {
+  removeModal() {
+    console.log('closing')
     this.setState({
-      displayModal: 'block',
+      displayModal: 'none',
     });
   }
 
@@ -39,8 +40,8 @@ class CategoryList extends React.Component {
             ? (
               <span
                 className={styles.addTask}
-                onClick={this.handlOpenModal}
-                onKeyDown={this.handlOpenModal}
+                onClick={this.handleOpenModal}
+                onKeyDown={this.handleOpenModal}
                 role="button"
                 tabIndex={0}
               >
@@ -52,20 +53,11 @@ class CategoryList extends React.Component {
         <div className={styles.scrollList}>{list}</div>
         {add
           ? (
-            <div id="myModal" className={styles.modal} style={{display: displayModal}}>
-              <div className={styles.modal_content}>
-                <span
-                  className={styles.modal_close}
-                  onClick={this.handleCloseModal}
-                  onKeyDown={this.handleCloseModal}
-                  role="button"
-                  tabIndex={0}
-                >
-                  &times;
-                </span>
-                <AddTaskModalForm addTask={addTask} handleCloseModal={this.handleCloseModal} />
-              </div>
-            </div>
+            <AddTaskModalForm
+              addTask={addTask}
+              displayModal={displayModal}
+              removeModal={this.removeModal}
+            />
           ) : null}
       </div>
     );
