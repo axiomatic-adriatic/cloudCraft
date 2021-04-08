@@ -7,6 +7,7 @@ import styles from './login.css';
 
 const LoginApp = () => {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+
   return (
     <div>
       {
