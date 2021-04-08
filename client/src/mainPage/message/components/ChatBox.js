@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useRef, useEffect } from 'react';
@@ -7,11 +8,6 @@ const ChatBox = ({
   chatHistory, deleteMessage, editMessage, userId, addTask,
 }) => {
   const messageEndRef = useRef(null);
-
-  const formatDate = (string) => {
-    const options = { month: 'long', day: 'numeric', weekday: 'long' };
-    return new Date(string).toLocaleDateString([], options);
-  };
 
   const formatTime = (string) => {
     const options = { hour: '2-digit', minute: '2-digit' };
@@ -31,7 +27,7 @@ const ChatBox = ({
   };
 
   const scrollToBottom = () => {
-    messageEndRef.current.scrollIntoView(true);
+    messageEndRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
   };
 
   useEffect(() => {
@@ -40,8 +36,8 @@ const ChatBox = ({
   return (
     <div className="chatbox">
       {chatHistory.map((entry) => (
-        <div  key={Object.keys(entry)[0]}>
-          <div className="date">{Object.keys(entry)[0]}</div>
+        <div key={Object.keys(entry)[0]}>
+          {Object.values(entry)[0].length === 0 ? null : <div className="date">{Object.keys(entry)[0]}</div>}
           {entry[Object.keys(entry)[0]].map((message) => (
             <div
               className="messageContainer"
@@ -71,11 +67,13 @@ const ChatBox = ({
               </Paragraph>
               <div className="extra">
                 <div className="options">
-                  <i
-                    className="fas fa-plus addTask"
-                    title="Add to Task"
-                    onClick={addTask}
-                  />
+                  {message.user_id === userId ? null : message.disabled === 1 ? <i className="fas fa-check" title="Claimed" /> : (
+                    <i
+                      className="fas fa-plus addTask"
+                      title="Add to Task"
+                      onClick={addTask}
+                    />
+                  )}
                   {message.user_id === userId ? (
                     <i
                       className="far fa-edit edit"

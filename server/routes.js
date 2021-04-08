@@ -6,6 +6,7 @@ const usersController = require('./controller/userList');
 const getUserID = require('./controller/usersInfo');
 const messagesController = require('./controller/messages');
 const searchController = require('./controller/search');
+const messageToTask = require('./controller/messageToTask');
 
 router.get('/tasks', taskController.getTasks);
 router.post('/task', taskController.addTask);
@@ -18,16 +19,16 @@ router.get('/userChannel', usersController.getUserChannel);
 router.get('/channelUsers', usersController.getChannelUsers);
 router.get('/channelName', usersController.getChannelName);
 router.get('/directMessages', usersController.getDirectMessages);
-// router.get('/directMessageChannel', usersController.getDmChannel);
 
 router.get('/chat', messagesController.getChatHistory);
 router.post('/chat', messagesController.editChat);
 router.put('/chat/delete', messagesController.deleteChat);
-// router.get('/chat/search', messagesController.searchChat);
 
 router.get('/userInfo', getUserID);
 
 router.get('/search/tasks', searchController.searchTasks);
 router.get('/search/messages', searchController.searchChat);
+
+router.post('/addToTask', messageToTask.addMessageToTask);
 
 module.exports = router;
