@@ -8,7 +8,6 @@ import TaskListModule from './taskList/index.js';
 import Message from './message/index.js';
 import UserList from './userList/index.js';
 import LogoutButton from '../login/logoutButton.jsx';
-import { io } from 'socket.io-client';
 
 class MainApp extends React.Component {
   constructor(props) {
