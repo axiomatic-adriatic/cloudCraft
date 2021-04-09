@@ -16,27 +16,6 @@ const Message = ({
     return new Date(string).toLocaleDateString([], options);
   };
 
-
-  // const socket = io({
-  //   extraHeaders: {
-  //     'my-custom-header': channel_id,
-  //   },
-  // });
-
-  // socket.on('message', (data) => {
-    // if (messages.length > 0 && channel_id && user_id && socket.id) {
-    //   const incomingMessage = data.message[0];
-    //   const lastDay = chatHistory[chatHistory.length - 1];
-    //   const allMessages = Object.values(lastDay)[0];
-    //   const date = formatDate(incomingMessage.datetime);
-    //   console.log(lastDay);
-    // console.log(incomingMessage);
-    // console.log(allMessages);
-    // console.log(date);
-    // }
-  //   console.log(data.message);
-  // });
-
   const deleteMessage = (messageId) => {
     const allMessages = chatHistory.map((date) => {
       const messages = Object.values(date)[0];
@@ -53,32 +32,18 @@ const Message = ({
   };
 
   const getGroupName = () => {
-    const userNames = messages.map((message) => message.name);
-    const group = [...new Set(userNames)];
+    const userNames = messages.map((message) => {
+      if (message.name !== userName) {
+        return message.name;
+      }
+    });
+    const removeUndefined = userNames.filter((name) => name !== undefined);
+    const group = [...new Set(removeUndefined)];
     setGroupName(group.join(', '));
   };
 
   const submit = (messageObject) => {
     socket.emit('message', messageObject);
-    // const time = new Date();
-    // const date = formatDate(time);
-    // const lastDay = chatHistory[chatHistory.length - 1];
-    // const allMessages = Object.values(lastDay)[0];
-    // const latestMessages = allMessages[allMessages.length - 1];
-    // const newMessageId = latestMessages.message_id + 1;
-    // const newMessage = {
-    //   ...messageObject, name: user_name || 'Avery', message_id: newMessageId, datetime: time,
-    // };
-    // const updatedMessages = chatHistory.map((message) => {
-    //   if (Object.keys(message)[0] === date) {
-    //     message[date].push(newMessage);
-    //   }
-    //   return message;
-    // });
-    // if (Object.keys(lastDay)[0] !== date) {
-    //   updatedMessages.push({ [date]: [newMessage] });
-    // }
-    // setchatHistory(updatedMessages);
   };
 
   const groupByDate = (history) => {
@@ -104,6 +69,17 @@ const Message = ({
     e.preventDefault();
     const messageId = e.target.closest('.messageContainer').getAttribute('data-key');
     const messageText = e.target.closest('.messageContainer').getAttribute('data-message');
+    const date = e.target.closest('.messageContainer').getAttribute('data-date');
+    chatHistory.forEach((dateOfMessages) => {
+      if (Object.keys(dateOfMessages)[0] === date) {
+        const allMessages = dateOfMessages[date];
+        allMessages.forEach((message) => {
+          if (message.message_id === Number(messageId)) {
+            message.disabled = 1;
+          }
+        });
+      }
+    });
     const taskObject = { user_id, message_text: messageText, message_id: messageId };
     axios.post('/addToTask', taskObject)
       .then(() => getAllTasks())
@@ -124,7 +100,7 @@ const Message = ({
         deleteMessage={deleteMessage}
         addTask={addTask}
       />
-      <TextBox submit={submit} userId={user_id} channelId={channel_id} />
+      <TextBox submit={submit} userId={user_id} channelId={channel_id} groupName={groupName} />
     </Container>
   );
 };
