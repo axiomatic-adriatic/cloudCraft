@@ -6,7 +6,6 @@ const TextBox = ({
   submit, userId, channelId, groupName,
 }) => {
   const [input, setInput] = useState('');
-  // const formRef = useRef(null);
 
   const sendMessage = (e) => {
     e.preventDefault();
@@ -34,7 +33,6 @@ const TextBox = ({
 
   return (
     <div className="textbox">
-      {/* <form ref={formRef}> */}
       <TextArea
         placeholder={`Send a message to ${groupName}`}
         value={input}
@@ -42,12 +40,11 @@ const TextBox = ({
         onKeyDown={(e) => onEnterPress(e)}
       />
       <Button
-        size={1.2}
+        size={1.4}
         onClick={sendMessage}
       >
         <i className="fas fa-paper-plane" style={{ color: input ? '#04A777' : '#808080' }} />
       </Button>
-      {/* </form> */}
     </div>
   );
 };
