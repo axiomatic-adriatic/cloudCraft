@@ -86,7 +86,7 @@ class Groups2 extends React.Component {
           }}>Direct Messages</h3>
       <div>
         {directMessages && directMessages.map((channel) => {
-          const imageSrc = 'https://ca.slack-edge.com/T01JNEETAHH-U01JYR06TBL-ee4d8d5750e5-72';
+          const imageSrc = 'https://ca.slack-edge.com/T01JNEETAHH-U01JYR06TBL-ee4d8d5750e5-512';
           return (
             <div
               key={channel}
