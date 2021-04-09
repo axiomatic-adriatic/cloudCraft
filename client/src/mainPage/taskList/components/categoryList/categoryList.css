@@ -10,6 +10,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: stretch; */
+  height: 50%;
 }
 
 .categoryList h3 {
@@ -20,9 +21,9 @@
 }
 
 .scrollList {
-  min-height: 315px;
+  /* min-height: 315px; */
   overflow-y: scroll;
-  max-height: 315px;
+  max-height: 350px;
 }
 /* width */
 .scrollList::-webkit-scrollbar {
