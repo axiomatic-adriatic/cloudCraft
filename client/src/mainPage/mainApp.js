@@ -110,7 +110,6 @@ class MainApp extends React.Component {
       user_id, channel_id, user_name, taskList,
     } = this.state;
     const { picture } = this.props;
-    console.log('state in main app:', this.state);
     return (
       <div className={styles.parent}>
         <div className={styles.div4}>
