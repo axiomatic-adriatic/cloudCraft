@@ -89,6 +89,7 @@ const Search = ({
         && (
           <Name>
             {'Welcome back, '}
+            &nbsp;
             <span style={{ color: '#274c77' }}>{` ${name}.`}</span>
           </Name>
         )
