@@ -24,7 +24,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     padding-top: 1rem;
-    height: 50vh;
+    height: 70vh;
     overflow-y: auto;
 
     .date {
@@ -53,7 +53,7 @@ export const Container = styled.div`
         display: none;
         background-color: #DCDCDC;
         position: absolute;
-        top: -1rem;
+        top: -1.2rem;
         right: 1rem;
         border-radius: 1rem;
       }
@@ -67,13 +67,12 @@ export const Container = styled.div`
         padding: 1.5px 0.5rem;
         justify-content: space-between;
 
-        .addTask, .delete, .edit {
+        .addTask, .delete, .edit, .claimed {
           padding: 0.5rem;
           border-radius: 1rem;
           font-size: .7rem;
 
           :hover {
-
             background-color: #D3D3D3;
             cursor: pointer;
           }
@@ -129,7 +128,7 @@ export const TextArea = styled.textarea`
   padding: 0.5rem;
   box-sizing: border-box;
   width: 100%;
-  height: 5rem;
+  height: 6rem;
   border-radius: .5rem;
   ::placeholder {
     color: #808080;
@@ -154,5 +153,78 @@ export const Button = styled.button`
   height: ${(props) => props.height}rem;
   font-size: ${(props) => props.size}rem;
   border-radius: 0.5rem;
-  border: 1px solid #808080;
+  border: none;
+  background-color: ${(props) => props.background};
+  color: ${(props) => props.color};
+`;
+
+export const ModalForm = styled.div`
+  position: fixed;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2;
+  height: 100%
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  color: black;
+`;
+
+export const ModalWrapper = styled.div`
+  width: 500px;
+  height: 200px;
+  border-radius: 1rem;
+  display: grid;
+  position: fixed;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 2fr 1fr;
+  grid-gap: 0.5rem;
+  background-color: #f5f5f5;
+  color: black;
+  align-items: center;
+  padding: 1rem;
+  cursor: auto;
+
+  .edit {
+    grid-column: span 3;
+    grid-row: 1 / 2;
+    border-radius: .5rem;
+    resize: none;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    width: 100%;
+    ::placeholder {
+      color: #808080;
+    }
+  }
+
+  .cancel {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    width: 5rem;
+    justify-self: flex-end;
+    cursor: pointer;
+    :focus {
+      outline: none;
+    }
+    :hover {
+      opacity: 0.8;
+    }
+  }
+
+  .saveChange {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+    cursor: pointer;
+    :focus {
+      outline: none;
+    }
+    :hover {
+      opacity: 0.8;
+    }
+  }
 `;
