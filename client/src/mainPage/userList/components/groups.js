@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import styles from './styles.css';
+import ChannelName from './channelNames.js';
 import Groups2 from './groups2.js';
 
 class Groups extends React.Component {
@@ -8,7 +9,7 @@ class Groups extends React.Component {
     super(props);
     this.state = {
       allChannels: [],
-      channelName: '',
+      channelName: [],
     };
     this.getAllChannels = this.getAllChannels.bind(this);
     this.getChannelName = this.getChannelName.bind(this);
@@ -22,7 +23,7 @@ class Groups extends React.Component {
   })
   .then((success) => {
     this.setState({
-      channelName: `${success.data[0].channel_name}`
+      channelName: [...`${success.data[0].channel_name}`]
     })
   })
   .catch((err) => {
@@ -72,19 +73,19 @@ class Groups extends React.Component {
     return (
       <div
         className="channels-container"
+        style={{
+          marginLeft: '15px',
+          paddingTop: '5px'
+        }}
       >
         <h3>Channels</h3>
-        {allChannels.map((channel) => {
+        {allChannels && allChannels.map((channel) => {
         return (
-        <div key={channel} className={styles.select}>
-          <p onClick={() => handleChannelClick(channel)}>
-            # Channel
-            {channel}
-          </p>
+        <div key={channel} className={styles.select} onClick={() => handleChannelClick(channel)}>
+          <ChannelName channel={channel} />
         </div>
         )
       })}
-      <Groups2 handleChannelClick={handleChannelClick} user_id={user_id} />
       </div>
     );
   }
