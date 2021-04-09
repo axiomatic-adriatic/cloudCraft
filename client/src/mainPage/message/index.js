@@ -6,7 +6,7 @@ import ChatBox from './components/ChatBox';
 import TextBox from './components/TextBox';
 
 const Message = ({
-  channel_id, user_id, user_name, messages, getAllTasks, socket,
+  channel_id, user_id, userName, messages, getAllTasks, socket,
 }) => {
   const [chatHistory, setchatHistory] = useState([]);
   const [groupName, setGroupName] = useState('');
@@ -59,6 +59,7 @@ const Message = ({
   };
 
   const submit = (messageObject) => {
+    const newMessage = { ...messageObject, name: userName }
     socket.emit('message', messageObject);
     // const time = new Date();
     // const date = formatDate(time);

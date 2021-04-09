@@ -46,6 +46,7 @@ class MainApp extends React.Component {
         console.log('user get request err', err);
       });
     this.socket.on('message', (data) => {
+      console.log(data.message[0])
       this.setState({ messages: [...this.state.messages, data.message[0]] });
     });
 
