@@ -77,8 +77,6 @@ class Groups2 extends React.Component {
 
   render() {
     const { directMessages, channelName } = this.state;
-    console.log('state in group two:', this.state);
-
     const { handleChannelClick, user_id, username} = this.props;
 
     const avatarStyle = {
@@ -87,13 +85,12 @@ class Groups2 extends React.Component {
       height: '35px',
       borderRadius: '15%',
       marginRight: '15px',
+      paddingLeft: '10px',
+      paddingTop: '8px',
     };
 
     return (
-      <div
-       style={{
-         marginLeft: '15px'
-       }}>
+      <div>
         <h3>Direct Messages</h3>
         <div>
         {directMessages && directMessages.map((channel) => {
@@ -105,7 +102,9 @@ class Groups2 extends React.Component {
               onClick={() => handleChannelClick(channel)}
                style={{
                display: 'flex',
-               padding: '3px'
+               padding: '3px',
+               justifyContent: 'left',
+               boxSizing: 'border-box'
               }}
             >
               <img

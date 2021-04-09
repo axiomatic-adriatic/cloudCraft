@@ -74,7 +74,7 @@ class Groups extends React.Component {
       <div
         className="channels-container"
         style={{
-          marginLeft: '15px',
+          paddingLeft: '15px',
           paddingTop: '5px'
         }}
       >

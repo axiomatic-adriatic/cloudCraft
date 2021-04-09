@@ -41,7 +41,7 @@ getChannelName(channelID) {
 
     return (
       <div>
-      {name && name.length > 0 && <p>{name}</p>}
+      {name && name.length > 0 && <p> {name}</p>}
       </div>
     );
   }
