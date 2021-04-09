@@ -74,11 +74,13 @@ class Groups extends React.Component {
       <div
         className="channels-container"
         style={{
-          paddingLeft: '15px',
           paddingTop: '5px'
         }}
       >
-        <h3>Channels</h3>
+        <h3
+        style={{
+          paddingLeft: '15px'
+        }}>Channels</h3>
         {allChannels && allChannels.map((channel) => {
         return (
         <div key={channel} className={styles.select} onClick={() => handleChannelClick(channel)}>

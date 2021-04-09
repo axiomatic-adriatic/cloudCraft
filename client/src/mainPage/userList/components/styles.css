@@ -1,17 +1,19 @@
 
+.select {
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 15px;
+}
+
 .select:hover {
   background-color: #274C77;
   margin-top: 3px;
   margin-bottom: 3px;
-  cursor: pointer;
-  width: 100%;
-  box-sizing: border-box;
+
 }
 
 .select:active {
   background-color: #8B8C89;
-  cursor: pointer;
-  width: 100%;
-  box-sizing: border-box;
 }
 
