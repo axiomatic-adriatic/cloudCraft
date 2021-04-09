@@ -33,6 +33,9 @@ class CategoryList extends React.Component {
       <Task task={task} key={task.task_id} getAllTasks={getAllTasks} add={add}/>
     ));
     return (
+      // <div style={{height: '50%', backgroundColor:'pink', minHeight: '50%'}}>
+
+      // </div>
       <div className={styles.categoryList}>
         <h3 style={{ backgroundColor: bgColor, color: textColor }}>
           {categoryName}
@@ -65,3 +68,6 @@ class CategoryList extends React.Component {
 }
 
 export default CategoryList;
+
+
+
