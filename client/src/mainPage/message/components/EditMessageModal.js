@@ -4,7 +4,7 @@ import {
   TextArea, Button, ModalForm, ModalWrapper,
 } from '../styles';
 
-const EditMessageModal = ({ setModal, messageToEdit, submitEditChange }) => {
+const EditMessageModal = ({ setModal, messageToEdit }) => {
   const [input, setInput] = useState(messageToEdit.message_text);
 
   const getInput = (e) => {
@@ -21,6 +21,12 @@ const EditMessageModal = ({ setModal, messageToEdit, submitEditChange }) => {
       .catch((err) => { throw err; });
   };
 
+  const onEnterPress = (e) => {
+    if (e.keyCode === 13 && e.shiftKey === false && input) {
+      saveChange();
+    }
+  };
+
   return (
     <ModalForm>
       <ModalWrapper className="modal">
@@ -28,6 +34,7 @@ const EditMessageModal = ({ setModal, messageToEdit, submitEditChange }) => {
           className="edit"
           value={input}
           onChange={(e) => getInput(e)}
+          onKeyDown={(e) => onEnterPress(e)}
         />
         <Button
           className="cancel"

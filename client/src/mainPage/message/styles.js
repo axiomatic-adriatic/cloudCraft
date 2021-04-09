@@ -1,37 +1,41 @@
 import styled from 'styled-components';
-import { CeruleanFrost } from '../../../../ui/colors';
+import { CeruleanFrost, BabyBlueEyes, BattleshipGrey, AliceBlue, YaleBlue } from '../../../../ui/colors';
 
 export const Container = styled.div`
   display: grid;
-  grid-template-columns: 0.5rem auto 0.5rem;
-  grid-template-rows: 3rem auto min-content;
+  grid-template-rows: 3rem 65vh min-content;
   grid-gap: 0.5rem;
   height: 100%;
+  background-color: ${AliceBlue};
 
   .banner {
-    grid-column: 2 / 3;
     grid-row: 1 / 2;
     align-items: center;
     display: flex;
     height: 100%;
-    border-bottom: 1px solid #808080;
+    padding: 0 2rem;
+    background-color: ${CeruleanFrost};
   }
 
   .chatbox {
-    grid-column: 2 / 3;
     grid-row: 2 / 3;
     grid-auto-rows: min-content;
     display: flex;
     flex-direction: column;
-    padding-top: 1rem;
-    height: 70vh;
+    padding: 1rem 0;
+    height: 100%;
     overflow-y: auto;
+    box-sizing: border-box;
 
     .date {
-      font-size: 0.7rem;
+      font-size: 0.8rem;
+      font-weight: 700;
       display: flex;
       justify-content: center;
-      background-color: #D3D3D3;
+      background-color: #d8e0e5;
+      height: 1.3rem;
+      align-items: center;
+      margin: 0.5rem 0;
     }
 
     .messageContainer {
@@ -43,19 +47,19 @@ export const Container = styled.div`
       grid-template-columns: auto 1fr;
       grid-template-rows: repeat(2, min-content);
       grid-gap: 0.4rem;
-      padding: 0.5rem;
+      padding: 0.5rem 2rem;
       margin: 0;
       :hover {
-        background-color: #F8F8F8;
+        background-color: #d8e0e5;
       }
 
       .extra {
         display: none;
-        background-color: #DCDCDC;
+        background-color: ${BabyBlueEyes};
         position: absolute;
         top: -1.2rem;
         right: 1rem;
-        border-radius: 1rem;
+        border-radius: 0.7rem;
       }
 
       :hover .extra {
@@ -67,15 +71,22 @@ export const Container = styled.div`
         padding: 1.5px 0.5rem;
         justify-content: space-between;
 
-        .addTask, .delete, .edit, .claimed {
+        .addTask, .delete, .edit {
           padding: 0.5rem;
           border-radius: 1rem;
-          font-size: .7rem;
+          font-size: 1rem;
+          color: #484848;
+          cursor: pointer;
 
           :hover {
-            background-color: #D3D3D3;
-            cursor: pointer;
+            transform: scale(1.2);
           }
+        }
+        .claimed {
+          color: #04A777;
+          padding: 0.5rem;
+          border-radius: 1rem;
+          font-size: 1rem;
         }
       }
 
@@ -103,7 +114,6 @@ export const Container = styled.div`
   }
 
   .textbox {
-    grid-column: 2 / 3;
     grid-row: 3 / 4;
     position: relative;
 
@@ -125,13 +135,23 @@ export const Container = styled.div`
 
 export const TextArea = styled.textarea`
   resize: none;
-  padding: 0.5rem;
+  padding: 0.8rem;
   box-sizing: border-box;
   width: 100%;
-  height: 6rem;
+  height: 6.1rem;
   border-radius: .5rem;
+  background-color: #f5f5f5;
+  font-size: 1rem;
+  border: 1px solid ${BattleshipGrey};
+  font-family: Oxygen, sans-serif;
+  :focus {
+    background-color: white;
+    outline-color: ${CeruleanFrost};
+  }
   ::placeholder {
     color: #808080;
+    font-size: 1rem;
+    font-family: Oxygen, sans-serif;
   }
 `;
 
