@@ -6,7 +6,7 @@ import ChatBox from './components/ChatBox';
 import TextBox from './components/TextBox';
 
 const Message = ({
-  channel_id, user_id, user_name, messages, getAllTasks, socket
+  channel_id, user_id, user_name, messages, getAllTasks, socket,
 }) => {
   const [chatHistory, setchatHistory] = useState([]);
   const [groupName, setGroupName] = useState('');
@@ -17,6 +17,25 @@ const Message = ({
   };
 
 
+  // const socket = io({
+  //   extraHeaders: {
+  //     'my-custom-header': channel_id,
+  //   },
+  // });
+
+  // socket.on('message', (data) => {
+    // if (messages.length > 0 && channel_id && user_id && socket.id) {
+    //   const incomingMessage = data.message[0];
+    //   const lastDay = chatHistory[chatHistory.length - 1];
+    //   const allMessages = Object.values(lastDay)[0];
+    //   const date = formatDate(incomingMessage.datetime);
+    //   console.log(lastDay);
+    // console.log(incomingMessage);
+    // console.log(allMessages);
+    // console.log(date);
+    // }
+  //   console.log(data.message);
+  // });
 
   const deleteMessage = (messageId) => {
     const allMessages = chatHistory.map((date) => {
@@ -33,22 +52,6 @@ const Message = ({
       .catch((err) => { throw err; });
   };
 
-  const editMessage = (editdMessage) => {
-    const { message_id, message_text } = editdMessage;
-    const allMessages = messages.filter((message) => {
-      if (message.message_id === message_id) {
-        message.message_text = message_text;
-      }
-      return message;
-    });
-    // axios({
-    //   method: 'post',
-    //   url: '/chat',
-    //   params: { message_id, message_text },
-    // })
-    //   .catch((err) => { throw err; });
-  };
-
   const getGroupName = () => {
     const userNames = messages.map((message) => message.name);
     const group = [...new Set(userNames)];
@@ -57,23 +60,25 @@ const Message = ({
 
   const submit = (messageObject) => {
     socket.emit('message', messageObject);
-    const date = formatDate(new Date());
-    const lastDay = chatHistory[chatHistory.length - 1];
-    const allMessages = Object.values(lastDay)[0];
-    const latestMessages = allMessages[allMessages.length - 1];
-    const newMessageId = latestMessages.message_id + 1;
-    const newMessage = { ...messageObject, name: user_name || 'Avery', message_id: newMessageId, datetime: date };
-    const updatedMessages = chatHistory.map((message) => {
-      if (Object.keys(message)[0] === date) {
-        message[date].push(newMessage);
-        console.log('test')
-      }
-      return message;
-    });
-    if (Object.keys(lastDay)[0] !== date) {
-      updatedMessages.push({ [date]: [newMessage] });
-    }
-    setchatHistory(updatedMessages);
+    // const time = new Date();
+    // const date = formatDate(time);
+    // const lastDay = chatHistory[chatHistory.length - 1];
+    // const allMessages = Object.values(lastDay)[0];
+    // const latestMessages = allMessages[allMessages.length - 1];
+    // const newMessageId = latestMessages.message_id + 1;
+    // const newMessage = {
+    //   ...messageObject, name: user_name || 'Avery', message_id: newMessageId, datetime: time,
+    // };
+    // const updatedMessages = chatHistory.map((message) => {
+    //   if (Object.keys(message)[0] === date) {
+    //     message[date].push(newMessage);
+    //   }
+    //   return message;
+    // });
+    // if (Object.keys(lastDay)[0] !== date) {
+    //   updatedMessages.push({ [date]: [newMessage] });
+    // }
+    // setchatHistory(updatedMessages);
   };
 
   const groupByDate = (history) => {
@@ -97,10 +102,12 @@ const Message = ({
 
   const addTask = (e) => {
     e.preventDefault();
-    console.log(e.target.closest('.messageContainer').getAttribute('data-key'));
-    // post request to task table, once post request is done
-    // update current message disabled column to true
-    // call getAllTasks();
+    const messageId = e.target.closest('.messageContainer').getAttribute('data-key');
+    const messageText = e.target.closest('.messageContainer').getAttribute('data-message');
+    const taskObject = { user_id, message_text: messageText, message_id: messageId };
+    axios.post('/addToTask', taskObject)
+      .then(() => getAllTasks())
+      .catch((err) => { throw err; });
   };
 
   useEffect(() => {
@@ -115,7 +122,6 @@ const Message = ({
         userId={user_id}
         chatHistory={chatHistory}
         deleteMessage={deleteMessage}
-        editMessage={editMessage}
         addTask={addTask}
       />
       <TextBox submit={submit} userId={user_id} channelId={channel_id} />
