@@ -5,11 +5,13 @@
   margin-bottom: 3px;
   cursor: pointer;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .select:active {
   background-color: #8B8C89;
   cursor: pointer;
   width: 100%;
+  box-sizing: border-box;
 }
 

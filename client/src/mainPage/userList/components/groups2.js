@@ -9,7 +9,6 @@ class Groups2 extends React.Component {
     super(props);
     this.state = {
       directMessages: [],
-      channelName: '',
     };
     this.getDirectMessages = this.getDirectMessages.bind(this);
     this.getChannelName = this.getChannelName.bind(this);
@@ -55,17 +54,7 @@ class Groups2 extends React.Component {
 
   componentDidMount() {
     const { user_id, username } = this.props;
-
-    Promise.all([this.getDirectMessages(user_id), this.getChannelName(this.state.directMessages[0])])
-    .then(([directMessages, name]) => {
-      this.setState({
-        directMessages: directMessages,
-        channelName: name
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    this.getDirectMessages(user_id);
   }
 
   componentDidUpdate(prevProps) {
@@ -91,8 +80,11 @@ class Groups2 extends React.Component {
 
     return (
       <div>
-        <h3>Direct Messages</h3>
-        <div>
+        <h3
+        style={{
+            paddingLeft: '15px'
+          }}>Direct Messages</h3>
+      <div>
         {directMessages && directMessages.map((channel) => {
           const imageSrc = faker.image.avatar();
           return (
