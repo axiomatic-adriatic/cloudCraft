@@ -99,6 +99,7 @@ const Message = ({
         chatHistory={chatHistory}
         deleteMessage={deleteMessage}
         addTask={addTask}
+        userName={userName}
       />
       <TextBox submit={submit} userId={user_id} channelId={channel_id} groupName={groupName} />
     </Container>

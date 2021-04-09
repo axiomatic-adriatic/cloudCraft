@@ -5,9 +5,10 @@
 import React, { useRef, useEffect, useState } from 'react';
 import EditMessageModal from './EditMessageModal';
 import { Header, Paragraph } from '../styles';
+import { CeruleanFrost, BabyBlueEyes, BattleshipGrey, AliceBlue, YaleBlue } from '../../../../../ui/colors';
 
 const ChatBox = ({
-  chatHistory, deleteMessage, userId, addTask,
+  chatHistory, deleteMessage, userId, addTask, userName
 }) => {
   const messageEndRef = useRef(null);
   const [modal, setModal] = useState(false);
@@ -68,7 +69,7 @@ const ChatBox = ({
               <Header
                 className="username"
                 size={1.1}
-                color="#484848"
+                color={message.name === userName ? BabyBlueEyes : '#484848'}
               >
                 {message.name}
               </Header>
