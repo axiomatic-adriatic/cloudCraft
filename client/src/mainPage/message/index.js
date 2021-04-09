@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { io } from 'socket.io-client';
 import axios from 'axios';
 import { Container } from './styles';
 import Banner from './components/Banner';
@@ -7,7 +6,7 @@ import ChatBox from './components/ChatBox';
 import TextBox from './components/TextBox';
 
 const Message = ({
-  channel_id, user_id, user_name, messages, getAllTasks
+  channel_id, user_id, user_name, messages, getAllTasks,socket
 }) => {
   const [chatHistory, setchatHistory] = useState([]);
   const [groupName, setGroupName] = useState('');
@@ -16,16 +15,6 @@ const Message = ({
     const options = { month: 'long', day: 'numeric', weekday: 'long' };
     return new Date(string).toLocaleDateString([], options);
   };
-
-  const socket = io({
-    extraHeaders: {
-      'my-custom-header': channel_id,
-    },
-  });
-
-  socket.on('message', (data) => {
-    console.log(data.message);
-  });
 
   const deleteMessage = (messageId) => {
     const allMessages = chatHistory.map((date) => {

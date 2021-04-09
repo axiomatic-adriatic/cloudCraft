@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import axios from 'axios';
+import { io } from 'socket.io-client';
 import styles from './mainApp.css';
 import SearchModule from './search/index.js';
 import TaskListModule from './taskList/index.js';
@@ -18,6 +19,11 @@ class MainApp extends React.Component {
       messages: [],
       taskList: [],
     };
+    this.socket = io({
+      extraHeaders: {
+        'my-custom-header': this.state.channel_id,
+      },
+    });
     this.handleChannelClick = this.handleChannelClick.bind(this);
 
     this.getMessages = this.getMessages.bind(this);
@@ -39,6 +45,9 @@ class MainApp extends React.Component {
       .catch((err) => {
         console.log('user get request err', err);
       });
+    this.socket.on('message', (data) => {
+      console.log(data.message);
+    });
     this.getChatHistory();
     this.getAllTasks();
   }
@@ -132,6 +141,7 @@ class MainApp extends React.Component {
             userName={this.state.user_name}
             channel_id={this.state.channel_id}
             user_id={this.state.user_id}
+            socket={this.socket}
           />
         </div>
         <div className={styles.div3}>
