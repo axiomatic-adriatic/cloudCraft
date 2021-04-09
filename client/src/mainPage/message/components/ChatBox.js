@@ -62,6 +62,7 @@ const ChatBox = ({
               key={message.message_id}
               data-key={message.message_id}
               data-date={formatDate(message.datetime)}
+              data-message={message.message_text}
             >
               <Header
                 className="username"

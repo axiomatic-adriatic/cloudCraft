@@ -103,15 +103,11 @@ const Message = ({
   const addTask = (e) => {
     e.preventDefault();
     const messageId = e.target.closest('.messageContainer').getAttribute('data-key');
-    const date = e.target.closest('.messageContainer').getAttribute('data-date');
-    // const taskToAdd = chatHistory[date].filter((message) => message.message_id === messageId);
-    console.log(messageId);
-    console.log(date);
-    console.log(chatHistory[date]);
-
-    // post request to task table, once post request is done
-    // update current message disabled column to true
-    // call getAllTasks();
+    const messageText = e.target.closest('.messageContainer').getAttribute('data-message');
+    const taskObject = { user_id, message_text: messageText, message_id: messageId };
+    axios.post('/addToTask', taskObject)
+      .then(() => getAllTasks())
+      .catch((err) => { throw err; });
   };
 
   useEffect(() => {
@@ -134,16 +130,3 @@ const Message = ({
 };
 
 export default Message;
-
-// const newMessage = { ...data.message[0], name: user_name || 'Avery' };
-// const date = formatDate(newMessage.datetime)
-// const insert = chatHistory.map((message) => {
-//   if (Object.keys(message)[0] === date) {
-//     const lastMessageIndex = message[date].length - 1;
-//     if (message[date][lastMessageIndex].message_id !== newMessage.message_id) {
-//       message[date].push(newMessage);
-//     }
-//   }
-//   return message;
-// });
-// setchatHistory(insert);

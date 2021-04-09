@@ -80,6 +80,7 @@ class MainApp extends React.Component {
         this.setState({
           taskList: [...resp.data],
         });
+        console.log('test');
       })
       .catch((err) => {
         console.log(err);
