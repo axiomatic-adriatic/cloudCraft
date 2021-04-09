@@ -59,7 +59,6 @@ const Message = ({
   };
 
   const submit = (messageObject) => {
-    const newMessage = { ...messageObject, name: userName }
     socket.emit('message', messageObject);
     // const time = new Date();
     // const date = formatDate(time);

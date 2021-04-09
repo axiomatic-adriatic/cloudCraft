@@ -19,7 +19,6 @@ io.on('connection', (client) => {
   const room = client.handshake.headers['my-custom-header'];
   client.join(room);
   client.on('message', (data) => {
-    console.log(data, 'test');
     messagesController.createMessage(data)
       .then((message) => {
         io.to(room).emit('message', { message });
