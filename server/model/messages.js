@@ -22,7 +22,7 @@ const getMessages = (channel_id) => {
    * containing the results of the query or is rejected with the the error that occurred
    * during the query.
  */
-const getLatest = () => db.promise().query('SELECT * FROM messages WHERE message_id = LAST_INSERT_ID() LIMIT 1').then(([message]) => message);
+const getLatest = () => db.promise().query('SELECT messages.*, users.name FROM messages LEFT JOIN users ON users.user_id=messages.user_id WHERE message_id = LAST_INSERT_ID() LIMIT 1').then(([message]) => message);
 
 /**
    * get single message with message_id.
