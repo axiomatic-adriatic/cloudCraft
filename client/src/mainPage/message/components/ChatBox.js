@@ -50,7 +50,6 @@ const ChatBox = ({
       {modal ? (
         <EditMessageModal
           setModal={setModal}
-          submitEditChange={submitEditChange}
           messageToEdit={messageToEdit}
         />
       ) : null}

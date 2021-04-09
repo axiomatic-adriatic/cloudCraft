@@ -9,14 +9,12 @@ import Message from './message/index.js';
 import UserList from './userList/index.js';
 import LogoutButton from '../login/logoutButton.jsx';
 
-var socket;
-
 class MainApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       user_id: 2,
-      channel_id: 100,
+      channel_id: 1,
       user_name: '',
       messages: [],
       taskList: [],
@@ -44,13 +42,6 @@ class MainApp extends React.Component {
           user_name: results.data.name || '',
         });
       })
-      .then(() => {
-        socket = io({
-          extraHeaders: {
-            'my-custom-header': this.state.channel_id,
-          },
-        });
-      })
       .catch((err) => {
         console.log('user get request err', err);
       });
@@ -62,12 +53,7 @@ class MainApp extends React.Component {
     this.setState({
       channel_id: channelID,
     });
-    this.socket = io({
-      extraHeaders: {
-        'my-custom-header': this.state.channel_id,
-      },
-    });
-    getChatHistory();
+    this.getChatHistory();
   }
 
   getChatHistory() {
@@ -140,9 +126,9 @@ class MainApp extends React.Component {
         </div>
         <div className={styles.div1}>
           <UserList
-            handleUserClick={this.handleUserClick}
             handleChannelClick={this.handleChannelClick}
             user_id={user_id}
+            username={user_name}
             channel_id={channel_id}
           />
         </div>

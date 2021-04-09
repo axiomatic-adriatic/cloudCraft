@@ -17,10 +17,8 @@ const EditMessageModal = ({ setModal, messageToEdit, submitEditChange }) => {
     axios.post('/chat', { message: { message_id: messageToEdit.message_id, message_text: messageToEdit.message_text } })
       .then((result) => {
         setModal(false);
-        console.log(result);
       })
       .catch((err) => { throw err; });
-    // console.log()
   };
 
   return (
