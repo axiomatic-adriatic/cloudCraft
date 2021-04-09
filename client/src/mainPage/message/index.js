@@ -6,7 +6,7 @@ import ChatBox from './components/ChatBox';
 import TextBox from './components/TextBox';
 
 const Message = ({
-  channel_id, user_id, user_name, messages, getAllTasks, socket,
+  channel_id, user_id, userName, messages, getAllTasks, socket,
 }) => {
   const [chatHistory, setchatHistory] = useState([]);
   const [groupName, setGroupName] = useState('');
