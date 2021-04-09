@@ -6,7 +6,7 @@ import ChatBox from './components/ChatBox';
 import TextBox from './components/TextBox';
 
 const Message = ({
-  channel_id, user_id, user_name, messages, getAllTasks,socket
+  channel_id, user_id, user_name, messages, getAllTasks, socket
 }) => {
   const [chatHistory, setchatHistory] = useState([]);
   const [groupName, setGroupName] = useState('');
@@ -15,6 +15,8 @@ const Message = ({
     const options = { month: 'long', day: 'numeric', weekday: 'long' };
     return new Date(string).toLocaleDateString([], options);
   };
+
+
 
   const deleteMessage = (messageId) => {
     const allMessages = chatHistory.map((date) => {
