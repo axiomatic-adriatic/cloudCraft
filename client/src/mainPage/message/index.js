@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { io } from 'socket.io-client';
 import axios from 'axios';
 import { Container } from './styles';
 import Banner from './components/Banner';
@@ -17,13 +16,14 @@ const Message = ({
     return new Date(string).toLocaleDateString([], options);
   };
 
+
   // const socket = io({
   //   extraHeaders: {
   //     'my-custom-header': channel_id,
   //   },
   // });
 
-  socket.on('message', (data) => {
+  // socket.on('message', (data) => {
     // if (messages.length > 0 && channel_id && user_id && socket.id) {
     //   const incomingMessage = data.message[0];
     //   const lastDay = chatHistory[chatHistory.length - 1];
@@ -34,8 +34,8 @@ const Message = ({
     // console.log(allMessages);
     // console.log(date);
     // }
-    console.log(data.message);
-  });
+  //   console.log(data.message);
+  // });
 
   const deleteMessage = (messageId) => {
     const allMessages = chatHistory.map((date) => {
@@ -60,25 +60,25 @@ const Message = ({
 
   const submit = (messageObject) => {
     socket.emit('message', messageObject);
-    const time = new Date();
-    const date = formatDate(time);
-    const lastDay = chatHistory[chatHistory.length - 1];
-    const allMessages = Object.values(lastDay)[0];
-    const latestMessages = allMessages[allMessages.length - 1];
-    const newMessageId = latestMessages.message_id + 1;
-    const newMessage = {
-      ...messageObject, name: user_name || 'Avery', message_id: newMessageId, datetime: time,
-    };
-    const updatedMessages = chatHistory.map((message) => {
-      if (Object.keys(message)[0] === date) {
-        message[date].push(newMessage);
-      }
-      return message;
-    });
-    if (Object.keys(lastDay)[0] !== date) {
-      updatedMessages.push({ [date]: [newMessage] });
-    }
-    setchatHistory(updatedMessages);
+    // const time = new Date();
+    // const date = formatDate(time);
+    // const lastDay = chatHistory[chatHistory.length - 1];
+    // const allMessages = Object.values(lastDay)[0];
+    // const latestMessages = allMessages[allMessages.length - 1];
+    // const newMessageId = latestMessages.message_id + 1;
+    // const newMessage = {
+    //   ...messageObject, name: user_name || 'Avery', message_id: newMessageId, datetime: time,
+    // };
+    // const updatedMessages = chatHistory.map((message) => {
+    //   if (Object.keys(message)[0] === date) {
+    //     message[date].push(newMessage);
+    //   }
+    //   return message;
+    // });
+    // if (Object.keys(lastDay)[0] !== date) {
+    //   updatedMessages.push({ [date]: [newMessage] });
+    // }
+    // setchatHistory(updatedMessages);
   };
 
   const groupByDate = (history) => {

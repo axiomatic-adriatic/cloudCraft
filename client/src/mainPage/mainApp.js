@@ -1,13 +1,13 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import axios from 'axios';
-import { io } from 'socket.io-client';
 import styles from './mainApp.css';
 import SearchModule from './search/index.js';
 import TaskListModule from './taskList/index.js';
 import Message from './message/index.js';
 import UserList from './userList/index.js';
 import LogoutButton from '../login/logoutButton.jsx';
+import { io } from 'socket.io-client';
 
 class MainApp extends React.Component {
   constructor(props) {
@@ -45,6 +45,10 @@ class MainApp extends React.Component {
       .catch((err) => {
         console.log('user get request err', err);
       });
+    this.socket.on('message', (data) => {
+      this.setState({ messages: [...this.state.messages, data.message[0]] });
+    });
+
     this.getChatHistory();
     this.getAllTasks();
   }
@@ -80,7 +84,6 @@ class MainApp extends React.Component {
         this.setState({
           taskList: [...resp.data],
         });
-        console.log('test');
       })
       .catch((err) => {
         console.log(err);

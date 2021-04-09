@@ -5,12 +5,11 @@
   cursor: pointer;
 }
 .categoryList {
-  margin-top: 20px;
   background-color: #E7ECEF;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: stretch;
+  align-items: stretch; */
 }
 
 .categoryList h3 {
@@ -21,10 +20,9 @@
 }
 
 .scrollList {
-  min-height: 280px;
+  min-height: 315px;
   overflow-y: scroll;
-  max-height: 280px;
-  overflow-y: scroll;
+  max-height: 315px;
 }
 /* width */
 .scrollList::-webkit-scrollbar {
