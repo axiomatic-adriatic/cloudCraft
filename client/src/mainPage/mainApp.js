@@ -39,7 +39,7 @@ class MainApp extends React.Component {
       .then((results) => {
         this.setState({
           user_id: results.data.user_id || 2,
-          user_name: results.data.name || '',
+          user_name: results.data.name || 'Avery',
         });
       })
       .catch((err) => {
