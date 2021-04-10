@@ -19,13 +19,14 @@ export const SearchBar = styled.div`
     justify-content: center;
 `;
 
-export const Name = styled.div`
+export const Name = styled.h1`
   grid-area: 2 / 1 / 3 / 2;
   display: flex;
   align-items: center;
   flex-direction: row;
   font-size: 25px;
-  font-style: 'Oxygen', sans-serif;
+  font-family: 'Oxygen', sans-serif;
+  color:#8B8C89
 `;
 
 export const SearchWrapper = styled.div`
@@ -36,10 +37,15 @@ export const SearchWrapper = styled.div`
     align-content: center;
     align-items: center;
     margin-right: 20px;
-    height:60%;
+    height:70%;
     width:70%;
-    border: 1px solid #8B8C89;
-    border-radius:10px;
+    /* border: 1.5px solid #8B8C89; */
+    border-radius:25px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    &:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
 `;
 
 export const SearchInput = styled.input`
@@ -51,8 +57,9 @@ flex: 0 1 auto;
 align-self: auto;
 outline:none;
 border:0;
-margin-left:10px;
+margin-left:15px;
 letter-spacing:2px;
+font-size:1rem;
 `;
 export const SearchIcon = styled(SearchAlt2)`
 color: '#8B8C89';

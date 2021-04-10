@@ -9,7 +9,6 @@ class Groups2 extends React.Component {
     super(props);
     this.state = {
       directMessages: [],
-      channelName: '',
     };
     this.getDirectMessages = this.getDirectMessages.bind(this);
     this.getChannelName = this.getChannelName.bind(this);
@@ -55,17 +54,7 @@ class Groups2 extends React.Component {
 
   componentDidMount() {
     const { user_id, username } = this.props;
-
-    Promise.all([this.getDirectMessages(user_id), this.getChannelName(this.state.directMessages[0])])
-    .then(([directMessages, name]) => {
-      this.setState({
-        directMessages: directMessages,
-        channelName: name
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    this.getDirectMessages(user_id);
   }
 
   componentDidUpdate(prevProps) {
@@ -77,8 +66,6 @@ class Groups2 extends React.Component {
 
   render() {
     const { directMessages, channelName } = this.state;
-    console.log('state in group two:', this.state);
-
     const { handleChannelClick, user_id, username} = this.props;
 
     const avatarStyle = {
@@ -87,17 +74,19 @@ class Groups2 extends React.Component {
       height: '35px',
       borderRadius: '15%',
       marginRight: '15px',
+      paddingLeft: '10px',
+      paddingTop: '8px',
     };
 
     return (
-      <div
-       style={{
-         marginLeft: '15px'
-       }}>
-        <h3>Direct Messages</h3>
-        <div>
+      <div>
+        <h3
+        style={{
+            paddingLeft: '15px'
+          }}>Direct Messages</h3>
+      <div>
         {directMessages && directMessages.map((channel) => {
-          const imageSrc = faker.image.avatar();
+          const imageSrc = 'https://ca.slack-edge.com/T01JNEETAHH-U01JYR06TBL-ee4d8d5750e5-512';
           return (
             <div
               key={channel}
@@ -105,7 +94,9 @@ class Groups2 extends React.Component {
               onClick={() => handleChannelClick(channel)}
                style={{
                display: 'flex',
-               padding: '3px'
+               padding: '3px',
+               justifyContent: 'left',
+               boxSizing: 'border-box'
               }}
             >
               <img

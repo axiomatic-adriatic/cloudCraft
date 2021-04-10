@@ -5,9 +5,10 @@
 import React, { useRef, useEffect, useState } from 'react';
 import EditMessageModal from './EditMessageModal';
 import { Header, Paragraph } from '../styles';
+import { CeruleanFrost, BabyBlueEyes, BattleshipGrey, AliceBlue, YaleBlue } from '../../../../../ui/colors';
 
 const ChatBox = ({
-  chatHistory, deleteMessage, userId, addTask,
+  chatHistory, deleteMessage, userId, addTask, userName
 }) => {
   const messageEndRef = useRef(null);
   const [modal, setModal] = useState(false);
@@ -45,6 +46,7 @@ const ChatBox = ({
   useEffect(() => {
     scrollToBottom();
   }, [chatHistory]);
+
   return (
     <div className="chatbox">
       {modal ? (
@@ -66,22 +68,22 @@ const ChatBox = ({
             >
               <Header
                 className="username"
-                size={0.9}
-                color="#202020"
+                size={1.1}
+                color={message.name === userName ? BabyBlueEyes : '#484848'}
               >
                 {message.name}
               </Header>
               <Paragraph
                 className="message"
-                size={0.8}
+                size={1}
                 color="#404040"
               >
                 {message.message_text}
               </Paragraph>
               <Paragraph
                 className="dateTime"
-                size={0.7}
-                color="#808080"
+                size={0.8}
+                color="#606060"
               >
                 {formatTime(message.datetime)}
               </Paragraph>

@@ -85,8 +85,14 @@ const Search = ({
   return (
     <Container>
       {
-        name !== '' &&
-        <Name>{`Welcome back, ${name}.`}</Name>
+        name !== ''
+        && (
+          <Name>
+            {'Welcome back,'}
+            &nbsp;
+            <span style={{ color: '#274c77' }}>{` ${name}.`}</span>
+          </Name>
+        )
       }
       <SearchBar>
         <SearchWrapper>
