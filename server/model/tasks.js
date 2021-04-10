@@ -64,39 +64,6 @@ const completeTask = (task_id, callback) => {
     }
   });
 };
-
-// getTasks(2, (err, result) => {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log(result);
-//   }
-// });
-
-// deleteTask(1, (err, result) => {
-//     if (err) {
-//         console.log(err)
-//     } else {
-//         console.log(result);
-//     }
-// })
-
-// completeTask(2, (err, result) => {
-//     if (err) {
-//         console.log(err);
-//     } else {
-//         console.log(result);
-//     }
-// })
-
-// addTask(2, "set up endpoint for getTask router", (err, result) => {
-//   if (err) {
-//     console.log(err)
-//   } else {
-//     console.log(result);
-//   }
-// })
-
 module.exports = {
   getTasks,
   addTask,
