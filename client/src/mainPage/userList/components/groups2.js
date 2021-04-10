@@ -2,7 +2,6 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import axios from 'axios';
-import faker from 'faker';
 import PropTypes from 'prop-types';
 import styles from './styles.css';
 import ChannelName from './channelNames';
