@@ -8,8 +8,8 @@ ReactDOM.render(
   window.location.pathname === '/home/' ? <MainApp />
     : (
       <Auth0Provider
-        domain="dev-u3lai6d6.us.auth0.com"
-        clientId="EK0st6RmeWmL7pbxBjH8nIg9GhtV97AQ"
+        domain=""
+        clientId=""
         redirectUri={window.location.origin}
       >
         <LoginApp />
