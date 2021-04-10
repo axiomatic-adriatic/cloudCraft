@@ -6,7 +6,7 @@ import styles from './mainApp.css';
 import SearchModule from './search/index.js';
 import TaskListModule from './taskList/index.js';
 import Message from './message/index.js';
-import UserList from './userList/index.js';
+import UserList from './userList/index';
 import LogoutButton from '../login/logoutButton.jsx';
 
 class MainApp extends React.Component {
@@ -39,7 +39,7 @@ class MainApp extends React.Component {
       .then((results) => {
         this.setState({
           user_id: results.data.user_id || 2,
-          user_name: results.data.name || '',
+          user_name: results.data.name || 'Avery',
         });
       })
       .catch((err) => {
