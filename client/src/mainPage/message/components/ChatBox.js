@@ -5,7 +5,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import EditMessageModal from './EditMessageModal';
 import { Header, Paragraph } from '../styles';
-import { CeruleanFrost, BabyBlueEyes, BattleshipGrey, AliceBlue, YaleBlue } from '../../../../../ui/colors';
+import { BabyBlueEyes } from '../../../../../ui/colors';
 
 const ChatBox = ({
   chatHistory, deleteMessage, userId, addTask, userName

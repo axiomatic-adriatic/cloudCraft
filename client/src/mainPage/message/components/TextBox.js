@@ -1,5 +1,4 @@
-import React, { useState, useRef } from 'react';
-// import axios from 'axios';
+import React, { useState } from 'react';
 import { TextArea, Button } from '../styles';
 
 const TextBox = ({
