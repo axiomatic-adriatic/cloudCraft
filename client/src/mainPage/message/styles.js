@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import { CeruleanFrost, BabyBlueEyes, BattleshipGrey, AliceBlue, YaleBlue } from '../../../../ui/colors';
+import {
+  CeruleanFrost, BabyBlueEyes, BattleshipGrey, AliceBlue,
+} from '../../../../ui/colors';
 
 export const Container = styled.div`
   display: grid;
@@ -138,11 +140,12 @@ export const TextArea = styled.textarea`
   padding: 0.8rem;
   box-sizing: border-box;
   width: 100%;
-  height: 6.1rem;
+  height: 6rem;
   border-radius: .5rem;
   background-color: #f5f5f5;
   font-size: 1rem;
-  border: 1px solid ${BattleshipGrey};
+  border: none;
+  // border: 1px solid ${BattleshipGrey};
   font-family: Oxygen, sans-serif;
   :focus {
     background-color: white;
