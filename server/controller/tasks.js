@@ -13,7 +13,6 @@ const getTasks = (req, res) => {
 
 const addTask = (req, res) => {
   const { user_id, task_text } = req.body;
-  // console.log(req.body)
   model.addTask(user_id, task_text, null, (err, results) => {
     if (err) {
       res.send(err);
