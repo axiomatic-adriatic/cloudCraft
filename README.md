@@ -31,6 +31,12 @@ npm run start
 
 Demo: Go to localhost:3005/home/ in browser
 
+With Authorization:
+-Set up personal Auth0 account
+-Navigate to client --> src --> index.js
+  -Add your unique domain and clientID values to Auth0Provider component:
+  <img src="./readMeImg/Auth0setUp.png" width="200px">
+
 ## Features
 - Authentication
   -   Authenticate users
