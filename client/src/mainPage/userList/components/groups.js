@@ -1,47 +1,31 @@
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable camelcase */
 import React from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import styles from './styles.css';
-import ChannelName from './channelNames.js';
-import Groups2 from './groups2.js';
+import ChannelName from './channelNames';
 
 class Groups extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       allChannels: [],
-      channelName: [],
     };
     this.getAllChannels = this.getAllChannels.bind(this);
-    this.getChannelName = this.getChannelName.bind(this);
   }
 
- getChannelName(channelID) {
-  axios.get('/channelName', {
-    params: {
-      channel: channelID,
-    }
-  })
-  .then((success) => {
-    this.setState({
-      channelName: [...`${success.data[0].channel_name}`]
-    })
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-}
-
+  // eslint-disable-next-line react/sort-comp
   getAllChannels(userID) {
-    const { updateChannels } = this.props;
     axios.get('/channels', {
       params: {
         userLoggedIn: userID,
-      }
+      },
     })
       .then((response) => {
         const channelData = response.data;
         const channels = [];
-        for (let i = 0; i < channelData.length; i++) {
+        for (let i = 0; i < channelData.length; i += 1) {
           channels.push(channelData[i].channel_id);
         }
         this.setState({
@@ -49,6 +33,7 @@ class Groups extends React.Component {
         });
       })
       .catch((error) => {
+        // eslint-disable-next-line no-console
         console.log(error);
       });
   }
@@ -60,37 +45,54 @@ class Groups extends React.Component {
 
   componentDidUpdate(prevProps) {
     const { user_id } = this.props;
-    if (this.props.user_id !== prevProps.user_id) {
+    if (user_id !== prevProps.user_id) {
       this.getAllChannels(user_id);
     }
   }
 
   render() {
-    const { allChannels, channelName } = this.state;
-
-    const { handleChannelClick, user_id } = this.props;
+    const { allChannels } = this.state;
+    const { handleChannelClick } = this.props;
 
     return (
       <div
         className="channels-container"
         style={{
-          paddingTop: '5px'
+          paddingTop: '5px',
         }}
       >
         <h3
-        style={{
-          paddingLeft: '15px'
-        }}>Channels</h3>
-        {allChannels && allChannels.map((channel) => {
-        return (
-        <div key={channel} className={styles.select} onClick={() => handleChannelClick(channel)}>
-          <ChannelName channel={channel} />
-        </div>
-        )
-      })}
+          style={{
+            paddingLeft: '15px',
+          }}
+        >
+          Channels
+        </h3>
+        {allChannels && allChannels.map((channel) => (
+          <div
+            key={channel}
+            role="button"
+            tabIndex={0}
+            onKeyPress={this.handleKeyPress}
+            className={styles.select}
+            onClick={() => handleChannelClick(channel)}
+          >
+            <ChannelName channel={channel} />
+          </div>
+        ))}
       </div>
     );
   }
 }
+
+Groups.propTypes = {
+  user_id: PropTypes.number,
+  handleChannelClick: PropTypes.func,
+};
+
+Groups.defaultProps = {
+  user_id: 2,
+  handleChannelClick: null,
+};
 
 export default Groups;
