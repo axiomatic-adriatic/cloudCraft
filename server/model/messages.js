@@ -2,7 +2,7 @@
 const db = require('../../db/db.js');
 
 /**
-   * create a new message in the table.
+   * get all message history for current channel_id in the table.
    * @param {number} channel_id - A number representing the channel id
    * @returns {Promise<Object>} A promise that is fulfilled with an object
    * containing the results of the query or is rejected with the the error that occurred
@@ -34,7 +34,7 @@ const getLatest = () => db.promise().query('SELECT messages.*, users.name FROM m
 const getMessage = (message_id) => db.promise().query(`SELECT * FROM messages WHERE message_id = ${message_id} LIMIT 1`).then(([message]) => message);
 
 /**
-   * create a new message in the table.
+   * create a new message in the table, and feedback the latest message.
    * @param {Object} message - An object where the keys are column names and
    * the values are the current values. include channel_id, user_id, message_text
    * @returns {Promise<Object>} A promise that is fulfilled with an object
@@ -47,7 +47,7 @@ const createMessage = (message) => {
 };
 
 /**
-   * toggle is delete of message in the table.
+   * toggle is_delete field of message in the table.
    * @param {Number} message_id
    * @returns {Promise<Object>} A promise that is fulfilled with an object
    * containing the results of the query or is rejected with the the error that occurred
@@ -62,7 +62,7 @@ const deleteMessage = (message_id) => {
 };
 
 /**
-   * update message in the table.
+   * update message_text for specific message_id in the table.
    * @param {Object} message need message_id and message_text for update
    * @returns {Promise<Object>} A promise that is fulfilled with an object
    * containing the results of the query or is rejected with the the error that occurred
