@@ -27,9 +27,14 @@ npm run webpack
 npm run start
 ```
 
-## Usage
+## Demo w/o Authorization:
+Go to localhost:3005/home/ in browser
 
-Demo: Go to localhost:3005/home/ in browser
+## Demo w/ Authorization:
+- Set up personal [Auth0](https://auth0.com/signup?&signUpData=%7B%22category%22%3A%22button%22%7D&email=undefined) account
+- Navigate to client --> src --> index.js
+  - Add your unique domain and clientID values to Auth0Provider component:
+<img src="./readMeImg/Auth0setUp.jpg" width="300px">
 
 ## Features
 - Authentication

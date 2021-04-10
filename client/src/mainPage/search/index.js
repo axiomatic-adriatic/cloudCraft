@@ -36,18 +36,6 @@ const Search = ({
 
   const handleChange = (e) => {
     setkeyWord(e.target.value);
-    // if (keyWord === '') {
-    //   axios({
-    //     method: 'get',
-    //     url: '/chat',
-    //     params: { channel_id },
-    //   })
-    //     .then((result) => {
-    //       const allMessages = result.data.filter((message) => message.is_delete === 0);
-    //       getMessages(allMessages);
-    //     })
-    //     .catch((err) => { throw err; });
-    // }
   };
   const keyPress = (e) => {
     if (e.keyCode === 13) {
