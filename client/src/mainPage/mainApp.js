@@ -6,7 +6,7 @@ import styles from './mainApp.css';
 import SearchModule from './search/index.js';
 import TaskListModule from './taskList/index.js';
 import Message from './message/index.js';
-import UserList from './userList/index.js';
+import UserList from './userList/index';
 import LogoutButton from '../login/logoutButton.jsx';
 
 class MainApp extends React.Component {
