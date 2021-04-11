@@ -89,6 +89,10 @@ class MainApp extends React.Component {
       });
   }
 
+  getTasks(tasks) {
+    this.setState({ taskList: tasks });
+  }
+
   addTask(textBody) {
     const { user_id } = this.state;
     const data = {
@@ -96,16 +100,12 @@ class MainApp extends React.Component {
       task_text: textBody,
     };
     axios.post('/task', data)
-      .then((resp) => {
+      .then(() => {
         this.getAllTasks();
       })
       .catch((err) => {
         console.log(err);
       });
-  }
-
-  getTasks(tasks) {
-    this.setState({ taskList: tasks });
   }
 
   render() {
@@ -147,7 +147,7 @@ class MainApp extends React.Component {
         <div className={styles.div3}>
           <TaskListModule
             tasks={taskList}
-            user_id={user_id}
+            userId={user_id}
             getAllTasks={this.getAllTasks}
             addTask={this.addTask}
           />
