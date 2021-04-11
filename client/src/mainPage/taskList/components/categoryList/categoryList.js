@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Task from '../task/task';
 import styles from './categoryList.css';
 import AddTaskModalForm from '../addTaskModalForm/addTaskModalForm';
@@ -13,29 +14,32 @@ class CategoryList extends React.Component {
     this.removeModal = this.removeModal.bind(this);
   }
 
-  handleOpenModal(e) {
+  handleOpenModal() {
     this.setState({
       displayModal: 'block',
     });
   }
 
   removeModal() {
-    console.log('closing')
     this.setState({
       displayModal: 'none',
     });
   }
 
   render() {
-    const { categoryName, tasks, bgColor, textColor, add, getAllTasks, addTask } = this.props;
+    const {
+      categoryName, tasks, bgColor, textColor, add, getAllTasks, addTask,
+    } = this.props;
     const { displayModal } = this.state;
     const list = tasks.map((task) => (
-      <Task task={task} key={task.task_id} getAllTasks={getAllTasks} add={add}/>
+      <Task
+        task={task}
+        key={task.task_id}
+        getAllTasks={getAllTasks}
+        add={add}
+      />
     ));
     return (
-      // <div style={{height: '50%', backgroundColor:'pink', minHeight: '50%'}}>
-
-      // </div>
       <div className={styles.categoryList}>
         <h3 style={{ backgroundColor: bgColor, color: textColor }}>
           {categoryName}
@@ -69,5 +73,17 @@ class CategoryList extends React.Component {
 
 export default CategoryList;
 
+CategoryList.propTypes = {
+  categoryName: PropTypes.string.isRequired,
+  tasks: PropTypes.arrayOf(PropTypes.object),
+  bgColor: PropTypes.oneOf(['#6096BA', '#A3CEF1']).isRequired,
+  textColor: PropTypes.oneOf(['#274C77', 'white']).isRequired,
+  add: PropTypes.bool.isRequired,
+  getAllTasks: PropTypes.func.isRequired,
+  addTask: PropTypes.func,
+};
 
-
+CategoryList.defaultProps = {
+  tasks: [],
+  addTask: null,
+};
