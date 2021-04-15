@@ -11,6 +11,9 @@ CloudCraft is collaborative tool that allows teams to communicate and manage wor
 ### Login Page
 <img src="./readMeImg/login.png" width="300px">
 
+### Authorization
+<img src="./readMeImg/Authorization.jpg" width="300px">
+
 ### Main App
 <img src="./readMeImg/main-app.png" width="300px">
 
